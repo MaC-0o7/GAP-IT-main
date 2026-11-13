@@ -78,22 +78,23 @@ export default function HomePage() {
 
   return (
     <>
-    <main className="home-page relative z-[var(--z-content)] overflow-x-clip bg-transparent text-[var(--text)]">
-      <header className="home-site-nav relative z-[var(--z-sticky)] mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-2 px-4 py-2 sm:px-6" style={{ paddingTop: "max(.5rem, env(safe-area-inset-top))" }}>
-        <Link aria-label={t("home.homeLink")} className="shrink-0" href="/"><BrandLogo className="h-auto w-[clamp(100px,16vw,150px)]" /></Link>
-        <div className="flex shrink-0 items-center gap-2">
-          <LanguageSelector />
-          <AnimatedThemeToggler isDark={theme === "dark"} label={t("shell.switchTheme", { theme: t(theme === "dark" ? "shell.light" : "shell.dark") })} onToggle={toggleTheme} />
-          {session ? (
-          <Link className="home-get-started" href="/workspace"><HomeText as="span">{t("home.heroPrimary")}</HomeText></Link>
-          ) : (
-            <>
-            <Link className="home-get-started home-mobile-get-started" href="/login"><HomeText as="span">{t("home.heroPrimary")}</HomeText></Link>
-              <Link className="home-desktop-login inline-flex min-h-11 items-center rounded-xl bg-[var(--primary)] px-4 text-sm font-bold text-[var(--on-primary)]" href="/login"><HomeText as="span">{t("auth.login")}</HomeText></Link>
-            </>
-          )}
-        </div>
-      </header>
+    <div className="relative z-10">
+      <main className="home-page overflow-x-clip bg-transparent text-[var(--text)]">
+          <header className="home-site-nav relative z-[var(--z-sticky)] mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-2 px-4 py-2 sm:px-6" style={{ paddingTop: "max(.5rem, env(safe-area-inset-top))" }}>
+            <Link aria-label={t("home.homeLink")} className="shrink-0" href="/"><BrandLogo className="h-auto w-[clamp(100px,16vw,150px)]" priority /></Link>
+            <div className="flex shrink-0 items-center gap-2">
+              <LanguageSelector />
+              <AnimatedThemeToggler isDark={theme === "dark"} label={t("shell.switchTheme", { theme: t(theme === "dark" ? "shell.light" : "shell.dark") })} onToggle={toggleTheme} />
+              {session ? (
+                <Link className="home-get-started" href="/workspace"><HomeText as="span">{t("home.heroPrimary")}</HomeText></Link>
+              ) : (
+                <>
+                  <Link className="home-get-started home-mobile-get-started" href="/login"><HomeText as="span">{t("home.heroPrimary")}</HomeText></Link>
+                  <Link className="home-desktop-login inline-flex min-h-11 items-center rounded-xl bg-[var(--primary)] px-4 text-sm font-bold text-[var(--on-primary)]" href="/login"><HomeText as="span">{t("auth.login")}</HomeText></Link>
+                </>
+              )}
+            </div>
+          </header>
 
       <HomeHero workspaceHref={session ? "/workspace" : "/login"} />
       <HomeProblemSolution />
@@ -127,22 +128,23 @@ export default function HomePage() {
           </form>
         </div>
       </HomeSection>
-    </main>
+      </main>
 
-    <HomeTextRevealContext.Provider value>
-      <footer className="home-site-footer border-t border-[var(--border)] px-5 py-[var(--space-5)] sm:px-8">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 text-sm sm:flex-row sm:items-center sm:justify-between">
-          <Link aria-label={t("home.homeLink")} className="w-fit" href="/"><BrandLogo className="h-auto w-28" /></Link>
-          <nav aria-label={t("home.footerNavigation")} className="flex flex-wrap gap-x-5 gap-y-2">
-            <a className="home-footer-link" href="#features"><HomeText as="span">{t("home.featuresTitle")}</HomeText></a>
-            <a className="home-footer-link" href="#about"><HomeText as="span">{t("auth.about")}</HomeText></a>
-            <a className="home-footer-link" href="#contact"><HomeText as="span">{t("auth.contact")}</HomeText></a>
-            <Link className="home-footer-link" href="/login"><HomeText as="span">{t("auth.signIn")}</HomeText></Link>
-          </nav>
-          <HomeText as="p" className="home-footer-note" hover={false}>{t("home.footerCopyright", { year: year ?? "", brand: siteInfo.copyright, notice: t("shell.demoBanner") })}</HomeText>
-        </div>
-      </footer>
-    </HomeTextRevealContext.Provider>
+      <HomeTextRevealContext.Provider value>
+        <footer className="home-site-footer border-t border-[var(--border)] px-5 py-[var(--space-5)] sm:px-8">
+          <div className="mx-auto flex max-w-7xl flex-col gap-3 text-sm sm:flex-row sm:items-center sm:justify-between">
+            <Link aria-label={t("home.homeLink")} className="w-fit" href="/"><BrandLogo className="h-auto w-28" /></Link>
+            <nav aria-label={t("home.footerNavigation")} className="flex flex-wrap gap-x-5 gap-y-2">
+              <a className="home-footer-link" href="#features"><HomeText as="span">{t("home.featuresTitle")}</HomeText></a>
+              <a className="home-footer-link" href="#about"><HomeText as="span">{t("auth.about")}</HomeText></a>
+              <a className="home-footer-link" href="#contact"><HomeText as="span">{t("auth.contact")}</HomeText></a>
+              <Link className="home-footer-link" href="/login"><HomeText as="span">{t("auth.signIn")}</HomeText></Link>
+            </nav>
+            <HomeText as="p" className="home-footer-note" hover={false}>{t("home.footerCopyright", { year: year ?? "", brand: siteInfo.copyright, notice: t("shell.demoBanner") })}</HomeText>
+          </div>
+        </footer>
+      </HomeTextRevealContext.Provider>
+    </div>
     </>
   );
 }

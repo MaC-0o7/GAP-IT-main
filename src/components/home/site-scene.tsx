@@ -39,7 +39,7 @@ export function SiteScene() {
     };
   }, []);
 
-  if ((pathname !== "/" && pathname !== "/login") || !sceneColors) return null;
+  if (pathname !== "/login" || !sceneColors) return null;
 
   return (
     <div
@@ -70,7 +70,7 @@ export function SiteScene() {
         glow={1.1}
         intro
         introDuration={1.6}
-        paused={reducedMotion || (pathname !== "/" && pathname !== "/login")}
+        paused={reducedMotion}
       />
     </div>
   );

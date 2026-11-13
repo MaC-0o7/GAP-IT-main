@@ -48,9 +48,11 @@ export function useSidebar() {
 export function BrandLogo({
   className,
   compact = false,
+  priority = false,
 }: {
   className?: string;
   compact?: boolean;
+  priority?: boolean;
 }) {
   if (compact) {
     return (
@@ -59,6 +61,7 @@ export function BrandLogo({
           alt="GAP-IT"
           className="absolute left-0 top-1/2 max-w-none -translate-y-1/2"
           height={31}
+          priority={priority}
           src="/gap-it-logo.png"
           unoptimized
           width={160}
@@ -72,6 +75,7 @@ export function BrandLogo({
       alt="GAP-IT"
       className={className}
       height={31}
+      priority={priority}
       src="/gap-it-logo.png"
       unoptimized
       width={160}
@@ -190,7 +194,7 @@ function DesktopSidebar({
       onMouseLeave={() => {
         if (hoverToExpand) setOpen(false);
       }}
-      transition={{ duration: 0.2, ease: "easeInOut" }}
+      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
       {...props}
     >
       {children}
