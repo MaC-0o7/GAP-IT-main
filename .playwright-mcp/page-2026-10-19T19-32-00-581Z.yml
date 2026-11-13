@@ -1,0 +1,1228 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - complementary "Main navigation" [ref=e3]:
+      - link "GAP-IT Overview" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img "GAP-IT" [ref=e6]
+      - navigation "Quality workspace sections" [ref=e8]:
+        - link "Overview" [ref=e11] [cursor=pointer]:
+          - /url: "#overview"
+        - generic [ref=e20]:
+          - link "Live Measurements" [ref=e21] [cursor=pointer]:
+            - /url: "#live-measurements"
+          - link "Instruments & Gateways" [ref=e26] [cursor=pointer]:
+            - /url: "#instrument-management"
+        - generic [ref=e33]:
+          - link "SPC Analysis" [ref=e34] [cursor=pointer]:
+            - /url: "#spc-analytics"
+          - link "SPC Reports" [ref=e41] [cursor=pointer]:
+            - /url: "#spc-reports"
+          - link "Parts & Inspection" [ref=e49] [cursor=pointer]:
+            - /url: "#part-inspection-setup"
+          - link "Quality Events" [ref=e55] [cursor=pointer]:
+            - /url: "#alerts-quality-events"
+        - generic [ref=e62]:
+          - link "Traceability" [ref=e63] [cursor=pointer]:
+            - /url: "#traceability"
+          - link "Measurement History" [ref=e70] [cursor=pointer]:
+            - /url: "#history-data-explorer"
+        - generic [ref=e77]:
+          - link "User Accounts" [ref=e78] [cursor=pointer]:
+            - /url: "#users-permissions"
+          - link "System Settings" [ref=e86] [cursor=pointer]:
+            - /url: "#system-settings"
+      - generic "Quality Team, Workspace member" [ref=e93]: QT
+    - generic [ref=e95]:
+      - banner [ref=e96]:
+        - generic [ref=e97]:
+          - generic [ref=e102]: Quality Operations
+          - generic [aria-hidden] [ref=e103]: /
+          - generic [ref=e104]: Live Measurements
+        - generic [ref=e105]:
+          - button "Search modules" [ref=e107]
+          - generic [ref=e111]: DEMO DATA, NO HARDWARE CONNECTED
+          - button "3 open quality events" [ref=e112]
+          - button "Switch to light theme" [active] [ref=e1684]
+          - button "Language" [ref=e122] [cursor=pointer]
+          - generic [ref=e127]:
+            - generic [ref=e128]: QT
+            - generic [ref=e129]:
+              - paragraph [ref=e130]: Quality Team
+              - paragraph [ref=e131]: Workspace member
+      - main [ref=e132]:
+        - generic [ref=e467]:
+          - generic [ref=e468]:
+            - generic [ref=e469]:
+              - paragraph [ref=e470]: Quality Operations
+              - heading "Live Measurements" [level=1] [ref=e471]
+              - paragraph [ref=e472]: Monitor simulated incoming readings. No physical measurement devices are connected.
+            - generic [ref=e473]: DEMO DATA, NO HARDWARE CONNECTED
+          - generic [ref=e476]:
+            - generic [ref=e477]:
+              - generic [ref=e478]:
+                - generic [ref=e483]:
+                  - paragraph [ref=e484]: Latest reading · demo stream
+                  - paragraph [ref=e485]: Length · INS-003 · 20 Oct 2026, 12:54 am
+                - generic [ref=e486]: SIMULATED · PAUSED
+              - generic [ref=e488]:
+                - generic [ref=e489]:
+                  - paragraph [ref=e490]: Most recent value
+                  - generic [ref=e491]:
+                    - paragraph [ref=e492]: "81.712"
+                    - generic [ref=e493]: mm
+                  - generic [ref=e494]:
+                    - generic [ref=e495]: PASS
+                    - generic [ref=e496]: LSL 81.1 · Nominal 81.5 · USL 81.9 mm
+                  - paragraph [ref=e497]: Instrument connection is simulated; no physical hardware is connected.
+                - generic [ref=e498]:
+                  - generic [ref=e499]:
+                    - paragraph [ref=e500]: Recent readings
+                    - paragraph [ref=e501]: Length · limits shown separately
+                  - img "Recent measurement trend with specification limits" [ref=e503]
+                  - generic [ref=e528]:
+                    - generic [ref=e529]: LSL / USL
+                    - generic [ref=e531]: Nominal
+            - generic [ref=e534]:
+              - generic [ref=e535]:
+                - generic [ref=e536]:
+                  - textbox "Search measurements" [ref=e541]:
+                    - /placeholder: Search ID, part, batch, instrument…
+                  - combobox "Filter by measurement status" [ref=e542]:
+                    - option "All" [selected]
+                    - option "PASS"
+                    - option "FAIL"
+                    - option "INVALID"
+                  - combobox "Filter by instrument" [ref=e543]:
+                    - option "All instruments" [selected]
+                    - option "INS-001"
+                    - option "INS-002"
+                    - option "INS-003"
+                    - option "INS-004"
+                  - combobox "Filter by part" [ref=e544]:
+                    - option "All parts" [selected]
+                    - option "P001"
+                    - option "P002"
+                    - option "P003"
+                - generic [ref=e545]:
+                  - button "Start stream" [ref=e546]
+                  - button "CSV" [ref=e549]
+              - generic [ref=e553]:
+                - generic [ref=e554]: 120 matching records
+                - generic [ref=e555]: 115 pass
+                - generic [ref=e556]: 4 fail
+                - generic [ref=e557]: 1 invalid
+                - generic [ref=e558]: Stream paused
+            - table [ref=e562]:
+              - rowgroup [ref=e563]:
+                - row [ref=e564]:
+                  - columnheader "Timestamp" [ref=e565]
+                  - columnheader "Measurement" [ref=e566]
+                  - columnheader "Part / batch" [ref=e567]
+                  - columnheader "Characteristic" [ref=e568]
+                  - columnheader "Value" [ref=e569]
+                  - columnheader "LSL – USL" [ref=e570]
+                  - columnheader "Instrument" [ref=e571]
+                  - columnheader "Result" [ref=e572]
+              - rowgroup [ref=e573]:
+                - row [ref=e574]:
+                  - cell "20 Oct 2026, 12:54 am" [ref=e575]
+                  - cell "ME-10119" [ref=e576]
+                  - cell "P003 B-260109" [ref=e577]:
+                    - generic [ref=e578]: P003
+                    - text: B-260109
+                  - cell "Length" [ref=e579]
+                  - cell "81.712 mm" [ref=e580]
+                  - cell "81.10 – 81.90" [ref=e581]
+                  - cell "INS-003" [ref=e582]
+                  - cell "PASS" [ref=e583]
+                - row [ref=e585]:
+                  - cell "20 Oct 2026, 12:42 am" [ref=e586]
+                  - cell "ME-10118" [ref=e587]
+                  - cell "P002 B-260109" [ref=e588]:
+                    - generic [ref=e589]: P002
+                    - text: B-260109
+                  - cell "Diameter" [ref=e590]
+                  - cell "51.925 mm" [ref=e591]
+                  - cell "51.70 – 52.30" [ref=e592]
+                  - cell "INS-002" [ref=e593]
+                  - cell "PASS" [ref=e594]
+                - row [ref=e596]:
+                  - cell "20 Oct 2026, 12:30 am" [ref=e597]
+                  - cell "ME-10117" [ref=e598]
+                  - cell "P001 B-260109" [ref=e599]:
+                    - generic [ref=e600]: P001
+                    - text: B-260109
+                  - cell "Width" [ref=e601]
+                  - cell "24.134 mm" [ref=e602]
+                  - cell "24.00 – 24.50" [ref=e603]
+                  - cell "INS-001" [ref=e604]
+                  - cell "PASS" [ref=e605]
+                - row [ref=e607]:
+                  - cell "20 Oct 2026, 12:18 am" [ref=e608]
+                  - cell "ME-10116" [ref=e609]
+                  - cell "P003 B-260109" [ref=e610]:
+                    - generic [ref=e611]: P003
+                    - text: B-260109
+                  - cell "Length" [ref=e612]
+                  - cell "82.168 mm" [ref=e613]
+                  - cell "81.10 – 81.90" [ref=e614]
+                  - cell "INS-003" [ref=e615]
+                  - cell "FAIL" [ref=e616]
+                - row [ref=e618]:
+                  - cell "20 Oct 2026, 12:06 am" [ref=e619]
+                  - cell "ME-10115" [ref=e620]
+                  - cell "P002 B-260109" [ref=e621]:
+                    - generic [ref=e622]: P002
+                    - text: B-260109
+                  - cell "Diameter" [ref=e623]
+                  - cell "52.111 mm" [ref=e624]
+                  - cell "51.70 – 52.30" [ref=e625]
+                  - cell "INS-002" [ref=e626]
+                  - cell "PASS" [ref=e627]
+                - row [ref=e629]:
+                  - cell "19 Oct 2026, 11:54 pm" [ref=e630]
+                  - cell "ME-10114" [ref=e631]
+                  - cell "P001 B-260109" [ref=e632]:
+                    - generic [ref=e633]: P001
+                    - text: B-260109
+                  - cell "Width" [ref=e634]
+                  - cell "24.134 mm" [ref=e635]
+                  - cell "24.00 – 24.50" [ref=e636]
+                  - cell "INS-001" [ref=e637]
+                  - cell "PASS" [ref=e638]
+                - row [ref=e640]:
+                  - cell "19 Oct 2026, 11:42 pm" [ref=e641]
+                  - cell "ME-10113" [ref=e642]
+                  - cell "P003 B-260109" [ref=e643]:
+                    - generic [ref=e644]: P003
+                    - text: B-260109
+                  - cell "Length" [ref=e645]
+                  - cell "81.400 mm" [ref=e646]
+                  - cell "81.10 – 81.90" [ref=e647]
+                  - cell "INS-003" [ref=e648]
+                  - cell "PASS" [ref=e649]
+                - row [ref=e651]:
+                  - cell "19 Oct 2026, 11:30 pm" [ref=e652]
+                  - cell "ME-10112" [ref=e653]
+                  - cell "P002 B-260109" [ref=e654]:
+                    - generic [ref=e655]: P002
+                    - text: B-260109
+                  - cell "Diameter" [ref=e656]
+                  - cell "52.159 mm" [ref=e657]
+                  - cell "51.70 – 52.30" [ref=e658]
+                  - cell "INS-002" [ref=e659]
+                  - cell "PASS" [ref=e660]
+                - row [ref=e662]:
+                  - cell "19 Oct 2026, 11:18 pm" [ref=e663]
+                  - cell "ME-10111" [ref=e664]
+                  - cell "P001 B-260109" [ref=e665]:
+                    - generic [ref=e666]: P001
+                    - text: B-260109
+                  - cell "Width" [ref=e667]
+                  - cell "24.278 mm" [ref=e668]
+                  - cell "24.00 – 24.50" [ref=e669]
+                  - cell "INS-001" [ref=e670]
+                  - cell "PASS" [ref=e671]
+                - row [ref=e673]:
+                  - cell "19 Oct 2026, 11:06 pm" [ref=e674]
+                  - cell "ME-10110" [ref=e675]
+                  - cell "P003 B-260109" [ref=e676]:
+                    - generic [ref=e677]: P003
+                    - text: B-260109
+                  - cell "Length" [ref=e678]
+                  - cell "81.277 mm" [ref=e679]
+                  - cell "81.10 – 81.90" [ref=e680]
+                  - cell "INS-003" [ref=e681]
+                  - cell "PASS" [ref=e682]
+                - row [ref=e684]:
+                  - cell "19 Oct 2026, 10:54 pm" [ref=e685]
+                  - cell "ME-10109" [ref=e686]
+                  - cell "P002 B-260109" [ref=e687]:
+                    - generic [ref=e688]: P002
+                    - text: B-260109
+                  - cell "Diameter" [ref=e689]
+                  - cell "52.009 mm" [ref=e690]
+                  - cell "51.70 – 52.30" [ref=e691]
+                  - cell "INS-002" [ref=e692]
+                  - cell "PASS" [ref=e693]
+                - row [ref=e695]:
+                  - cell "19 Oct 2026, 10:42 pm" [ref=e696]
+                  - cell "ME-10108" [ref=e697]
+                  - cell "P001 B-260109" [ref=e698]:
+                    - generic [ref=e699]: P001
+                    - text: B-260109
+                  - cell "Width" [ref=e700]
+                  - cell "24.388 mm" [ref=e701]
+                  - cell "24.00 – 24.50" [ref=e702]
+                  - cell "INS-001" [ref=e703]
+                  - cell "PASS" [ref=e704]
+                - row [ref=e706]:
+                  - cell "19 Oct 2026, 10:30 pm" [ref=e707]
+                  - cell "ME-10107" [ref=e708]
+                  - cell "P003 B-260108" [ref=e709]:
+                    - generic [ref=e710]: P003
+                    - text: B-260108
+                  - cell "Length" [ref=e711]
+                  - cell "81.431 mm" [ref=e712]
+                  - cell "81.10 – 81.90" [ref=e713]
+                  - cell "INS-003" [ref=e714]
+                  - cell "PASS" [ref=e715]
+                - row [ref=e717]:
+                  - cell "19 Oct 2026, 10:18 pm" [ref=e718]
+                  - cell "ME-10106" [ref=e719]
+                  - cell "P002 B-260108" [ref=e720]:
+                    - generic [ref=e721]: P002
+                    - text: B-260108
+                  - cell "Diameter" [ref=e722]
+                  - cell "51.848 mm" [ref=e723]
+                  - cell "51.70 – 52.30" [ref=e724]
+                  - cell "INS-002" [ref=e725]
+                  - cell "PASS" [ref=e726]
+                - row [ref=e728]:
+                  - cell "19 Oct 2026, 10:06 pm" [ref=e729]
+                  - cell "ME-10105" [ref=e730]
+                  - cell "P001 B-260108" [ref=e731]:
+                    - generic [ref=e732]: P001
+                    - text: B-260108
+                  - cell "Width" [ref=e733]
+                  - cell "24.326 mm" [ref=e734]
+                  - cell "24.00 – 24.50" [ref=e735]
+                  - cell "INS-001" [ref=e736]
+                  - cell "PASS" [ref=e737]
+                - row [ref=e739]:
+                  - cell "19 Oct 2026, 9:54 pm" [ref=e740]
+                  - cell "ME-10104" [ref=e741]
+                  - cell "P003 B-260108" [ref=e742]:
+                    - generic [ref=e743]: P003
+                    - text: B-260108
+                  - cell "Length" [ref=e744]
+                  - cell "81.671 mm" [ref=e745]
+                  - cell "81.10 – 81.90" [ref=e746]
+                  - cell "INS-003" [ref=e747]
+                  - cell "PASS" [ref=e748]
+                - row [ref=e750]:
+                  - cell "19 Oct 2026, 9:42 pm" [ref=e751]
+                  - cell "ME-10103" [ref=e752]
+                  - cell "P002 B-260108" [ref=e753]:
+                    - generic [ref=e754]: P002
+                    - text: B-260108
+                  - cell "Diameter" [ref=e755]
+                  - cell "51.876 mm" [ref=e756]
+                  - cell "51.70 – 52.30" [ref=e757]
+                  - cell "INS-002" [ref=e758]
+                  - cell "PASS" [ref=e759]
+                - row [ref=e761]:
+                  - cell "19 Oct 2026, 9:30 pm" [ref=e762]
+                  - cell "ME-10102" [ref=e763]
+                  - cell "P001 B-260108" [ref=e764]:
+                    - generic [ref=e765]: P001
+                    - text: B-260108
+                  - cell "Width" [ref=e766]
+                  - cell "24.170 mm" [ref=e767]
+                  - cell "24.00 – 24.50" [ref=e768]
+                  - cell "INS-001" [ref=e769]
+                  - cell "PASS" [ref=e770]
+                - row [ref=e772]:
+                  - cell "19 Oct 2026, 9:18 pm" [ref=e773]
+                  - cell "ME-10101" [ref=e774]
+                  - cell "P003 B-260108" [ref=e775]:
+                    - generic [ref=e776]: P003
+                    - text: B-260108
+                  - cell "Length" [ref=e777]
+                  - cell "81.698 mm" [ref=e778]
+                  - cell "81.10 – 81.90" [ref=e779]
+                  - cell "INS-003" [ref=e780]
+                  - cell "PASS" [ref=e781]
+                - row [ref=e783]:
+                  - cell "19 Oct 2026, 9:06 pm" [ref=e784]
+                  - cell "ME-10100" [ref=e785]
+                  - cell "P002 B-260108" [ref=e786]:
+                    - generic [ref=e787]: P002
+                    - text: B-260108
+                  - cell "Diameter" [ref=e788]
+                  - cell "52.058 mm" [ref=e789]
+                  - cell "51.70 – 52.30" [ref=e790]
+                  - cell "INS-002" [ref=e791]
+                  - cell "PASS" [ref=e792]
+                - row [ref=e794]:
+                  - cell "19 Oct 2026, 8:54 pm" [ref=e795]
+                  - cell "ME-10099" [ref=e796]
+                  - cell "P001 B-260108" [ref=e797]:
+                    - generic [ref=e798]: P001
+                    - text: B-260108
+                  - cell "Width" [ref=e799]
+                  - cell "24.114 mm" [ref=e800]
+                  - cell "24.00 – 24.50" [ref=e801]
+                  - cell "INS-001" [ref=e802]
+                  - cell "PASS" [ref=e803]
+                - row [ref=e805]:
+                  - cell "19 Oct 2026, 8:42 pm" [ref=e806]
+                  - cell "ME-10098" [ref=e807]
+                  - cell "P003 B-260108" [ref=e808]:
+                    - generic [ref=e809]: P003
+                    - text: B-260108
+                  - cell "Length" [ref=e810]
+                  - cell "81.479 mm" [ref=e811]
+                  - cell "81.10 – 81.90" [ref=e812]
+                  - cell "INS-003" [ref=e813]
+                  - cell "PASS" [ref=e814]
+                - row [ref=e816]:
+                  - cell "19 Oct 2026, 8:30 pm" [ref=e817]
+                  - cell "ME-10097" [ref=e818]
+                  - cell "P002 B-260108" [ref=e819]:
+                    - generic [ref=e820]: P002
+                    - text: B-260108
+                  - cell "Diameter" [ref=e821]
+                  - cell "52.168 mm" [ref=e822]
+                  - cell "51.70 – 52.30" [ref=e823]
+                  - cell "INS-002" [ref=e824]
+                  - cell "PASS" [ref=e825]
+                - row [ref=e827]:
+                  - cell "19 Oct 2026, 8:18 pm" [ref=e828]
+                  - cell "ME-10096" [ref=e829]
+                  - cell "P001 B-260108" [ref=e830]:
+                    - generic [ref=e831]: P001
+                    - text: B-260108
+                  - cell "Width" [ref=e832]
+                  - cell "24.227 mm" [ref=e833]
+                  - cell "24.00 – 24.50" [ref=e834]
+                  - cell "INS-001" [ref=e835]
+                  - cell "PASS" [ref=e836]
+                - row [ref=e838]:
+                  - cell "19 Oct 2026, 8:06 pm" [ref=e839]
+                  - cell "ME-10095" [ref=e840]
+                  - cell "P003 B-260107" [ref=e841]:
+                    - generic [ref=e842]: P003
+                    - text: B-260107
+                  - cell "Length" [ref=e843]
+                  - cell "81.285 mm" [ref=e844]
+                  - cell "81.10 – 81.90" [ref=e845]
+                  - cell "INS-003" [ref=e846]
+                  - cell "PASS" [ref=e847]
+                - row [ref=e849]:
+                  - cell "19 Oct 2026, 7:54 pm" [ref=e850]
+                  - cell "ME-10094" [ref=e851]
+                  - cell "P002 B-260107" [ref=e852]:
+                    - generic [ref=e853]: P002
+                    - text: B-260107
+                  - cell "Diameter" [ref=e854]
+                  - cell "52.069 mm" [ref=e855]
+                  - cell "51.70 – 52.30" [ref=e856]
+                  - cell "INS-002" [ref=e857]
+                  - cell "PASS" [ref=e858]
+                - row [ref=e860]:
+                  - cell "19 Oct 2026, 7:42 pm" [ref=e861]
+                  - cell "ME-10093" [ref=e862]
+                  - cell "P001 B-260107" [ref=e863]:
+                    - generic [ref=e864]: P001
+                    - text: B-260107
+                  - cell "Width" [ref=e865]
+                  - cell "24.369 mm" [ref=e866]
+                  - cell "24.00 – 24.50" [ref=e867]
+                  - cell "INS-001" [ref=e868]
+                  - cell "PASS" [ref=e869]
+                - row [ref=e871]:
+                  - cell "19 Oct 2026, 7:30 pm" [ref=e872]
+                  - cell "ME-10092" [ref=e873]
+                  - cell "P003 B-260107" [ref=e874]:
+                    - generic [ref=e875]: P003
+                    - text: B-260107
+                  - cell "Length" [ref=e876]
+                  - cell "81.359 mm" [ref=e877]
+                  - cell "81.10 – 81.90" [ref=e878]
+                  - cell "INS-003" [ref=e879]
+                  - cell "PASS" [ref=e880]
+                - row [ref=e882]:
+                  - cell "19 Oct 2026, 7:18 pm" [ref=e883]
+                  - cell "ME-10091" [ref=e884]
+                  - cell "P002 B-260107" [ref=e885]:
+                    - generic [ref=e886]: P002
+                    - text: B-260107
+                  - cell "Diameter" [ref=e887]
+                  - cell "51.884 mm" [ref=e888]
+                  - cell "51.70 – 52.30" [ref=e889]
+                  - cell "INS-002" [ref=e890]
+                  - cell "PASS" [ref=e891]
+                - row [ref=e893]:
+                  - cell "19 Oct 2026, 7:06 pm" [ref=e894]
+                  - cell "ME-10090" [ref=e895]
+                  - cell "P001 B-260107" [ref=e896]:
+                    - generic [ref=e897]: P001
+                    - text: B-260107
+                  - cell "Width" [ref=e898]
+                  - cell "24.363 mm" [ref=e899]
+                  - cell "24.00 – 24.50" [ref=e900]
+                  - cell "INS-001" [ref=e901]
+                  - cell "PASS" [ref=e902]
+                - row [ref=e904]:
+                  - cell "19 Oct 2026, 6:54 pm" [ref=e905]
+                  - cell "ME-10089" [ref=e906]
+                  - cell "P003 B-260107" [ref=e907]:
+                    - generic [ref=e908]: P003
+                    - text: B-260107
+                  - cell "Length" [ref=e909]
+                  - cell "81.608 mm" [ref=e910]
+                  - cell "81.10 – 81.90" [ref=e911]
+                  - cell "INS-003" [ref=e912]
+                  - cell "PASS" [ref=e913]
+                - row [ref=e915]:
+                  - cell "19 Oct 2026, 6:42 pm" [ref=e916]
+                  - cell "ME-10088" [ref=e917]
+                  - cell "P002 B-260107" [ref=e918]:
+                    - generic [ref=e919]: P002
+                    - text: B-260107
+                  - cell "Diameter" [ref=e920]
+                  - cell "51.844 mm" [ref=e921]
+                  - cell "51.70 – 52.30" [ref=e922]
+                  - cell "INS-002" [ref=e923]
+                  - cell "PASS" [ref=e924]
+                - row [ref=e926]:
+                  - cell "19 Oct 2026, 6:30 pm" [ref=e927]
+                  - cell "ME-10087" [ref=e928]
+                  - cell "P001 B-260107" [ref=e929]:
+                    - generic [ref=e930]: P001
+                    - text: B-260107
+                  - cell "Width" [ref=e931]
+                  - cell "23.891 mm" [ref=e932]
+                  - cell "24.00 – 24.50" [ref=e933]
+                  - cell "INS-001" [ref=e934]
+                  - cell "FAIL" [ref=e935]
+                - row [ref=e937]:
+                  - cell "19 Oct 2026, 6:18 pm" [ref=e938]
+                  - cell "ME-10086" [ref=e939]
+                  - cell "P003 B-260107" [ref=e940]:
+                    - generic [ref=e941]: P003
+                    - text: B-260107
+                  - cell "Length" [ref=e942]
+                  - cell "81.722 mm" [ref=e943]
+                  - cell "81.10 – 81.90" [ref=e944]
+                  - cell "INS-003" [ref=e945]
+                  - cell "PASS" [ref=e946]
+                - row [ref=e948]:
+                  - cell "19 Oct 2026, 6:06 pm" [ref=e949]
+                  - cell "ME-10085" [ref=e950]
+                  - cell "P002 B-260107" [ref=e951]:
+                    - generic [ref=e952]: P002
+                    - text: B-260107
+                  - cell "Diameter" [ref=e953]
+                  - cell "51.998 mm" [ref=e954]
+                  - cell "51.70 – 52.30" [ref=e955]
+                  - cell "INS-002" [ref=e956]
+                  - cell "PASS" [ref=e957]
+                - row [ref=e959]:
+                  - cell "19 Oct 2026, 5:54 pm" [ref=e960]
+                  - cell "ME-10084" [ref=e961]
+                  - cell "P001 B-260107" [ref=e962]:
+                    - generic [ref=e963]: P001
+                    - text: B-260107
+                  - cell "Width" [ref=e964]
+                  - cell "24.111 mm" [ref=e965]
+                  - cell "24.00 – 24.50" [ref=e966]
+                  - cell "INS-001" [ref=e967]
+                  - cell "PASS" [ref=e968]
+                - row [ref=e970]:
+                  - cell "19 Oct 2026, 5:42 pm" [ref=e971]
+                  - cell "ME-10083" [ref=e972]
+                  - cell "P003 B-260106" [ref=e973]:
+                    - generic [ref=e974]: P003
+                    - text: B-260106
+                  - cell "Length" [ref=e975]
+                  - cell "81.560 mm" [ref=e976]
+                  - cell "81.10 – 81.90" [ref=e977]
+                  - cell "INS-003" [ref=e978]
+                  - cell "PASS" [ref=e979]
+                - row [ref=e981]:
+                  - cell "19 Oct 2026, 5:30 pm" [ref=e982]
+                  - cell "ME-10082" [ref=e983]
+                  - cell "P002 B-260106" [ref=e984]:
+                    - generic [ref=e985]: P002
+                    - text: B-260106
+                  - cell "Diameter" [ref=e986]
+                  - cell "52.155 mm" [ref=e987]
+                  - cell "51.70 – 52.30" [ref=e988]
+                  - cell "INS-002" [ref=e989]
+                  - cell "PASS" [ref=e990]
+                - row [ref=e992]:
+                  - cell "19 Oct 2026, 5:18 pm" [ref=e993]
+                  - cell "ME-10081" [ref=e994]
+                  - cell "P001 B-260106" [ref=e995]:
+                    - generic [ref=e996]: P001
+                    - text: B-260106
+                  - cell "Width" [ref=e997]
+                  - cell "24.179 mm" [ref=e998]
+                  - cell "24.00 – 24.50" [ref=e999]
+                  - cell "INS-001" [ref=e1000]
+                  - cell "PASS" [ref=e1001]
+                - row [ref=e1003]:
+                  - cell "19 Oct 2026, 5:06 pm" [ref=e1004]
+                  - cell "ME-10080" [ref=e1005]
+                  - cell "P003 B-260106" [ref=e1006]:
+                    - generic [ref=e1007]: P003
+                    - text: B-260106
+                  - cell "Length" [ref=e1008]
+                  - cell "81.323 mm" [ref=e1009]
+                  - cell "81.10 – 81.90" [ref=e1010]
+                  - cell "INS-003" [ref=e1011]
+                  - cell "PASS" [ref=e1012]
+                - row [ref=e1014]:
+                  - cell "19 Oct 2026, 4:54 pm" [ref=e1015]
+                  - cell "ME-10079" [ref=e1016]
+                  - cell "P002 B-260106" [ref=e1017]:
+                    - generic [ref=e1018]: P002
+                    - text: B-260106
+                  - cell "Diameter" [ref=e1019]
+                  - cell "52.119 mm" [ref=e1020]
+                  - cell "51.70 – 52.30" [ref=e1021]
+                  - cell "INS-002" [ref=e1022]
+                  - cell "PASS" [ref=e1023]
+                - row [ref=e1025]:
+                  - cell "19 Oct 2026, 4:42 pm" [ref=e1026]
+                  - cell "ME-10078" [ref=e1027]
+                  - cell "P001 B-260106" [ref=e1028]:
+                    - generic [ref=e1029]: P001
+                    - text: B-260106
+                  - cell "Width" [ref=e1030]
+                  - cell "24.335 mm" [ref=e1031]
+                  - cell "24.00 – 24.50" [ref=e1032]
+                  - cell "INS-001" [ref=e1033]
+                  - cell "PASS" [ref=e1034]
+                - row [ref=e1036]:
+                  - cell "19 Oct 2026, 4:30 pm" [ref=e1037]
+                  - cell "ME-10077" [ref=e1038]
+                  - cell "P003 B-260106" [ref=e1039]:
+                    - generic [ref=e1040]: P003
+                    - text: B-260106
+                  - cell "Length" [ref=e1041]
+                  - cell "81.306 mm" [ref=e1042]
+                  - cell "81.10 – 81.90" [ref=e1043]
+                  - cell "INS-003" [ref=e1044]
+                  - cell "PASS" [ref=e1045]
+                - row [ref=e1047]:
+                  - cell "19 Oct 2026, 4:18 pm" [ref=e1048]
+                  - cell "ME-10076" [ref=e1049]
+                  - cell "P002 B-260106" [ref=e1050]:
+                    - generic [ref=e1051]: P002
+                    - text: B-260106
+                  - cell "Diameter" [ref=e1052]
+                  - cell "51.935 mm" [ref=e1053]
+                  - cell "51.70 – 52.30" [ref=e1054]
+                  - cell "INS-002" [ref=e1055]
+                  - cell "PASS" [ref=e1056]
+                - row [ref=e1058]:
+                  - cell "19 Oct 2026, 4:06 pm" [ref=e1059]
+                  - cell "ME-10075" [ref=e1060]
+                  - cell "P001 B-260106" [ref=e1061]:
+                    - generic [ref=e1062]: P001
+                    - text: B-260106
+                  - cell "Width" [ref=e1063]
+                  - cell "24.385 mm" [ref=e1064]
+                  - cell "24.00 – 24.50" [ref=e1065]
+                  - cell "INS-001" [ref=e1066]
+                  - cell "PASS" [ref=e1067]
+                - row [ref=e1069]:
+                  - cell "19 Oct 2026, 3:54 pm" [ref=e1070]
+                  - cell "ME-10074" [ref=e1071]
+                  - cell "P003 B-260106" [ref=e1072]:
+                    - generic [ref=e1073]: P003
+                    - text: B-260106
+                  - cell "Length" [ref=e1074]
+                  - cell "81.530 mm" [ref=e1075]
+                  - cell "81.10 – 81.90" [ref=e1076]
+                  - cell "INS-003" [ref=e1077]
+                  - cell "PASS" [ref=e1078]
+                - row [ref=e1080]:
+                  - cell "19 Oct 2026, 3:42 pm" [ref=e1081]
+                  - cell "ME-10073" [ref=e1082]
+                  - cell "P002 B-260106" [ref=e1083]:
+                    - generic [ref=e1084]: P002
+                    - text: B-260106
+                  - cell "Diameter" [ref=e1085]
+                  - cell "51.832 mm" [ref=e1086]
+                  - cell "51.70 – 52.30" [ref=e1087]
+                  - cell "INS-002" [ref=e1088]
+                  - cell "PASS" [ref=e1089]
+                - row [ref=e1091]:
+                  - cell "19 Oct 2026, 3:30 pm" [ref=e1092]
+                  - cell "ME-10072" [ref=e1093]
+                  - cell "P001 B-260106" [ref=e1094]:
+                    - generic [ref=e1095]: P001
+                    - text: B-260106
+                  - cell "Width" [ref=e1096]
+                  - cell "24.267 mm" [ref=e1097]
+                  - cell "24.00 – 24.50" [ref=e1098]
+                  - cell "INS-001" [ref=e1099]
+                  - cell "PASS" [ref=e1100]
+                - row [ref=e1102]:
+                  - cell "19 Oct 2026, 3:18 pm" [ref=e1103]
+                  - cell "ME-10071" [ref=e1104]
+                  - cell "P003 B-260105" [ref=e1105]:
+                    - generic [ref=e1106]: P003
+                    - text: B-260105
+                  - cell "Length" [ref=e1107]
+                  - cell "81.717 mm" [ref=e1108]
+                  - cell "81.10 – 81.90" [ref=e1109]
+                  - cell "INS-003" [ref=e1110]
+                  - cell "PASS" [ref=e1111]
+                - row [ref=e1113]:
+                  - cell "19 Oct 2026, 3:06 pm" [ref=e1114]
+                  - cell "ME-10070" [ref=e1115]
+                  - cell "P002 B-260105" [ref=e1116]:
+                    - generic [ref=e1117]: P002
+                    - text: B-260105
+                  - cell "Diameter" [ref=e1118]
+                  - cell "51.938 mm" [ref=e1119]
+                  - cell "51.70 – 52.30" [ref=e1120]
+                  - cell "INS-002" [ref=e1121]
+                  - cell "PASS" [ref=e1122]
+                - row [ref=e1124]:
+                  - cell "19 Oct 2026, 2:54 pm" [ref=e1125]
+                  - cell "ME-10069" [ref=e1126]
+                  - cell "P001 B-260105" [ref=e1127]:
+                    - generic [ref=e1128]: P001
+                    - text: B-260105
+                  - cell "Width" [ref=e1129]
+                  - cell "24.128 mm" [ref=e1130]
+                  - cell "24.00 – 24.50" [ref=e1131]
+                  - cell "INS-001" [ref=e1132]
+                  - cell "PASS" [ref=e1133]
+                - row [ref=e1135]:
+                  - cell "19 Oct 2026, 2:42 pm" [ref=e1136]
+                  - cell "ME-10068" [ref=e1137]
+                  - cell "P003 B-260105" [ref=e1138]:
+                    - generic [ref=e1139]: P003
+                    - text: B-260105
+                  - cell "Length" [ref=e1140]
+                  - cell "81.634 mm" [ref=e1141]
+                  - cell "81.10 – 81.90" [ref=e1142]
+                  - cell "INS-003" [ref=e1143]
+                  - cell "PASS" [ref=e1144]
+                - row [ref=e1146]:
+                  - cell "19 Oct 2026, 2:30 pm" [ref=e1147]
+                  - cell "ME-10067" [ref=e1148]
+                  - cell "P002 B-260105" [ref=e1149]:
+                    - generic [ref=e1150]: P002
+                    - text: B-260105
+                  - cell "Diameter" [ref=e1151]
+                  - cell "52.121 mm" [ref=e1152]
+                  - cell "51.70 – 52.30" [ref=e1153]
+                  - cell "INS-002" [ref=e1154]
+                  - cell "PASS" [ref=e1155]
+                - row [ref=e1157]:
+                  - cell "19 Oct 2026, 2:18 pm" [ref=e1158]
+                  - cell "ME-10066" [ref=e1159]
+                  - cell "P001 B-260105" [ref=e1160]:
+                    - generic [ref=e1161]: P001
+                    - text: B-260105
+                  - cell "Width" [ref=e1162]
+                  - cell "24.141 mm" [ref=e1163]
+                  - cell "24.00 – 24.50" [ref=e1164]
+                  - cell "INS-001" [ref=e1165]
+                  - cell "PASS" [ref=e1166]
+                - row [ref=e1168]:
+                  - cell "19 Oct 2026, 2:06 pm" [ref=e1169]
+                  - cell "ME-10065" [ref=e1170]
+                  - cell "P003 B-260105" [ref=e1171]:
+                    - generic [ref=e1172]: P003
+                    - text: B-260105
+                  - cell "Length" [ref=e1173]
+                  - cell "81.384 mm" [ref=e1174]
+                  - cell "81.10 – 81.90" [ref=e1175]
+                  - cell "INS-003" [ref=e1176]
+                  - cell "PASS" [ref=e1177]
+                - row [ref=e1179]:
+                  - cell "19 Oct 2026, 1:54 pm" [ref=e1180]
+                  - cell "ME-10064" [ref=e1181]
+                  - cell "P002 B-260105" [ref=e1182]:
+                    - generic [ref=e1183]: P002
+                    - text: B-260105
+                  - cell "Diameter" [ref=e1184]
+                  - cell "52.154 mm" [ref=e1185]
+                  - cell "51.70 – 52.30" [ref=e1186]
+                  - cell "INS-002" [ref=e1187]
+                  - cell "PASS" [ref=e1188]
+                - row [ref=e1190]:
+                  - cell "19 Oct 2026, 1:42 pm" [ref=e1191]
+                  - cell "ME-10063" [ref=e1192]
+                  - cell "P001 B-260105" [ref=e1193]:
+                    - generic [ref=e1194]: P001
+                    - text: B-260105
+                  - cell "Width" [ref=e1195]
+                  - cell "24.289 mm" [ref=e1196]
+                  - cell "24.00 – 24.50" [ref=e1197]
+                  - cell "INS-001" [ref=e1198]
+                  - cell "PASS" [ref=e1199]
+                - row [ref=e1201]:
+                  - cell "19 Oct 2026, 1:30 pm" [ref=e1202]
+                  - cell "ME-10062" [ref=e1203]
+                  - cell "P003 B-260105" [ref=e1204]:
+                    - generic [ref=e1205]: P003
+                    - text: B-260105
+                  - cell "Length" [ref=e1206]
+                  - cell "81.279 mm" [ref=e1207]
+                  - cell "81.10 – 81.90" [ref=e1208]
+                  - cell "INS-003" [ref=e1209]
+                  - cell "PASS" [ref=e1210]
+                - row [ref=e1212]:
+                  - cell "19 Oct 2026, 1:18 pm" [ref=e1213]
+                  - cell "ME-10061" [ref=e1214]
+                  - cell "P002 B-260105" [ref=e1215]:
+                    - generic [ref=e1216]: P002
+                    - text: B-260105
+                  - cell "Diameter" [ref=e1217]
+                  - cell "51.995 mm" [ref=e1218]
+                  - cell "51.70 – 52.30" [ref=e1219]
+                  - cell "INS-002" [ref=e1220]
+                  - cell "PASS" [ref=e1221]
+                - row [ref=e1223]:
+                  - cell "19 Oct 2026, 1:06 pm" [ref=e1224]
+                  - cell "ME-10060" [ref=e1225]
+                  - cell "P001 B-260105" [ref=e1226]:
+                    - generic [ref=e1227]: P001
+                    - text: B-260105
+                  - cell "Width" [ref=e1228]
+                  - cell "24.389 mm" [ref=e1229]
+                  - cell "24.00 – 24.50" [ref=e1230]
+                  - cell "INS-001" [ref=e1231]
+                  - cell "PASS" [ref=e1232]
+                - row [ref=e1234]:
+                  - cell "19 Oct 2026, 12:54 pm" [ref=e1235]
+                  - cell "ME-10059" [ref=e1236]
+                  - cell "P003 B-260104" [ref=e1237]:
+                    - generic [ref=e1238]: P003
+                    - text: B-260104
+                  - cell "Length" [ref=e1239]
+                  - cell "81.449 mm" [ref=e1240]
+                  - cell "81.10 – 81.90" [ref=e1241]
+                  - cell "INS-003" [ref=e1242]
+                  - cell "PASS" [ref=e1243]
+                - row [ref=e1245]:
+                  - cell "19 Oct 2026, 12:42 pm" [ref=e1246]
+                  - cell "ME-10058" [ref=e1247]
+                  - cell "P002 B-260104" [ref=e1248]:
+                    - generic [ref=e1249]: P002
+                    - text: B-260104
+                  - cell "Diameter" [ref=e1250]
+                  - cell "52.233 mm" [ref=e1251]
+                  - cell "51.70 – 52.30" [ref=e1252]
+                  - cell "INS-002" [ref=e1253]
+                  - cell "PASS" [ref=e1254]
+                - row [ref=e1256]:
+                  - cell "19 Oct 2026, 12:30 pm" [ref=e1257]
+                  - cell "ME-10057" [ref=e1258]
+                  - cell "P001 B-260104" [ref=e1259]:
+                    - generic [ref=e1260]: P001
+                    - text: B-260104
+                  - cell "Width" [ref=e1261]
+                  - cell "24.316 mm" [ref=e1262]
+                  - cell "24.00 – 24.50" [ref=e1263]
+                  - cell "INS-001" [ref=e1264]
+                  - cell "PASS" [ref=e1265]
+                - row [ref=e1267]:
+                  - cell "19 Oct 2026, 12:18 pm" [ref=e1268]
+                  - cell "ME-10056" [ref=e1269]
+                  - cell "P003 B-260104" [ref=e1270]:
+                    - generic [ref=e1271]: P003
+                    - text: B-260104
+                  - cell "Length" [ref=e1272]
+                  - cell "81.682 mm" [ref=e1273]
+                  - cell "81.10 – 81.90" [ref=e1274]
+                  - cell "INS-003" [ref=e1275]
+                  - cell "PASS" [ref=e1276]
+                - row [ref=e1278]:
+                  - cell "19 Oct 2026, 12:06 pm" [ref=e1279]
+                  - cell "ME-10055" [ref=e1280]
+                  - cell "P002 B-260104" [ref=e1281]:
+                    - generic [ref=e1282]: P002
+                    - text: B-260104
+                  - cell "Diameter" [ref=e1283]
+                  - cell "51.886 mm" [ref=e1284]
+                  - cell "51.70 – 52.30" [ref=e1285]
+                  - cell "INS-002" [ref=e1286]
+                  - cell "PASS" [ref=e1287]
+                - row [ref=e1289]:
+                  - cell "19 Oct 2026, 11:54 am" [ref=e1290]
+                  - cell "ME-10054" [ref=e1291]
+                  - cell "P001 B-260104" [ref=e1292]:
+                    - generic [ref=e1293]: P001
+                    - text: B-260104
+                  - cell "Width" [ref=e1294]
+                  - cell "24.160 mm" [ref=e1295]
+                  - cell "24.00 – 24.50" [ref=e1296]
+                  - cell "INS-001" [ref=e1297]
+                  - cell "PASS" [ref=e1298]
+                - row [ref=e1300]:
+                  - cell "19 Oct 2026, 11:42 am" [ref=e1301]
+                  - cell "ME-10053" [ref=e1302]
+                  - cell "P003 B-260104" [ref=e1303]:
+                    - generic [ref=e1304]: P003
+                    - text: B-260104
+                  - cell "Length" [ref=e1305]
+                  - cell "81.689 mm" [ref=e1306]
+                  - cell "81.10 – 81.90" [ref=e1307]
+                  - cell "INS-003" [ref=e1308]
+                  - cell "PASS" [ref=e1309]
+                - row [ref=e1311]:
+                  - cell "19 Oct 2026, 11:30 am" [ref=e1312]
+                  - cell "ME-10052" [ref=e1313]
+                  - cell "P002 B-260104" [ref=e1314]:
+                    - generic [ref=e1315]: P002
+                    - text: B-260104
+                  - cell "Diameter" [ref=e1316]
+                  - cell "52.071 mm" [ref=e1317]
+                  - cell "51.70 – 52.30" [ref=e1318]
+                  - cell "INS-002" [ref=e1319]
+                  - cell "PASS" [ref=e1320]
+                - row [ref=e1322]:
+                  - cell "19 Oct 2026, 11:18 am" [ref=e1323]
+                  - cell "ME-10051" [ref=e1324]
+                  - cell "P001 B-260104" [ref=e1325]:
+                    - generic [ref=e1326]: P001
+                    - text: B-260104
+                  - cell "Width" [ref=e1327]
+                  - cell "24.117 mm" [ref=e1328]
+                  - cell "24.00 – 24.50" [ref=e1329]
+                  - cell "INS-001" [ref=e1330]
+                  - cell "PASS" [ref=e1331]
+                - row [ref=e1333]:
+                  - cell "19 Oct 2026, 11:06 am" [ref=e1334]
+                  - cell "ME-10050" [ref=e1335]
+                  - cell "P003 B-260104" [ref=e1336]:
+                    - generic [ref=e1337]: P003
+                    - text: B-260104
+                  - cell "Length" [ref=e1338]
+                  - cell "81.461 mm" [ref=e1339]
+                  - cell "81.10 – 81.90" [ref=e1340]
+                  - cell "INS-003" [ref=e1341]
+                  - cell "PASS" [ref=e1342]
+                - row [ref=e1344]:
+                  - cell "19 Oct 2026, 10:54 am" [ref=e1345]
+                  - cell "ME-10049" [ref=e1346]
+                  - cell "P002 B-260104" [ref=e1347]:
+                    - generic [ref=e1348]: P002
+                    - text: B-260104
+                  - cell "Diameter" [ref=e1349]
+                  - cell "52.168 mm" [ref=e1350]
+                  - cell "51.70 – 52.30" [ref=e1351]
+                  - cell "INS-002" [ref=e1352]
+                  - cell "PASS" [ref=e1353]
+                - row [ref=e1355]:
+                  - cell "19 Oct 2026, 10:42 am" [ref=e1356]
+                  - cell "ME-10048" [ref=e1357]
+                  - cell "P001 B-260104" [ref=e1358]:
+                    - generic [ref=e1359]: P001
+                    - text: B-260104
+                  - cell "Width" [ref=e1360]
+                  - cell "24.239 mm" [ref=e1361]
+                  - cell "24.00 – 24.50" [ref=e1362]
+                  - cell "INS-001" [ref=e1363]
+                  - cell "PASS" [ref=e1364]
+                - row [ref=e1366]:
+                  - cell "19 Oct 2026, 10:30 am" [ref=e1367]
+                  - cell "ME-10047" [ref=e1368]
+                  - cell "P003 B-260103" [ref=e1369]:
+                    - generic [ref=e1370]: P003
+                    - text: B-260103
+                  - cell "Length" [ref=e1371]
+                  - cell "81.281 mm" [ref=e1372]
+                  - cell "81.10 – 81.90" [ref=e1373]
+                  - cell "INS-003" [ref=e1374]
+                  - cell "PASS" [ref=e1375]
+                - row [ref=e1377]:
+                  - cell "19 Oct 2026, 10:18 am" [ref=e1378]
+                  - cell "ME-10046" [ref=e1379]
+                  - cell "P002 B-260103" [ref=e1380]:
+                    - generic [ref=e1381]: P002
+                    - text: B-260103
+                  - cell "Diameter" [ref=e1382]
+                  - cell "52.056 mm" [ref=e1383]
+                  - cell "51.70 – 52.30" [ref=e1384]
+                  - cell "INS-002" [ref=e1385]
+                  - cell "PASS" [ref=e1386]
+                - row [ref=e1388]:
+                  - cell "19 Oct 2026, 10:06 am" [ref=e1389]
+                  - cell "ME-10045" [ref=e1390]
+                  - cell "P001 B-260103" [ref=e1391]:
+                    - generic [ref=e1392]: P001
+                    - text: B-260103
+                  - cell "Width" [ref=e1393]
+                  - cell "24.375 mm" [ref=e1394]
+                  - cell "24.00 – 24.50" [ref=e1395]
+                  - cell "INS-001" [ref=e1396]
+                  - cell "PASS" [ref=e1397]
+                - row [ref=e1399]:
+                  - cell "19 Oct 2026, 9:54 am" [ref=e1400]
+                  - cell "ME-10044" [ref=e1401]
+                  - cell "P003 B-260103" [ref=e1402]:
+                    - generic [ref=e1403]: P003
+                    - text: B-260103
+                  - cell "Length" [ref=e1404]
+                  - cell "81.374 mm" [ref=e1405]
+                  - cell "81.10 – 81.90" [ref=e1406]
+                  - cell "INS-003" [ref=e1407]
+                  - cell "PASS" [ref=e1408]
+                - row [ref=e1410]:
+                  - cell "19 Oct 2026, 9:42 am" [ref=e1411]
+                  - cell "ME-10043" [ref=e1412]
+                  - cell "P002 B-260103" [ref=e1413]:
+                    - generic [ref=e1414]: P002
+                    - text: B-260103
+                  - cell "Diameter" [ref=e1415]
+                  - cell "51.875 mm" [ref=e1416]
+                  - cell "51.70 – 52.30" [ref=e1417]
+                  - cell "INS-002" [ref=e1418]
+                  - cell "PASS" [ref=e1419]
+                - row [ref=e1421]:
+                  - cell "19 Oct 2026, 9:30 am" [ref=e1422]
+                  - cell "ME-10042" [ref=e1423]
+                  - cell "P001 B-260103" [ref=e1424]:
+                    - generic [ref=e1425]: P001
+                    - text: B-260103
+                  - cell "Width" [ref=e1426]
+                  - cell "24.356 mm" [ref=e1427]
+                  - cell "24.00 – 24.50" [ref=e1428]
+                  - cell "INS-001" [ref=e1429]
+                  - cell "PASS" [ref=e1430]
+                - row [ref=e1432]:
+                  - cell "19 Oct 2026, 9:18 am" [ref=e1433]
+                  - cell "ME-10041" [ref=e1434]
+                  - cell "P003 B-260103" [ref=e1435]:
+                    - generic [ref=e1436]: P003
+                    - text: B-260103
+                  - cell "Length" [ref=e1437]
+                  - cell "81.624 mm" [ref=e1438]
+                  - cell "81.10 – 81.90" [ref=e1439]
+                  - cell "INS-003" [ref=e1440]
+                  - cell "PASS" [ref=e1441]
+                - row [ref=e1443]:
+                  - cell "19 Oct 2026, 9:06 am" [ref=e1444]
+                  - cell "ME-10040" [ref=e1445]
+                  - cell "P002 B-260103" [ref=e1446]:
+                    - generic [ref=e1447]: P002
+                    - text: B-260103
+                  - cell "Diameter" [ref=e1448]
+                  - cell "51.849 mm" [ref=e1449]
+                  - cell "51.70 – 52.30" [ref=e1450]
+                  - cell "INS-002" [ref=e1451]
+                  - cell "PASS" [ref=e1452]
+                - row [ref=e1454]:
+                  - cell "19 Oct 2026, 8:54 am" [ref=e1455]
+                  - cell "ME-10039" [ref=e1456]
+                  - cell "P001 B-260103" [ref=e1457]:
+                    - generic [ref=e1458]: P001
+                    - text: B-260103
+                  - cell "Width" [ref=e1459]
+                  - cell "24.205 mm" [ref=e1460]
+                  - cell "24.00 – 24.50" [ref=e1461]
+                  - cell "INS-001" [ref=e1462]
+                  - cell "PASS" [ref=e1463]
+                - row [ref=e1465]:
+                  - cell "19 Oct 2026, 8:42 am" [ref=e1466]
+                  - cell "ME-10038" [ref=e1467]
+                  - cell "P003 B-260103" [ref=e1468]:
+                    - generic [ref=e1469]: P003
+                    - text: B-260103
+                  - cell "Length" [ref=e1470]
+                  - cell "81.720 mm" [ref=e1471]
+                  - cell "81.10 – 81.90" [ref=e1472]
+                  - cell "INS-003" [ref=e1473]
+                  - cell "PASS" [ref=e1474]
+                - row [ref=e1476]:
+                  - cell "19 Oct 2026, 8:30 am" [ref=e1477]
+                  - cell "ME-10037" [ref=e1478]
+                  - cell "P002 B-260103" [ref=e1479]:
+                    - generic [ref=e1480]: P002
+                    - text: B-260103
+                  - cell "Diameter" [ref=e1481]
+                  - cell "52.011 mm" [ref=e1482]
+                  - cell "51.70 – 52.30" [ref=e1483]
+                  - cell "INS-002" [ref=e1484]
+                  - cell "PASS" [ref=e1485]
+                - row [ref=e1487]:
+                  - cell "19 Oct 2026, 8:18 am" [ref=e1488]
+                  - cell "ME-10036" [ref=e1489]
+                  - cell "P001 B-260103" [ref=e1490]:
+                    - generic [ref=e1491]: P001
+                    - text: B-260103
+                  - cell "Width" [ref=e1492]
+                  - cell "24.110 mm" [ref=e1493]
+                  - cell "24.00 – 24.50" [ref=e1494]
+                  - cell "INS-001" [ref=e1495]
+                  - cell "PASS" [ref=e1496]
+                - row [ref=e1498]:
+                  - cell "19 Oct 2026, 8:06 am" [ref=e1499]
+                  - cell "ME-10035" [ref=e1500]
+                  - cell "P003 B-260102" [ref=e1501]:
+                    - generic [ref=e1502]: P003
+                    - text: B-260102
+                  - cell "Length" [ref=e1503]
+                  - cell "81.542 mm" [ref=e1504]
+                  - cell "81.10 – 81.90" [ref=e1505]
+                  - cell "INS-003" [ref=e1506]
+                  - cell "PASS" [ref=e1507]
+                - row [ref=e1509]:
+                  - cell "19 Oct 2026, 7:54 am" [ref=e1510]
+                  - cell "ME-10034" [ref=e1511]
+                  - cell "P002 B-260102" [ref=e1512]:
+                    - generic [ref=e1513]: P002
+                    - text: B-260102
+                  - cell "Diameter" [ref=e1514]
+                  - cell "52.159 mm" [ref=e1515]
+                  - cell "51.70 – 52.30" [ref=e1516]
+                  - cell "INS-002" [ref=e1517]
+                  - cell "PASS" [ref=e1518]
+                - row [ref=e1520]:
+                  - cell "19 Oct 2026, 7:42 am" [ref=e1521]
+                  - cell "ME-10033" [ref=e1522]
+                  - cell "P001 B-260102" [ref=e1523]:
+                    - generic [ref=e1524]: P001
+                    - text: B-260102
+                  - cell "Width" [ref=e1525]
+                  - cell "24.189 mm" [ref=e1526]
+                  - cell "24.00 – 24.50" [ref=e1527]
+                  - cell "INS-001" [ref=e1528]
+                  - cell "PASS" [ref=e1529]
+                - row [ref=e1531]:
+                  - cell "19 Oct 2026, 7:30 am" [ref=e1532]
+                  - cell "ME-10032" [ref=e1533]
+                  - cell "P003 B-260102" [ref=e1534]:
+                    - generic [ref=e1535]: P003
+                    - text: B-260102
+                  - cell "Length" [ref=e1536]
+                  - cell "81.312 mm" [ref=e1537]
+                  - cell "81.10 – 81.90" [ref=e1538]
+                  - cell "INS-003" [ref=e1539]
+                  - cell "PASS" [ref=e1540]
+                - row [ref=e1542]:
+                  - cell "19 Oct 2026, 7:18 am" [ref=e1543]
+                  - cell "ME-10031" [ref=e1544]
+                  - cell "P002 B-260102" [ref=e1545]:
+                    - generic [ref=e1546]: P002
+                    - text: B-260102
+                  - cell "Diameter" [ref=e1547]
+                  - cell "52.109 mm" [ref=e1548]
+                  - cell "51.70 – 52.30" [ref=e1549]
+                  - cell "INS-002" [ref=e1550]
+                  - cell "PASS" [ref=e1551]
+                - row [ref=e1553]:
+                  - cell "19 Oct 2026, 7:06 am" [ref=e1554]
+                  - cell "ME-10030" [ref=e1555]
+                  - cell "P001 B-260102" [ref=e1556]:
+                    - generic [ref=e1557]: P001
+                    - text: B-260102
+                  - cell "Width" [ref=e1558]
+                  - cell "24.344 mm" [ref=e1559]
+                  - cell "24.00 – 24.50" [ref=e1560]
+                  - cell "INS-001" [ref=e1561]
+                  - cell "PASS" [ref=e1562]
+                - row [ref=e1564]:
+                  - cell "19 Oct 2026, 6:54 am" [ref=e1565]
+                  - cell "ME-10029" [ref=e1566]
+                  - cell "P003 B-260102" [ref=e1567]:
+                    - generic [ref=e1568]: P003
+                    - text: B-260102
+                  - cell "Length" [ref=e1569]
+                  - cell "80.796 mm" [ref=e1570]
+                  - cell "81.10 – 81.90" [ref=e1571]
+                  - cell "INS-003" [ref=e1572]
+                  - cell "FAIL" [ref=e1573]
+                - row [ref=e1575]:
+                  - cell "19 Oct 2026, 6:42 am" [ref=e1576]
+                  - cell "ME-10028" [ref=e1577]
+                  - cell "P002 B-260102" [ref=e1578]:
+                    - generic [ref=e1579]: P002
+                    - text: B-260102
+                  - cell "Diameter" [ref=e1580]
+                  - cell "51.923 mm" [ref=e1581]
+                  - cell "51.70 – 52.30" [ref=e1582]
+                  - cell "INS-002" [ref=e1583]
+                  - cell "PASS" [ref=e1584]
+                - row [ref=e1586]:
+                  - cell "19 Oct 2026, 6:30 am" [ref=e1587]
+                  - cell "ME-10027" [ref=e1588]
+                  - cell "P001 B-260102" [ref=e1589]:
+                    - generic [ref=e1590]: P001
+                    - text: B-260102
+                  - cell "Width" [ref=e1591]
+                  - cell "24.382 mm" [ref=e1592]
+                  - cell "24.00 – 24.50" [ref=e1593]
+                  - cell "INS-001" [ref=e1594]
+                  - cell "PASS" [ref=e1595]
+                - row [ref=e1597]:
+                  - cell "19 Oct 2026, 6:18 am" [ref=e1598]
+                  - cell "ME-10026" [ref=e1599]
+                  - cell "P003 B-260102" [ref=e1600]:
+                    - generic [ref=e1601]: P003
+                    - text: B-260102
+                  - cell "Length" [ref=e1602]
+                  - cell "81.548 mm" [ref=e1603]
+                  - cell "81.10 – 81.90" [ref=e1604]
+                  - cell "INS-003" [ref=e1605]
+                  - cell "PASS" [ref=e1606]
+                - row [ref=e1608]:
+                  - cell "19 Oct 2026, 6:06 am" [ref=e1609]
+                  - cell "ME-10025" [ref=e1610]
+                  - cell "P002 B-260102" [ref=e1611]:
+                    - generic [ref=e1612]: P002
+                    - text: B-260102
+                  - cell "Diameter" [ref=e1613]
+                  - cell "51.833 mm" [ref=e1614]
+                  - cell "51.70 – 52.30" [ref=e1615]
+                  - cell "INS-002" [ref=e1616]
+                  - cell "PASS" [ref=e1617]
+                - row [ref=e1619]:
+                  - cell "19 Oct 2026, 5:54 am" [ref=e1620]
+                  - cell "ME-10024" [ref=e1621]
+                  - cell "P001 B-260102" [ref=e1622]:
+                    - generic [ref=e1623]: P001
+                    - text: B-260102
+                  - cell "Width" [ref=e1624]
+                  - cell "24.256 mm" [ref=e1625]
+                  - cell "24.00 – 24.50" [ref=e1626]
+                  - cell "INS-001" [ref=e1627]
+                  - cell "PASS" [ref=e1628]
+                - row [ref=e1630]:
+                  - cell "19 Oct 2026, 5:42 am" [ref=e1631]
+                  - cell "ME-10023" [ref=e1632]
+                  - cell "P003 B-260101" [ref=e1633]:
+                    - generic [ref=e1634]: P003
+                    - text: B-260101
+                  - cell "Length" [ref=e1635]
+                  - cell "81.721 mm" [ref=e1636]
+                  - cell "81.10 – 81.90" [ref=e1637]
+                  - cell "INS-003" [ref=e1638]
+                  - cell "PASS" [ref=e1639]
+                - row [ref=e1641]:
+                  - cell "19 Oct 2026, 5:30 am" [ref=e1642]
+                  - cell "ME-10022" [ref=e1643]
+                  - cell "P002 B-260101" [ref=e1644]:
+                    - generic [ref=e1645]: P002
+                    - text: B-260101
+                  - cell "Diameter" [ref=e1646]
+                  - cell "51.950 mm" [ref=e1647]
+                  - cell "51.70 – 52.30" [ref=e1648]
+                  - cell "INS-002" [ref=e1649]
+                  - cell "PASS" [ref=e1650]
+                - row [ref=e1652]:
+                  - cell "19 Oct 2026, 5:18 am" [ref=e1653]
+                  - cell "ME-10021" [ref=e1654]
+                  - cell "P001 B-260101" [ref=e1655]:
+                    - generic [ref=e1656]: P001
+                    - text: B-260101
+                  - cell "Width" [ref=e1657]
+                  - cell "24.123 mm" [ref=e1658]
+                  - cell "24.00 – 24.50" [ref=e1659]
+                  - cell "INS-001" [ref=e1660]
+                  - cell "PASS" [ref=e1661]
+                - row [ref=e1663]:
+                  - cell "19 Oct 2026, 5:06 am" [ref=e1664]
+                  - cell "ME-10020" [ref=e1665]
+                  - cell "P003 B-260101" [ref=e1666]:
+                    - generic [ref=e1667]: P003
+                    - text: B-260101
+                  - cell "Length" [ref=e1668]
+                  - cell "81.619 mm" [ref=e1669]
+                  - cell "81.10 – 81.90" [ref=e1670]
+                  - cell "INS-003" [ref=e1671]
+                  - cell "PASS" [ref=e1672]
+  - button "Open Next.js Dev Tools" [ref=e1679] [cursor=pointer]
+  - alert [ref=e1683]: Live Measurements

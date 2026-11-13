@@ -1,0 +1,61 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e3]:
+      - link "GAP-IT home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "GAP-IT" [ref=e5]
+      - generic [ref=e6]:
+        - button "Language" [ref=e8] [cursor=pointer]
+        - button "Switch to dark theme" [ref=e13]
+        - button "Open navigation menu" [ref=e18]
+        - link "Login" [ref=e20] [cursor=pointer]:
+          - /url: /login
+    - region "Home" [ref=e21]:
+      - button "Show About button" [ref=e23]
+    - generic [ref=e27]:
+      - generic [ref=e28]:
+        - paragraph [ref=e29]:
+          - generic "Get in touch" [ref=e30]
+        - heading "Get in touch" [level=2] [ref=e31]
+        - paragraph [ref=e33]: Bring measurement, process control, and traceability together in one clear workspace.
+        - generic [ref=e34]:
+          - generic [ref=e40]:
+            - paragraph [ref=e41]:
+              - generic "Email" [ref=e42]
+            - paragraph [ref=e43]:
+              - generic "quality@example.com" [ref=e44]
+          - generic [ref=e49]:
+            - paragraph [ref=e50]:
+              - generic "Phone" [ref=e51]
+            - paragraph [ref=e52]:
+              - generic "+1 (555) 010-0199" [ref=e53]
+          - generic [ref=e59]:
+            - paragraph [ref=e60]:
+              - generic "Location" [ref=e61]
+            - paragraph [ref=e62]:
+              - generic "Demo location, replace before launch" [ref=e63]
+        - paragraph [ref=e64]: Contact details are placeholders. Update src/lib/site-info.ts before launch.
+      - generic [ref=e66]:
+        - generic [ref=e67]:
+          - generic "Name" [ref=e68]
+          - textbox "Name" [ref=e69]
+        - generic [ref=e70]:
+          - generic "Email" [ref=e71]
+          - textbox "Email" [ref=e72]
+        - generic [ref=e73]:
+          - generic "Message" [ref=e74]
+          - textbox "Message" [ref=e75]
+        - button "Send message" [ref=e76]
+  - contentinfo [ref=e78]:
+    - generic [ref=e79]:
+      - link "GAP-IT home" [ref=e80] [cursor=pointer]:
+        - /url: /
+        - img "GAP-IT" [ref=e81]
+      - generic [ref=e82]:
+        - link "Quality, made visible" [ref=e83] [cursor=pointer]:
+          - /url: "#about"
+        - link "Get in touch" [ref=e84] [cursor=pointer]:
+          - /url: "#contact"
+        - link "Sign in" [ref=e85] [cursor=pointer]:
+          - /url: /login
+      - paragraph [ref=e86]: © GAP-IT, DEMO DATA, NO HARDWARE CONNECTED

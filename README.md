@@ -1,0 +1,80 @@
+# GAP-IT Quality Operations
+
+Responsive quality operations workspace for desktop and Android-sized screens.
+This project uses Next.js, React, TypeScript, Tailwind CSS, and Tabler icons.
+
+## Run locally
+
+Requirements: Node.js 20 or later.
+
+```powershell
+npm install
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000). Run `npm run build` to
+verify a production build, then `npm run start` to serve the built app.
+
+## Workspace modules
+
+The responsive workspace provides:
+
+1. Overview dashboard with data-derived device, quality, and measurement KPIs.
+2. Live measurements with a controllable simulated reading stream and CSV export.
+3. Instrument and gateway inventory with simulated connection status.
+4. SPC analysis with an individuals chart, separate specification/control limits,
+   histogram, descriptive statistics, and guarded capability estimates.
+5. SPC report previews with date and part filters, report history, and CSV export.
+6. Part and inspection setup with validated part/characteristic specification
+   creation.
+7. Quality-event workflow with assignment, investigation notes, and resolution.
+8. Traceability search across parts, batches, serials, and measurements.
+9. Historical measurement search, filters, dates, and CSV export.
+10. Demo user roles and account controls.
+11. General, measurement, appearance, and demo-data settings.
+
+## Demo data and persistence
+
+All modules share seeded demo instruments, gateways, parts, measurements, and
+quality events. Demo edits and readings are saved in the current browser's
+`localStorage` under `gap-it-demo-data`. Use **System Settings → Reset demo
+workspace** to restore the seeded data. Browser-local storage is not a shared
+database and does not synchronize between users or devices.
+
+The example part P001 uses the illustrative Width characteristic: nominal
+24.25 mm, LSL 24.00 mm, and USL 24.50 mm. These sample values are not certified
+instrument specifications.
+
+The live stream is simulated. The application displays **DEMO DATA — NO
+HARDWARE CONNECTED** and does not communicate with physical instruments or
+gateways. Device status actions only modify simulated local records.
+
+SPC calculations use valid numeric readings only. Sample standard deviation
+uses `n - 1`; Cp and Cpk use the part's specification limits and are withheld
+until at least 30 valid readings exist. The demo Individuals chart derives
+moving-range-based control limits separately from specification limits. These
+statistics are illustrative and are not a validated production capability study.
+
+## Android and desktop
+
+The same responsive app runs in supported mobile and desktop browsers. The
+PWA manifest and icons support installation from browsers that offer an install
+option. Android installation from a deployed site requires HTTPS. This project
+is an installable web app, not a native Android APK.
+
+Section navigation is stored in browser history: Back returns to the previous
+workspace section and stays at the dashboard at the in-app history boundary.
+Physical phone and desktop resolutions differ; layout adapts to the available
+viewport rather than forcing identical pixel dimensions.
+
+## Limitations and future integration
+
+- Authentication, server-enforced authorization, password resets, and audit
+  services require a trusted backend. The frontend role controls are a demo.
+- Cross-user persistence, immutable part revisions, durable report history, and
+  production audit trails require a backend datastore.
+- Hardware protocols, diagnostics, calibration services, notifications,
+  backups, APIs/webhooks, and ERP/MES/QMS integrations are not connected.
+- CSV exports contain the currently filtered demo measurements. PDF export and
+  real scanner/hardware integrations are not implemented.
+- Do not use demo data for production quality decisions.

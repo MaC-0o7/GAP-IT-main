@@ -1,0 +1,644 @@
+[   58890ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[   61199ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <MotionConfig reducedMotion="user">
+      <div className="app-shell ...">
+        <Sidebar>
+        <div className="flex min-w...">
+          <header>
+          <main className="app-main h...">
+            <WorkspaceModule activeSection="overview" activeForStreaming={true} data={{gateways:[...], ...}} ...>
+              <motion.div animate={{opacity:1,y:0}} className="mx-auto w-..." initial={{opacity:0,y:6}} ...>
+                <div className="mx-auto w-..." style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                  <PageIntro>
+                  <div className="space-y-4">
+                    <div>
+                    <div>
+                    <div className="grid grid-...">
+                      <section>
+                      <section>
+                      <section className="emerald-ca...">
+                        <OverviewCardHeader>
+                        <ol className="mt-3">
+                          <li className="grid min-h...">
+                            <span>
+                            <div className="min-w-0">
+                              <div>
+                              <p>
+                              <time
+                                className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                               dateTime="2026-10-19T19:17:26.589Z"
+-                               dateTime="2026-10-19T19:17:18.359Z"
+                              >
++                               20 Oct 2026, 12:47 am
+                          <li className="grid min-h...">
+                            <span>
+                            <div className="min-w-0">
+                              <div>
+                              <p>
+                              <time
+                                className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                               dateTime="2026-10-19T19:05:26.589Z"
+-                               dateTime="2026-10-19T19:05:18.359Z"
+                              >
++                               20 Oct 2026, 12:35 am
+                          <li className="grid min-h...">
+                            <span>
+                            <div className="min-w-0">
+                              <div>
+                              <p>
+                              <time
+                                className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                               dateTime="2026-10-19T18:53:26.589Z"
+-                               dateTime="2026-10-19T18:53:18.359Z"
+                              >
++                               20 Oct 2026, 12:23 am
+                          <li className="grid min-h...">
+                            <span>
+                            <div className="min-w-0">
+                              <div>
+                              <p>
+                              <time
+                                className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                               dateTime="2026-10-19T18:41:26.589Z"
+-                               dateTime="2026-10-19T18:41:18.359Z"
+                              >
++                               20 Oct 2026, 12:11 am
+                          <li className="grid min-h...">
+                            <span>
+                            <div className="min-w-0">
+                              <div>
+                              <p>
+                              <time
+                                className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                               dateTime="2026-10-19T12:53:26.589Z"
+-                               dateTime="2026-10-19T12:53:18.359Z"
+                              >
++                               19 Oct 2026, 6:23 pm
+                          <li className="grid min-h...">
+                            <span>
+                            <div className="min-w-0">
+                              <div>
+                              <p>
+                              <time
+                                className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                               dateTime="2026-10-19T01:17:26.589Z"
+-                               dateTime="2026-10-19T01:17:18.359Z"
+                              >
++                               19 Oct 2026, 6:47 am
+                    ...
+          <section className="app-main f...">
+            <header>
+            <AnimatePresence>
+            <main className="app-main m...">
+              <WorkspaceModule activeSection="overview" activeForStreaming={false} data={{gateways:[...], ...}} ...>
+                <motion.div animate={{opacity:1,y:0}} className="mx-auto w-..." initial={{opacity:0,y:6}} ...>
+                  <div className="mx-auto w-..." style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                    <PageIntro>
+                    <div className="space-y-4">
+                      <div>
+                      <div>
+                      <div className="grid grid-...">
+                        <section>
+                        <section>
+                        <section className="emerald-ca...">
+                          <OverviewCardHeader>
+                          <ol className="mt-3">
+                            <li className="grid min-h...">
+                              <span>
+                              <div className="min-w-0">
+                                <div>
+                                <p>
+                                <time
+                                  className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                                 dateTime="2026-10-19T19:17:26.589Z"
+-                                 dateTime="2026-10-19T19:17:18.359Z"
+                                >
++                                 20 Oct 2026, 12:47 am
+                            <li className="grid min-h...">
+                              <span>
+                              <div className="min-w-0">
+                                <div>
+                                <p>
+                                <time
+                                  className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                                 dateTime="2026-10-19T19:05:26.589Z"
+-                                 dateTime="2026-10-19T19:05:18.359Z"
+                                >
++                                 20 Oct 2026, 12:35 am
+                            <li className="grid min-h...">
+                              <span>
+                              <div className="min-w-0">
+                                <div>
+                                <p>
+                                <time
+                                  className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                                 dateTime="2026-10-19T18:53:26.589Z"
+-                                 dateTime="2026-10-19T18:53:18.359Z"
+                                >
++                                 20 Oct 2026, 12:23 am
+                            <li className="grid min-h...">
+                              <span>
+                              <div className="min-w-0">
+                                <div>
+                                <p>
+                                <time
+                                  className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                                 dateTime="2026-10-19T18:41:26.589Z"
+-                                 dateTime="2026-10-19T18:41:18.359Z"
+                                >
++                                 20 Oct 2026, 12:11 am
+                            <li className="grid min-h...">
+                              <span>
+                              <div className="min-w-0">
+                                <div>
+                                <p>
+                                <time
+                                  className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                                 dateTime="2026-10-19T12:53:26.589Z"
+-                                 dateTime="2026-10-19T12:53:18.359Z"
+                                >
++                                 19 Oct 2026, 6:23 pm
+                            <li className="grid min-h...">
+                              <span>
+                              <div className="min-w-0">
+                                <div>
+                                <p>
+                                <time
+                                  className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                                 dateTime="2026-10-19T01:17:26.589Z"
+-                                 dateTime="2026-10-19T01:17:18.359Z"
+                                >
++                                 19 Oct 2026, 6:47 am
+                      ...
+ @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[   69744ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   70331ms] [LOG] [Fast Refresh] done in 588ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   75938ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   76798ms] [LOG] [Fast Refresh] done in 860ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   80544ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   80891ms] [LOG] [Fast Refresh] done in 347ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   83982ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   84565ms] [LOG] [Fast Refresh] done in 582ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   88350ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   89047ms] [LOG] [Fast Refresh] done in 696ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   91628ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   92829ms] [LOG] [Fast Refresh] done in 1201ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[   96008ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[   97782ms] [LOG] [Fast Refresh] done in 1774ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  102280ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  102936ms] [LOG] [Fast Refresh] done in 657ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  106034ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  106035ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  106035ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  106035ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  116029ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  116031ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  116032ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  116032ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  144326ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  150743ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  150747ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  150747ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  150747ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  150965ms] [LOG] [Fast Refresh] done in 6639ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  153981ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  153981ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  153981ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  153981ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  171007ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  171008ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  171008ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437550000 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  171008ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437550000 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  171008ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  171008ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  177318ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  179904ms] [LOG] [Fast Refresh] done in 2586ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  181967ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  183264ms] [LOG] [Fast Refresh] done in 1297ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  184735ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  185873ms] [LOG] [Fast Refresh] done in 1137ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  188165ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  189794ms] [LOG] [Fast Refresh] done in 1628ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  190973ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  191262ms] [LOG] [Fast Refresh] done in 288ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  193973ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  194714ms] [LOG] [Fast Refresh] done in 740ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  196086ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  196351ms] [LOG] [Fast Refresh] done in 266ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  198598ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  199514ms] [LOG] [Fast Refresh] done in 917ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  200922ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  201316ms] [LOG] [Fast Refresh] done in 394ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  202250ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  202588ms] [LOG] [Fast Refresh] done in 338ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  204977ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  205094ms] [LOG] [Fast Refresh] done in 116ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  206781ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  207392ms] [LOG] [Fast Refresh] done in 611ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  210573ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437587765 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210573ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210573ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437587765 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210573ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437569816 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210573ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437581416 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437550000 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437566580 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437576388 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437566580 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437569816 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437592134 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437581416 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437550000 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437590246 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437590246 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  210574ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437592134 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  218901ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  219424ms] [LOG] [Fast Refresh] done in 523ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  221681ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  222009ms] [LOG] [Fast Refresh] done in 329ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  224122ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  225416ms] [LOG] [Fast Refresh] done in 1293ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  226600ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  226900ms] [LOG] [Fast Refresh] done in 300ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  229935ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437606867 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229935ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437587765 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229936ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229936ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437594552 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229936ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437594552 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229937ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437587765 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229937ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437569816 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229937ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437581416 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437550000 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437611955 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437566580 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437606867 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437615471 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437576388 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437566580 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437479166 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437467860 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437569816 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437592134 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437581416 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437550000 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437590246 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/layout.css?v=1792437590246 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  229938ms] [WARNING] The resource http://localhost:3000/_next/static/css/app/page.css?v=1792437592134 was preloaded using link preload but not used within a few seconds from the window's load event. Please make sure it has an appropriate `as` value and it is preloaded intentionally. @ http://localhost:3000/:0
+[  232862ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  233078ms] [LOG] [Fast Refresh] done in 217ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  235058ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  235162ms] [LOG] [Fast Refresh] done in 104ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  238152ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  238839ms] [LOG] [Fast Refresh] done in 687ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  240068ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  240772ms] [LOG] [Fast Refresh] done in 703ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  243105ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  243176ms] [LOG] [Fast Refresh] done in 71ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  245063ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  245137ms] [LOG] [Fast Refresh] done in 74ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  247464ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  248793ms] [LOG] [Fast Refresh] done in 1329ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  249301ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  250428ms] [LOG] [Fast Refresh] done in 1128ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  252151ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  253032ms] [LOG] [Fast Refresh] done in 880ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  255195ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  256850ms] [LOG] [Fast Refresh] done in 1655ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  257784ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  258303ms] [LOG] [Fast Refresh] done in 518ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  260047ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  260496ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/?_rsc=_mjR7ylJSLpkZcZ3:0
+[  260515ms] [ERROR] Failed to fetch RSC payload for http://localhost:3000/. Falling back to browser navigation. TypeError: Failed to fetch
+    at createFetch (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/router-reducer/fetch-server-response.js:163:33)
+    at async fetchServerResponse (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/router-reducer/fetch-server-response.js:88:21) @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[  260626ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/webpack/webpack.6b5dd0d003fcb0ca.hot-update.js:0
+[  260627ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/_next/static/webpack/app/layout.6b5dd0d003fcb0ca.hot-update.js:0
+[  260682ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:111
+[  260951ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_REFUSED @ http://localhost:3000/__nextjs_original-stack-frames:0
+[  328156ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom-client.development.js:25630
+[  330003ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <MotionConfig reducedMotion="user">
+      <div className="app-shell ...">
+        <Sidebar>
+        <div className="flex min-w...">
+          <header>
+          <main className="app-main h...">
+            <WorkspaceModule activeSection="overview" activeForStreaming={true} data={{gateways:[...], ...}} ...>
+              <motion.div animate={{opacity:1,y:0}} className="mx-auto w-..." initial={{opacity:0,y:6}} ...>
+                <div className="mx-auto w-..." style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                  <PageIntro>
+                  <div className="space-y-4">
+                    <div>
+                    <div>
+                    <div className="grid grid-...">
+                      <section>
+                      <section>
+                      <section className="emerald-ca...">
+                        <OverviewCardHeader>
+                        <ol className="mt-3">
+                          <li className="grid min-h...">
+                            <span>
+                            <div className="min-w-0">
+                              <div>
+                              <p>
+                              <time
+                                className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                               dateTime="2026-10-19T19:21:55.864Z"
+-                               dateTime="2026-10-19T19:21:49.984Z"
+                              >
++                               20 Oct 2026, 12:51 am
+                          <li className="grid min-h...">
+                            <span>
+                            <div className="min-w-0">
+                              <div>
+                              <p>
+                              <time
+                                className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                               dateTime="2026-10-19T19:09:55.864Z"
+-                               dateTime="2026-10-19T19:09:49.984Z"
+                              >
++                               20 Oct 2026, 12:39 am
+                          <li className="grid min-h...">
+                            <span>
+                            <div className="min-w-0">
+                              <div>
+                              <p>
+                              <time
+                                className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                               dateTime="2026-10-19T18:57:55.864Z"
+-                               dateTime="2026-10-19T18:57:49.984Z"
+                              >
++                               20 Oct 2026, 12:27 am
+                          <li className="grid min-h...">
+                            <span>
+                            <div className="min-w-0">
+                              <div>
+                              <p>
+                              <time
+                                className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                               dateTime="2026-10-19T18:45:55.864Z"
+-                               dateTime="2026-10-19T18:45:49.984Z"
+                              >
++                               20 Oct 2026, 12:15 am
+                          <li className="grid min-h...">
+                            <span>
+                            <div className="min-w-0">
+                              <div>
+                              <p>
+                              <time
+                                className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                               dateTime="2026-10-19T12:57:55.864Z"
+-                               dateTime="2026-10-19T12:57:49.984Z"
+                              >
++                               19 Oct 2026, 6:27 pm
+                          <li className="grid min-h...">
+                            <span>
+                            <div className="min-w-0">
+                              <div>
+                              <p>
+                              <time
+                                className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                               dateTime="2026-10-19T01:21:55.864Z"
+-                               dateTime="2026-10-19T01:21:49.984Z"
+                              >
++                               19 Oct 2026, 6:51 am
+                    ...
+          <section className="app-main f...">
+            <header>
+            <AnimatePresence>
+            <main className="app-main m...">
+              <WorkspaceModule activeSection="overview" activeForStreaming={false} data={{gateways:[...], ...}} ...>
+                <motion.div animate={{opacity:1,y:0}} className="mx-auto w-..." initial={{opacity:0,y:6}} ...>
+                  <div className="mx-auto w-..." style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                    <PageIntro>
+                    <div className="space-y-4">
+                      <div>
+                      <div>
+                      <div className="grid grid-...">
+                        <section>
+                        <section>
+                        <section className="emerald-ca...">
+                          <OverviewCardHeader>
+                          <ol className="mt-3">
+                            <li className="grid min-h...">
+                              <span>
+                              <div className="min-w-0">
+                                <div>
+                                <p>
+                                <time
+                                  className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                                 dateTime="2026-10-19T19:21:55.864Z"
+-                                 dateTime="2026-10-19T19:21:49.984Z"
+                                >
++                                 20 Oct 2026, 12:51 am
+                            <li className="grid min-h...">
+                              <span>
+                              <div className="min-w-0">
+                                <div>
+                                <p>
+                                <time
+                                  className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                                 dateTime="2026-10-19T19:09:55.864Z"
+-                                 dateTime="2026-10-19T19:09:49.984Z"
+                                >
++                                 20 Oct 2026, 12:39 am
+                            <li className="grid min-h...">
+                              <span>
+                              <div className="min-w-0">
+                                <div>
+                                <p>
+                                <time
+                                  className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                                 dateTime="2026-10-19T18:57:55.864Z"
+-                                 dateTime="2026-10-19T18:57:49.984Z"
+                                >
++                                 20 Oct 2026, 12:27 am
+                            <li className="grid min-h...">
+                              <span>
+                              <div className="min-w-0">
+                                <div>
+                                <p>
+                                <time
+                                  className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                                 dateTime="2026-10-19T18:45:55.864Z"
+-                                 dateTime="2026-10-19T18:45:49.984Z"
+                                >
++                                 20 Oct 2026, 12:15 am
+                            <li className="grid min-h...">
+                              <span>
+                              <div className="min-w-0">
+                                <div>
+                                <p>
+                                <time
+                                  className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                                 dateTime="2026-10-19T12:57:55.864Z"
+-                                 dateTime="2026-10-19T12:57:49.984Z"
+                                >
++                                 19 Oct 2026, 6:27 pm
+                            <li className="grid min-h...">
+                              <span>
+                              <div className="min-w-0">
+                                <div>
+                                <p>
+                                <time
+                                  className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums"
++                                 dateTime="2026-10-19T01:21:55.864Z"
+-                                 dateTime="2026-10-19T01:21:49.984Z"
+                                >
++                                 19 Oct 2026, 6:51 am
+                      ...
+ @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/next-devtools/userspace/app/errors/intercept-console-error.js:56
+[  334866ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  335227ms] [LOG] [Fast Refresh] done in 361ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  346505ms] [LOG] [Fast Refresh] done in 11639ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  346642ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  350258ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  350783ms] [LOG] [Fast Refresh] done in 525ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  353342ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  353828ms] [LOG] [Fast Refresh] done in 486ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  356135ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  356584ms] [LOG] [Fast Refresh] done in 449ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  358490ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  358819ms] [LOG] [Fast Refresh] done in 330ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  362171ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  362768ms] [LOG] [Fast Refresh] done in 596ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  364292ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  364580ms] [LOG] [Fast Refresh] done in 289ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  365905ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  366178ms] [LOG] [Fast Refresh] done in 273ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  367502ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  367688ms] [LOG] [Fast Refresh] done in 187ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  370604ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  371544ms] [LOG] [Fast Refresh] done in 941ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  372241ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  372432ms] [LOG] [Fast Refresh] done in 190ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  373691ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  373874ms] [LOG] [Fast Refresh] done in 184ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  375070ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  375164ms] [LOG] [Fast Refresh] done in 93ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  376555ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  376837ms] [LOG] [Fast Refresh] done in 282ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  378731ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  378900ms] [LOG] [Fast Refresh] done in 170ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  381712ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  382399ms] [LOG] [Fast Refresh] done in 688ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  384131ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  384860ms] [LOG] [Fast Refresh] done in 728ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  385945ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  386243ms] [LOG] [Fast Refresh] done in 299ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  387797ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  387935ms] [LOG] [Fast Refresh] done in 138ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  388641ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  389424ms] [LOG] [Fast Refresh] done in 784ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  394290ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  394728ms] [LOG] [Fast Refresh] done in 438ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  396672ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  396851ms] [LOG] [Fast Refresh] done in 180ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  398077ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  398291ms] [LOG] [Fast Refresh] done in 212ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  399888ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  400113ms] [LOG] [Fast Refresh] done in 224ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  405059ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  407063ms] [LOG] [Fast Refresh] done in 2003ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  408063ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  408222ms] [LOG] [Fast Refresh] done in 158ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  409228ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  409334ms] [LOG] [Fast Refresh] done in 106ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  409852ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  409874ms] [LOG] [Fast Refresh] done in 22ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  410095ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  410119ms] [LOG] [Fast Refresh] done in 25ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  411117ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  411251ms] [LOG] [Fast Refresh] done in 133ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  412096ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  412196ms] [LOG] [Fast Refresh] done in 101ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  413193ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  413396ms] [LOG] [Fast Refresh] done in 203ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  414282ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  414377ms] [LOG] [Fast Refresh] done in 95ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  415080ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  415177ms] [LOG] [Fast Refresh] done in 98ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  415937ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  416096ms] [LOG] [Fast Refresh] done in 159ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  416977ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  417237ms] [LOG] [Fast Refresh] done in 260ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  417681ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  417767ms] [LOG] [Fast Refresh] done in 85ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  418442ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  418552ms] [LOG] [Fast Refresh] done in 110ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  419428ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  419575ms] [LOG] [Fast Refresh] done in 147ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  420482ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  420765ms] [LOG] [Fast Refresh] done in 283ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  421267ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  421417ms] [LOG] [Fast Refresh] done in 149ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  422102ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  422423ms] [LOG] [Fast Refresh] done in 320ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  422832ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  422929ms] [LOG] [Fast Refresh] done in 97ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  423689ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  423791ms] [LOG] [Fast Refresh] done in 101ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  424527ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  424631ms] [LOG] [Fast Refresh] done in 103ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  425806ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  426077ms] [LOG] [Fast Refresh] done in 272ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  427318ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  427430ms] [LOG] [Fast Refresh] done in 113ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  428606ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  428828ms] [LOG] [Fast Refresh] done in 221ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  429168ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  429195ms] [LOG] [Fast Refresh] done in 27ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  430088ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  430190ms] [LOG] [Fast Refresh] done in 103ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  430860ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  430959ms] [LOG] [Fast Refresh] done in 99ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  431564ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  431643ms] [LOG] [Fast Refresh] done in 78ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  432401ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  432538ms] [LOG] [Fast Refresh] done in 136ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  433461ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  433621ms] [LOG] [Fast Refresh] done in 160ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  434129ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  434222ms] [LOG] [Fast Refresh] done in 93ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  435996ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  436027ms] [LOG] [Fast Refresh] done in 30ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  436265ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  436499ms] [LOG] [Fast Refresh] done in 234ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  438599ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  438705ms] [LOG] [Fast Refresh] done in 107ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13
+[  439971ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/hot-reloader/app/hot-reloader-app.js:196
+[  440272ms] [LOG] [Fast Refresh] done in 301ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/dev/report-hmr-latency.js:13

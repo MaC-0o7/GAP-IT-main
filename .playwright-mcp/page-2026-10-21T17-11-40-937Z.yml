@@ -1,0 +1,32 @@
+- main [ref=f2e2]:
+  - generic [ref=f2e3]:
+    - link "GAP-IT" [ref=f2e4] [cursor=pointer]:
+      - /url: /
+    - generic [ref=f2e5]:
+      - button "Language" [ref=f2e7] [cursor=pointer]
+      - button "Switch to dark theme" [ref=f2e12]
+  - generic [ref=f2e16]:
+    - generic [ref=f2e19]:
+      - generic [ref=f2e20]:
+        - heading "Welcome back" [level=1] [ref=f2e21]
+        - paragraph [ref=f2e22]: Demo login, not real security
+      - generic [ref=f2e23]:
+        - text: Username
+        - textbox "Username" [ref=f2e24]
+      - generic [ref=f2e25]:
+        - text: Password
+        - generic [ref=f2e26]:
+          - textbox "Password Show password" [ref=f2e27]
+          - button "Show password" [ref=f2e28]
+      - button "Sign in" [ref=f2e32]
+    - generic [aria-hidden] [ref=f2e44]: ⌂
+    - region "Demo accounts" [ref=f2e53]:
+      - heading "Demo accounts" [level=2] [ref=f2e54]
+      - generic [ref=f2e55]:
+        - button "Admin · All" [ref=f2e56]
+        - button "Operator · Normal" [ref=f2e57]
+        - button "Inspector · Standard" [ref=f2e58]
+        - button "User · Limited" [ref=f2e59]
+      - paragraph [ref=f2e60]: Demo login, not real security
+      - link "Back to Home" [ref=f2e61] [cursor=pointer]:
+        - /url: /

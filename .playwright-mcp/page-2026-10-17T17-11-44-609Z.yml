@@ -1,0 +1,304 @@
+- generic [ref=f11e2]:
+  - complementary "Main navigation" [ref=f11e3]:
+    - generic [ref=f11e4]:
+      - link "GAP-IT home" [ref=f11e5] [cursor=pointer]:
+        - /url: "#overview"
+        - generic [aria-hidden] [ref=f11e6]: G
+        - generic [ref=f11e7]: GAP-IT
+      - button "Expand sidebar" [ref=f11e8]
+    - navigation "Quality workspace sections" [ref=f11e11]:
+      - link "Overview" [ref=f11e14] [cursor=pointer]:
+        - /url: "#overview"
+      - generic [ref=f11e23]:
+        - link "Live Measurements" [ref=f11e24] [cursor=pointer]:
+          - /url: "#live-measurements"
+        - link "Instruments & Gateways" [ref=f11e29] [cursor=pointer]:
+          - /url: "#instrument-management"
+      - generic [ref=f11e36]:
+        - link "SPC Analysis" [ref=f11e37] [cursor=pointer]:
+          - /url: "#spc-analytics"
+        - link "SPC Reports" [ref=f11e44] [cursor=pointer]:
+          - /url: "#spc-reports"
+        - link "Parts & Inspection" [ref=f11e52] [cursor=pointer]:
+          - /url: "#part-inspection-setup"
+        - link "Quality Events" [ref=f11e58] [cursor=pointer]:
+          - /url: "#alerts-quality-events"
+      - generic [ref=f11e65]:
+        - link "Traceability" [ref=f11e66] [cursor=pointer]:
+          - /url: "#traceability"
+        - link "Measurement History" [ref=f11e73] [cursor=pointer]:
+          - /url: "#history-data-explorer"
+      - generic [ref=f11e80]:
+        - link "Users & Roles" [ref=f11e81] [cursor=pointer]:
+          - /url: "#users-permissions"
+        - link "System Settings" [ref=f11e89] [cursor=pointer]:
+          - /url: "#system-settings"
+    - generic "Quality Team, Workspace member" [ref=f11e96]: QT
+  - generic [ref=f11e98]:
+    - banner [ref=f11e99]:
+      - generic [ref=f11e100]:
+        - generic [ref=f11e105]: Quality Operations
+        - generic [aria-hidden] [ref=f11e106]: /
+        - generic [ref=f11e107]: Overview
+      - generic [ref=f11e108]:
+        - button "Search modules" [ref=f11e110]
+        - generic [ref=f11e114]: DEMO · NO HARDWARE
+        - button "3 open quality events" [ref=f11e115]
+        - button "Switch to dark theme" [ref=f11e120]
+        - generic [ref=f11e123]:
+          - generic [ref=f11e124]: QT
+          - generic [ref=f11e125]:
+            - paragraph [ref=f11e126]: Quality Team
+            - paragraph [ref=f11e127]: Workspace member
+    - main [ref=f11e128]:
+      - generic [ref=f11e129]:
+        - generic [ref=f11e130]:
+          - generic [ref=f11e131]:
+            - paragraph [ref=f11e132]: GAP-IT quality workspace
+            - heading "Overview Dashboard" [level=1] [ref=f11e133]
+            - paragraph [ref=f11e134]: Quality operations at a glance. KPIs are calculated from the shared demo measurement and device data.
+          - generic [ref=f11e135]: DEMO DATA — NO HARDWARE CONNECTED
+        - generic [ref=f11e138]:
+          - generic [ref=f11e139]:
+            - generic [ref=f11e142]:
+              - paragraph [ref=f11e143]: Measurements today
+              - paragraph [ref=f11e144]: "0"
+              - paragraph [ref=f11e145]: 120 total records
+            - generic [ref=f11e151]:
+              - paragraph [ref=f11e152]: Accepted readings
+              - paragraph [ref=f11e153]: "115"
+              - paragraph [ref=f11e154]: Within specification limits
+            - generic [ref=f11e161]:
+              - paragraph [ref=f11e162]: Rejected readings
+              - paragraph [ref=f11e163]: "4"
+              - paragraph [ref=f11e164]: 1 invalid readings excluded
+            - generic [ref=f11e170]:
+              - paragraph [ref=f11e171]: Quality pass rate
+              - paragraph [ref=f11e172]: 97%
+              - paragraph [ref=f11e173]: 115 pass / 4 fail
+            - generic [ref=f11e182]:
+              - paragraph [ref=f11e183]: Active instruments
+              - paragraph [ref=f11e184]: "3"
+              - paragraph [ref=f11e185]: 4 registered · demo status
+            - generic [ref=f11e192]:
+              - paragraph [ref=f11e193]: Open quality events
+              - paragraph [ref=f11e194]: "3"
+              - paragraph [ref=f11e195]: 3 total events
+          - generic [ref=f11e200]:
+            - generic [ref=f11e201]:
+              - generic [ref=f11e202]:
+                - generic [ref=f11e203]:
+                  - paragraph [ref=f11e204]: Production pulse
+                  - heading "Measurement trend" [level=2] [ref=f11e205]
+                  - paragraph [ref=f11e206]: Past 24 hours · 0 readings
+                - generic [ref=f11e207]:
+                  - generic [ref=f11e208]: Dashboard date range
+                  - combobox "Dashboard date range" [ref=f11e209]:
+                    - option "Last 24 hours" [selected]
+                    - option "Last 7 days"
+                    - option "Last 30 days"
+                  - generic [ref=f11e210]: Updated —
+              - generic [ref=f11e211]: No readings in this range.
+              - generic [ref=f11e213]:
+                - generic [ref=f11e214]: 24 hours ago
+                - generic [ref=f11e215]: Now
+              - generic [ref=f11e216]:
+                - generic [ref=f11e217]: Measurements
+                - generic [ref=f11e219]: "Peak bucket: 1"
+              - generic [ref=f11e220]:
+                - button "Open live monitor" [ref=f11e221]
+                - button "View SPC analysis" [ref=f11e222]
+            - generic [ref=f11e223]:
+              - generic [ref=f11e224]:
+                - generic [ref=f11e225]:
+                  - paragraph [ref=f11e226]: Needs attention
+                  - heading "Recent quality events" [level=2] [ref=f11e227]
+                - generic [ref=f11e228]: 3 open
+              - paragraph [ref=f11e229]: Prioritize current issues across the workspace
+              - generic [ref=f11e230]:
+                - generic [ref=f11e234]:
+                  - paragraph [ref=f11e235]: Width measured 23.891 mm, outside specification.
+                  - paragraph [ref=f11e236]: QE-3003 · 17 Oct 2026, 8:51 am
+                - generic [ref=f11e237]: Acknowledged
+              - generic [ref=f11e238]:
+                - generic [ref=f11e242]:
+                  - paragraph [ref=f11e243]: Length measured 80.796 mm, outside specification.
+                  - paragraph [ref=f11e244]: QE-3002 · 16 Oct 2026, 9:15 pm
+                - generic [ref=f11e245]: Acknowledged
+              - generic [ref=f11e246]:
+                - generic [ref=f11e250]:
+                  - paragraph [ref=f11e251]: Width measured 24.575 mm, outside specification.
+                  - paragraph [ref=f11e252]: QE-3001 · 16 Oct 2026, 3:27 pm
+                - generic [ref=f11e253]: Open
+              - button "Go to event centre" [ref=f11e254]: Go to event centre →
+          - generic [ref=f11e255]:
+            - generic [ref=f11e256]:
+              - generic [ref=f11e257]:
+                - generic [ref=f11e258]:
+                  - paragraph [ref=f11e259]: Quality mix
+                  - heading "Inspection results" [level=2] [ref=f11e260]
+                - generic [ref=f11e261]: 120 total
+              - generic [ref=f11e262]:
+                - img "115 pass, 4 fail, 1 invalid" [ref=f11e263]:
+                  - generic [ref=f11e265]:
+                    - paragraph [ref=f11e266]: 97%
+                    - paragraph [ref=f11e267]: Pass rate
+                - generic [ref=f11e268]:
+                  - generic [ref=f11e269]:
+                    - generic [ref=f11e270]: Pass
+                    - generic [ref=f11e272]: "115"
+                  - generic [ref=f11e273]:
+                    - generic [ref=f11e274]: Fail
+                    - generic [ref=f11e276]: "4"
+                  - generic [ref=f11e277]:
+                    - generic [ref=f11e278]: Invalid
+                    - generic [ref=f11e280]: "1"
+              - generic [ref=f11e281]:
+                - generic [ref=f11e282]:
+                  - generic [ref=f11e283]: Accepted to target
+                  - generic [ref=f11e284]: 97%
+                - progressbar "Quality pass rate 97%" [ref=f11e285]
+            - generic [ref=f11e287]:
+              - generic [ref=f11e288]:
+                - generic [ref=f11e289]:
+                  - paragraph [ref=f11e290]: Device status
+                  - heading "Instruments" [level=2] [ref=f11e291]
+                - button "View all" [ref=f11e292]
+              - generic [ref=f11e293]:
+                - generic [ref=f11e294]:
+                  - generic [ref=f11e299]:
+                    - paragraph [ref=f11e300]: Width laser A
+                    - paragraph [ref=f11e301]: INS-001 · 17 Oct 2026, 3:14 pm
+                  - generic [ref=f11e302]: Online
+                - generic [ref=f11e303]:
+                  - generic [ref=f11e308]:
+                    - paragraph [ref=f11e309]: Width laser B
+                    - paragraph [ref=f11e310]: INS-002 · 17 Oct 2026, 3:13 pm
+                  - generic [ref=f11e311]: Online
+                - generic [ref=f11e312]:
+                  - generic [ref=f11e317]:
+                    - paragraph [ref=f11e318]: Height probe C
+                    - paragraph [ref=f11e319]: INS-003 · 17 Oct 2026, 3:14 pm
+                  - generic [ref=f11e320]: Online
+              - paragraph [ref=f11e321]: Connection status is simulated demo data.
+            - generic [ref=f11e322]:
+              - generic [ref=f11e323]:
+                - generic [ref=f11e324]:
+                  - paragraph [ref=f11e325]: Workspace feed
+                  - heading "Recent activity" [level=2] [ref=f11e326]
+                - generic [ref=f11e327]: Latest 6
+              - list [ref=f11e328]:
+                - listitem [ref=f11e329]:
+                  - generic [ref=f11e333]:
+                    - paragraph [ref=f11e334]: Length 81.712 mm
+                    - paragraph [ref=f11e335]: P003 · INS-003 · PASS
+                    - time [ref=f11e336]: 17 Oct 2026, 3:15 pm
+                - listitem [ref=f11e337]:
+                  - generic [ref=f11e341]:
+                    - paragraph [ref=f11e342]: Diameter 51.925 mm
+                    - paragraph [ref=f11e343]: P002 · INS-002 · PASS
+                    - time [ref=f11e344]: 17 Oct 2026, 3:03 pm
+                - listitem [ref=f11e345]:
+                  - generic [ref=f11e349]:
+                    - paragraph [ref=f11e350]: Width 24.134 mm
+                    - paragraph [ref=f11e351]: P001 · INS-001 · PASS
+                    - time [ref=f11e352]: 17 Oct 2026, 2:51 pm
+                - listitem [ref=f11e353]:
+                  - generic [ref=f11e357]:
+                    - paragraph [ref=f11e358]: Length 82.168 mm
+                    - paragraph [ref=f11e359]: P003 · INS-003 · FAIL
+                    - time [ref=f11e360]: 17 Oct 2026, 2:39 pm
+                - listitem [ref=f11e361]:
+                  - generic [ref=f11e366]:
+                    - paragraph [ref=f11e367]: Width measured 23.891 mm, outside specification.
+                    - paragraph [ref=f11e368]: Medium event · Acknowledged
+                    - time [ref=f11e369]: 17 Oct 2026, 8:51 am
+                - listitem [ref=f11e370]:
+                  - generic [ref=f11e375]:
+                    - paragraph [ref=f11e376]: Length measured 80.796 mm, outside specification.
+                    - paragraph [ref=f11e377]: Medium event · Acknowledged
+                    - time [ref=f11e378]: 16 Oct 2026, 9:15 pm
+          - generic [ref=f11e379]:
+            - generic [ref=f11e380]:
+              - generic [ref=f11e381]:
+                - paragraph [ref=f11e382]: Latest activity
+                - heading "Recent measurements" [level=2] [ref=f11e383]
+              - generic [ref=f11e384]: 120 records
+            - table [ref=f11e386]:
+              - rowgroup [ref=f11e387]:
+                - row [ref=f11e388]:
+                  - columnheader "Timestamp" [ref=f11e389]
+                  - columnheader "Measurement" [ref=f11e390]
+                  - columnheader "Part / batch" [ref=f11e391]
+                  - columnheader "Characteristic" [ref=f11e392]
+                  - columnheader "Value" [ref=f11e393]
+                  - columnheader "LSL – USL" [ref=f11e394]
+                  - columnheader "Instrument" [ref=f11e395]
+                  - columnheader "Result" [ref=f11e396]
+              - rowgroup [ref=f11e397]:
+                - row [ref=f11e398]:
+                  - cell "17 Oct 2026, 3:15 pm" [ref=f11e399]
+                  - cell "ME-10119" [ref=f11e400]
+                  - cell "P003 B-260109" [ref=f11e401]:
+                    - generic [ref=f11e402]: P003
+                    - text: B-260109
+                  - cell "Length" [ref=f11e403]
+                  - cell "81.712 mm" [ref=f11e404]
+                  - cell "81.10 – 81.90" [ref=f11e405]
+                  - cell "INS-003" [ref=f11e406]
+                  - cell "PASS" [ref=f11e407]
+                - row [ref=f11e409]:
+                  - cell "17 Oct 2026, 3:03 pm" [ref=f11e410]
+                  - cell "ME-10118" [ref=f11e411]
+                  - cell "P002 B-260109" [ref=f11e412]:
+                    - generic [ref=f11e413]: P002
+                    - text: B-260109
+                  - cell "Diameter" [ref=f11e414]
+                  - cell "51.925 mm" [ref=f11e415]
+                  - cell "51.70 – 52.30" [ref=f11e416]
+                  - cell "INS-002" [ref=f11e417]
+                  - cell "PASS" [ref=f11e418]
+                - row [ref=f11e420]:
+                  - cell "17 Oct 2026, 2:51 pm" [ref=f11e421]
+                  - cell "ME-10117" [ref=f11e422]
+                  - cell "P001 B-260109" [ref=f11e423]:
+                    - generic [ref=f11e424]: P001
+                    - text: B-260109
+                  - cell "Width" [ref=f11e425]
+                  - cell "24.134 mm" [ref=f11e426]
+                  - cell "24.00 – 24.50" [ref=f11e427]
+                  - cell "INS-001" [ref=f11e428]
+                  - cell "PASS" [ref=f11e429]
+                - row [ref=f11e431]:
+                  - cell "17 Oct 2026, 2:39 pm" [ref=f11e432]
+                  - cell "ME-10116" [ref=f11e433]
+                  - cell "P003 B-260109" [ref=f11e434]:
+                    - generic [ref=f11e435]: P003
+                    - text: B-260109
+                  - cell "Length" [ref=f11e436]
+                  - cell "82.168 mm" [ref=f11e437]
+                  - cell "81.10 – 81.90" [ref=f11e438]
+                  - cell "INS-003" [ref=f11e439]
+                  - cell "FAIL" [ref=f11e440]
+                - row [ref=f11e442]:
+                  - cell "17 Oct 2026, 2:27 pm" [ref=f11e443]
+                  - cell "ME-10115" [ref=f11e444]
+                  - cell "P002 B-260109" [ref=f11e445]:
+                    - generic [ref=f11e446]: P002
+                    - text: B-260109
+                  - cell "Diameter" [ref=f11e447]
+                  - cell "52.111 mm" [ref=f11e448]
+                  - cell "51.70 – 52.30" [ref=f11e449]
+                  - cell "INS-002" [ref=f11e450]
+                  - cell "PASS" [ref=f11e451]
+                - row [ref=f11e453]:
+                  - cell "17 Oct 2026, 2:15 pm" [ref=f11e454]
+                  - cell "ME-10114" [ref=f11e455]
+                  - cell "P001 B-260109" [ref=f11e456]:
+                    - generic [ref=f11e457]: P001
+                    - text: B-260109
+                  - cell "Width" [ref=f11e458]
+                  - cell "24.134 mm" [ref=f11e459]
+                  - cell "24.00 – 24.50" [ref=f11e460]
+                  - cell "INS-001" [ref=f11e461]
+                  - cell "PASS" [ref=f11e462]

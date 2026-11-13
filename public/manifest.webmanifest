@@ -1,0 +1,19 @@
+{
+  "id": "/",
+  "name": "GAP-IT Quality Operations",
+  "short_name": "GAP-IT",
+  "description": "Quality operations workspace for measurement and process control.",
+  "start_url": "/workspace",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#14B8A6",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

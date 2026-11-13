@@ -1,0 +1,61 @@
+- generic [active] [ref=f2e1]:
+  - main [ref=f2e2]:
+    - generic [ref=f2e3]:
+      - link "GAP-IT home" [ref=f2e4] [cursor=pointer]:
+        - /url: /
+        - img "GAP-IT" [ref=f2e5]
+      - generic [ref=f2e6]:
+        - button "Language" [ref=f2e8] [cursor=pointer]
+        - button "Switch to dark theme" [ref=f2e13]
+        - button "Open navigation menu" [ref=f2e18]
+        - link "Login" [ref=f2e20] [cursor=pointer]:
+          - /url: /login
+    - region "Home" [ref=f2e21]:
+      - button "Show About button" [ref=f2e23]
+    - generic [ref=f2e27]:
+      - generic [ref=f2e28]:
+        - paragraph [ref=f2e29]:
+          - generic "Get in touch" [ref=f2e30]
+        - heading "Get in touch" [level=2] [ref=f2e31]
+        - paragraph [ref=f2e33]: Bring measurement, process control, and traceability together in one clear workspace.
+        - generic [ref=f2e34]:
+          - generic [ref=f2e40]:
+            - paragraph [ref=f2e41]:
+              - generic "Email" [ref=f2e42]
+            - paragraph [ref=f2e43]:
+              - generic "quality@example.com" [ref=f2e44]
+          - generic [ref=f2e49]:
+            - paragraph [ref=f2e50]:
+              - generic "Phone" [ref=f2e51]
+            - paragraph [ref=f2e52]:
+              - generic "+1 (555) 010-0199" [ref=f2e53]
+          - generic [ref=f2e59]:
+            - paragraph [ref=f2e60]:
+              - generic "Location" [ref=f2e61]
+            - paragraph [ref=f2e62]:
+              - generic "Demo location, replace before launch" [ref=f2e63]
+        - paragraph [ref=f2e64]: Contact details are placeholders. Update src/lib/site-info.ts before launch.
+      - generic [ref=f2e66]:
+        - generic [ref=f2e67]:
+          - generic "Name" [ref=f2e68]
+          - textbox "Name" [ref=f2e69]
+        - generic [ref=f2e70]:
+          - generic "Email" [ref=f2e71]
+          - textbox "Email" [ref=f2e72]
+        - generic [ref=f2e73]:
+          - generic "Message" [ref=f2e74]
+          - textbox "Message" [ref=f2e75]
+        - button "Send message" [ref=f2e76]
+  - contentinfo [ref=f2e78]:
+    - generic [ref=f2e79]:
+      - link "GAP-IT home" [ref=f2e80] [cursor=pointer]:
+        - /url: /
+        - img "GAP-IT" [ref=f2e81]
+      - generic [ref=f2e82]:
+        - link "Quality, made visible" [ref=f2e83] [cursor=pointer]:
+          - /url: "#about"
+        - link "Get in touch" [ref=f2e84] [cursor=pointer]:
+          - /url: "#contact"
+        - link "Sign in" [ref=f2e85] [cursor=pointer]:
+          - /url: /login
+      - paragraph [ref=f2e86]: © GAP-IT, DEMO DATA, NO HARDWARE CONNECTED
