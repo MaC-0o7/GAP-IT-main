@@ -1,13 +1,18 @@
 import type { Metadata, Viewport } from "next";
 import {
+  Noto_Sans_Kannada,
+  Noto_Sans_Malayalam,
   Noto_Sans_Devanagari,
   Noto_Sans_Tamil,
+  Noto_Sans_Telugu,
   Sora,
   Space_Grotesk,
 } from "next/font/google";
+import { cookies } from "next/headers";
 import Script from "next/script";
 import { SiteBackgrounds } from "@/components/SiteBackgrounds";
 import { LanguageProvider } from "@/lib/i18n/provider";
+import { isLanguage } from "@/lib/i18n/types";
 import "./globals.css";
 
 const notoTamil = Noto_Sans_Tamil({
@@ -21,6 +26,27 @@ const notoDevanagari = Noto_Sans_Devanagari({
   display: "swap",
   subsets: ["devanagari", "latin"],
   variable: "--font-noto-devanagari",
+  weight: ["400", "500", "600", "700"],
+});
+
+const notoTelugu = Noto_Sans_Telugu({
+  display: "swap",
+  subsets: ["telugu", "latin"],
+  variable: "--font-noto-telugu",
+  weight: ["400", "500", "600", "700"],
+});
+
+const notoKannada = Noto_Sans_Kannada({
+  display: "swap",
+  subsets: ["kannada", "latin"],
+  variable: "--font-noto-kannada",
+  weight: ["400", "500", "600", "700"],
+});
+
+const notoMalayalam = Noto_Sans_Malayalam({
+  display: "swap",
+  subsets: ["malayalam", "latin"],
+  variable: "--font-noto-malayalam",
   weight: ["400", "500", "600", "700"],
 });
 
@@ -65,18 +91,21 @@ const themeInitScript = `
   }
 `;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const savedLanguage = (await cookies()).get("lang")?.value ?? null;
+  const initialLanguage = isLanguage(savedLanguage) ? savedLanguage : null;
+
   return (
-  <html className={`${notoTamil.variable} ${notoDevanagari.variable} ${spaceGrotesk.variable} ${sora.variable}`} data-scroll-behavior="smooth" lang="en" suppressHydrationWarning>
+  <html className={`${notoTamil.variable} ${notoDevanagari.variable} ${notoTelugu.variable} ${notoKannada.variable} ${notoMalayalam.variable} ${spaceGrotesk.variable} ${sora.variable}`} data-scroll-behavior="smooth" lang={initialLanguage ?? "en"} suppressHydrationWarning>
     <head>
       <Script id="theme-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: themeInitScript }} />
     </head>
     <body>
-      <LanguageProvider>
+      <LanguageProvider initialLanguage={initialLanguage}>
         <SiteBackgrounds />
         {children}
       </LanguageProvider>

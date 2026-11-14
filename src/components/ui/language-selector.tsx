@@ -4,17 +4,8 @@ import { createPortal } from "react-dom";
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { Check, Languages } from "lucide-react";
 import { useT } from "@/lib/i18n/provider";
-import type { Language } from "@/lib/i18n/types";
+import { LANGUAGES, type Language } from "@/lib/i18n/types";
 import "./language-selector.css";
-
-const LANGUAGES: { code: Language; label: string; native: string }[] = [
-  { code: "en", label: "English", native: "English" },
-  { code: "hi", label: "Hindi", native: "हिन्दी" },
-  { code: "te", label: "Telugu", native: "తెలుగు" },
-  { code: "ta", label: "Tamil", native: "தமிழ்" },
-  { code: "kn", label: "Kannada", native: "ಕನ್ನಡ" },
-  { code: "ml", label: "Malayalam", native: "മലയാളം" },
-];
 
 export function LanguageSelector({
   onChange,

@@ -50,7 +50,7 @@
   --text: #172B3A;
   --muted: #526477;
   --muted-strong: #8493A4;
-  --font-family: var(--font-space-grotesk), var(--font-noto-tamil), var(--font-noto-devanagari), sans-serif;
+  --font-family: var(--font-space-grotesk), var(--font-noto-tamil), var(--font-noto-devanagari), var(--font-noto-telugu), var(--font-noto-kannada), var(--font-noto-malayalam), sans-serif;
   --border: #E2E8F0;
   --success: #16A34A;
   --success-surface: #DCFCE7;
@@ -64,7 +64,7 @@
   --about-text-color: #F97316;
   --about-heading-color: #F97316;
   --about-accent-color: #F97316;
-  --about-font-family: var(--font-space-grotesk), var(--font-noto-tamil), var(--font-noto-devanagari), sans-serif;
+  --about-font-family: var(--font-space-grotesk), var(--font-noto-tamil), var(--font-noto-devanagari), var(--font-noto-telugu), var(--font-noto-kannada), var(--font-noto-malayalam), sans-serif;
   --about-text-shadow: 0 1px 3px rgb(0 0 0 / 35%);
   --about-input-border: #F97316;
   --about-placeholder-color: color-mix(in srgb, var(--about-text-color) 80%, transparent);
@@ -152,7 +152,7 @@
   --text: #F5F3FF;
   --muted: #C4B5FD;
   --muted-strong: #DDD6FE;
-  --font-family: var(--font-sora), var(--font-noto-tamil), var(--font-noto-devanagari), sans-serif;
+  --font-family: var(--font-sora), var(--font-noto-tamil), var(--font-noto-devanagari), var(--font-noto-telugu), var(--font-noto-kannada), var(--font-noto-malayalam), sans-serif;
   --border: rgb(196 181 253 / 24%);
   --success: #34D399;
   --success-surface: #12392F;
@@ -166,7 +166,7 @@
   --about-text-color: #F5F3FF;
   --about-heading-color: #F5F3FF;
   --about-accent-color: #C4B5FD;
-  --about-font-family: var(--font-sora), var(--font-noto-tamil), var(--font-noto-devanagari), sans-serif;
+  --about-font-family: var(--font-sora), var(--font-noto-tamil), var(--font-noto-devanagari), var(--font-noto-telugu), var(--font-noto-kannada), var(--font-noto-malayalam), sans-serif;
   --about-text-shadow: 0 1px 4px rgb(0 0 0 / 60%);
   --about-input-border: rgb(245 243 255 / 60%);
   --about-placeholder-color: rgb(245 243 255 / 80%);
@@ -301,7 +301,22 @@ html:lang(hi) {
   line-height: 1.6;
 }
 
-html:not([lang="ta"]):not([lang="hi"]) {
+html:lang(te) {
+  font-family: var(--font-space-grotesk), var(--font-noto-telugu), sans-serif;
+  line-height: 1.6;
+}
+
+html:lang(kn) {
+  font-family: var(--font-space-grotesk), var(--font-noto-kannada), sans-serif;
+  line-height: 1.6;
+}
+
+html:lang(ml) {
+  font-family: var(--font-space-grotesk), var(--font-noto-malayalam), sans-serif;
+  line-height: 1.6;
+}
+
+html:not([lang="ta"]):not([lang="hi"]):not([lang="te"]):not([lang="kn"]):not([lang="ml"]) {
   font-family: var(--font-space-grotesk), sans-serif;
 }
 

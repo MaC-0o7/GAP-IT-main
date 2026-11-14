@@ -19,6 +19,7 @@ import type {
   TranslationKey,
   TranslationValues,
 } from "@/lib/i18n/types";
+import { isLanguage } from "@/lib/i18n/types";
 
 const dictionaries = { en, ta, hi, te, kn, ml };
 const storageKey = "lang";
@@ -34,10 +35,6 @@ const LanguageContext = createContext<LanguageContextValue | undefined>(
   undefined,
 );
 
-function isLanguage(value: string | null): value is Language {
-  return value === "en" || value === "ta" || value === "hi" || value === "te" || value === "kn" || value === "ml";
-}
-
 function getBrowserLanguage(): Language {
   const browserLanguage = window.navigator.language.toLowerCase();
   if (browserLanguage.startsWith("ta")) return "ta";
@@ -48,10 +45,17 @@ function getBrowserLanguage(): Language {
   return "en";
 }
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguageState] = useState<Language>("en");
+export function LanguageProvider({
+  children,
+  initialLanguage,
+}: {
+  children: ReactNode;
+  initialLanguage: Language | null;
+}) {
+  const [language, setLanguageState] = useState<Language>(initialLanguage ?? "en");
 
   useEffect(() => {
+    if (initialLanguage) return;
     try {
       const savedLanguage = window.localStorage.getItem(storageKey)
         ?? window.localStorage.getItem(legacyStorageKey);
@@ -60,7 +64,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       console.warn("Unable to read the saved language from browser storage.", error);
       setLanguageState(getBrowserLanguage());
     }
-  }, []);
+  }, [initialLanguage]);
 
   const setLanguage = useCallback((nextLanguage: Language) => {
     setLanguageState(nextLanguage);
@@ -68,6 +72,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       window.localStorage.setItem(storageKey, nextLanguage);
     } catch (error) {
       console.warn("Unable to save the selected language to browser storage.", error);
+    }
+    try {
+      const secure = window.location.protocol === "https:" ? "; Secure" : "";
+      document.cookie = `${storageKey}=${nextLanguage}; Path=/; Max-Age=31536000; SameSite=Lax${secure}`;
+    } catch (error) {
+      console.warn("Unable to persist the selected language in a cookie.", error);
     }
   }, []);
 

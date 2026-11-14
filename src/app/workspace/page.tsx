@@ -28,7 +28,7 @@ import { SearchInput } from "@/components/ui/primitives";
 import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler";
 import { LanguageSelector } from "@/components/ui/language-selector";
 import { useT } from "@/lib/i18n/provider";
-import type { Language } from "@/lib/i18n/types";
+import { isLanguage, LANGUAGES, type Language } from "@/lib/i18n/types";
 import type { TranslationKey } from "@/lib/i18n/types";
 import { clearDemoSession, readDemoSession, type DemoSession } from "@/lib/auth/session";
 import {
@@ -235,12 +235,14 @@ function WorkspaceSidebarContent({
               <select
                 aria-label={t("language.label")}
                 className="min-h-11 w-full min-w-0 rounded-lg border border-[var(--border)] bg-[var(--bg)] px-2 text-sm text-[var(--text)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--primary)]"
-                onChange={(event) => onLanguageChange(event.target.value as Language)}
+                onChange={(event) => {
+                  if (isLanguage(event.target.value)) onLanguageChange(event.target.value);
+                }}
                 value={language}
               >
-                <option value="en">English</option>
-                <option value="hi">हिन्दी</option>
-                <option value="ta">தமிழ்</option>
+                {LANGUAGES.map(({ code, native }) => (
+                  <option key={code} value={code}>{native}</option>
+                ))}
               </select>
             </label>
             <AnimatedThemeToggler
@@ -712,7 +714,7 @@ export default function Home() {
             <p className="truncate font-bold">{session.name}</p>
             <p className="mt-1 inline-flex rounded-full bg-[var(--surface-elevated)] px-2.5 py-1 text-xs font-semibold">{roleLabel}</p>
             <div className="mt-3 space-y-2 border-t border-[var(--border)] pt-3 text-sm">
-              <label className="flex min-h-11 items-center justify-between gap-3"><span className="font-semibold">{t("language.label")}</span><select aria-label={t("language.label")} className="min-h-10 rounded-lg border border-[var(--border)] bg-[var(--bg)] px-2" onChange={(event) => setLanguage(event.target.value as Language)} value={language}><option value="en">English</option><option value="hi">हिन्दी</option><option value="ta">தமிழ்</option></select></label>
+              <label className="flex min-h-11 items-center justify-between gap-3"><span className="font-semibold">{t("language.label")}</span><select aria-label={t("language.label")} className="min-h-10 rounded-lg border border-[var(--border)] bg-[var(--bg)] px-2" onChange={(event) => { if (isLanguage(event.target.value)) setLanguage(event.target.value); }} value={language}>{LANGUAGES.map(({ code, native }) => <option key={code} value={code}>{native}</option>)}</select></label>
               <div className="flex min-h-11 items-center justify-between gap-3"><span className="font-semibold">{t("shell.switchTheme", { theme: t(data.settings.theme === "dark" ? "shell.light" : "shell.dark") })}</span><AnimatedThemeToggler className="size-11" isDark={data.settings.theme === "dark"} label={t("shell.switchTheme", { theme: t(data.settings.theme === "dark" ? "shell.light" : "shell.dark") })} onToggle={toggleTheme} /></div>
               <button className="mt-2 inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[var(--danger-surface)] px-3 font-semibold text-[var(--danger)]" onClick={signOut} type="button"><IconLogout aria-hidden="true" size={17} />{t("auth.signOut")}</button>
             </div>
