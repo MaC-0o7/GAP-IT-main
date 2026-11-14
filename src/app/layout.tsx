@@ -7,6 +7,7 @@ import {
 } from "next/font/google";
 import Script from "next/script";
 import { SiteScene } from "@/components/home/site-scene";
+import { SiteBackgrounds } from "@/components/SiteBackgrounds";
 import { LanguageProvider } from "@/lib/i18n/provider";
 import "./globals.css";
 
@@ -77,6 +78,7 @@ export default function RootLayout({
     </head>
     <body>
       <LanguageProvider>
+        <SiteBackgrounds />
         <SiteScene />
         {children}
       </LanguageProvider>

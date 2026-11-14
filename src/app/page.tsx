@@ -6,7 +6,6 @@ import Link from "next/link";
 import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler";
 import { BrandLogo } from "@/components/ui/sidebar";
 import { LanguageSelector } from "@/components/ui/language-selector";
-import { HomeGridScan } from "@/components/home/home-grid-scan";
 import { HomeText, HomeTextRevealContext } from "@/components/home/home-text";
 import {
   HomeAbout,
@@ -147,7 +146,6 @@ export default function HomePage() {
   return (
     <>
     <div className="relative z-10">
-      <HomeGridScan />
       <main className="home-page overflow-x-clip bg-transparent text-[var(--text)]">
           <header className="home-site-nav relative z-[var(--z-sticky)] mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-2 px-4 py-2 sm:px-6" style={{ paddingTop: "max(.5rem, env(safe-area-inset-top))" }}>
             <Link aria-label={t("home.homeLink")} className="shrink-0" href="/"><BrandLogo className="h-auto w-[clamp(100px,16vw,150px)]" priority /></Link>

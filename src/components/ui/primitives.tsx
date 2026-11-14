@@ -2,6 +2,7 @@
 
 import { useId, type ComponentProps, type KeyboardEvent, type ReactNode } from "react";
 import { IconSearch } from "@tabler/icons-react";
+import { motion, useReducedMotion } from "motion/react";
 import { GooeyInput } from "@/components/ui/gooey-input";
 import { cn } from "@/lib/utils";
 
@@ -190,6 +191,7 @@ export function Tabs({
   label,
 }: SelectionControlProps) {
   const id = useId();
+  const reduceMotion = useReducedMotion();
   const moveTab = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
     let nextIndex: number | undefined;
     if (event.key === "ArrowRight" || event.key === "ArrowDown") {
@@ -227,7 +229,7 @@ export function Tabs({
             id={`${id}-${option.value}`}
             aria-selected={selected}
             className={cn(
-              "min-h-10 shrink-0 border-b-2 px-3 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--primary)] disabled:cursor-not-allowed disabled:opacity-50",
+              "relative min-h-10 shrink-0 border-b-2 px-3 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[var(--primary)] disabled:cursor-not-allowed disabled:opacity-50",
               selected
                 ? "border-[var(--primary)] bg-[var(--primary)] text-[var(--on-primary)]"
                 : "border-transparent text-[var(--muted)] hover:bg-[var(--surface-elevated)] hover:text-[var(--text)]",
@@ -239,6 +241,14 @@ export function Tabs({
             tabIndex={selected ? 0 : -1}
             type="button"
           >
+            {selected && (
+              <motion.span
+                aria-hidden="true"
+                className="absolute inset-x-0 bottom-[-2px] h-0.5 bg-[var(--primary)]"
+                layoutId={`${id}-active-indicator`}
+                transition={{ duration: reduceMotion ? 0 : 0.3, ease: "easeInOut" }}
+              />
+            )}
             {option.label}
           </button>
         );

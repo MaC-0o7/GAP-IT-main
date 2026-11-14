@@ -12,6 +12,7 @@ export function SiteScene() {
     hoverColor: string;
     backgroundColor: string;
     fontFamily: string;
+    dark: boolean;
   } | null>(null);
 
   useEffect(() => {
@@ -23,10 +24,13 @@ export function SiteScene() {
         hoverColor: styles.getPropertyValue("--scene-hover-color").trim(),
         backgroundColor: styles.getPropertyValue("--scene-background").trim(),
         fontFamily: bodyStyles.fontFamily,
+        dark: document.documentElement.classList.contains("dark"),
       });
     };
     updateThemeColors();
     window.addEventListener("gap-it-theme-change", updateThemeColors);
+    const observer = new MutationObserver(updateThemeColors);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const updateMotion = () => setReducedMotion(motionQuery.matches);
@@ -34,6 +38,7 @@ export function SiteScene() {
     motionQuery.addEventListener("change", updateMotion);
 
     return () => {
+      observer.disconnect();
       window.removeEventListener("gap-it-theme-change", updateThemeColors);
       motionQuery.removeEventListener("change", updateMotion);
     };
@@ -44,7 +49,7 @@ export function SiteScene() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-0 site-scene"
+      className={`pointer-events-none fixed inset-0 z-0 site-scene transition-opacity duration-700 ease-in-out ${sceneColors.dark ? "opacity-100" : "opacity-0"}`}
     >
       <ShapeWaves
         text="GAP-IT"
@@ -70,7 +75,7 @@ export function SiteScene() {
         glow={1.1}
         intro
         introDuration={1.6}
-        paused={reducedMotion}
+        paused={reducedMotion || !sceneColors.dark}
       />
     </div>
   );

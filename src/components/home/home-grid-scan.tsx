@@ -14,7 +14,7 @@ function getActiveTheme(): ActiveTheme {
   return document.documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
-export function HomeGridScan() {
+export function HomeGridScan({ active = true }: { active?: boolean }) {
   const [theme, setTheme] = useState<ActiveTheme | null>(null);
   const [dpr, setDpr] = useState<number | undefined>(undefined);
   const [ready, setReady] = useState(false);
@@ -115,7 +115,7 @@ export function HomeGridScan() {
           interactive={false}
           lightMode={!dark}
           linesColor={dark ? "#7c3aed" : "#ffffff"}
-          paused={!heroVisible || !tabVisible}
+          paused={!active || !heroVisible || !tabVisible}
           scanColor={dark ? "#ffffff" : "#0fd795"}
           scanDelay={1.6}
           scanDuration={2.4}
