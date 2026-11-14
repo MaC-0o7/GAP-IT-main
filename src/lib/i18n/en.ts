@@ -362,6 +362,9 @@ const en = {
     recentReadings: "Recent readings",
     limitsShownSeparately: "limits shown separately",
     noNumericReadings: "No numeric readings match these filters.",
+    latestSix: "Latest six",
+    workspaceFeed: "Workspace feed",
+    recentMeasurementTrend: "Recent measurement trend",
   },
   measurements: {
     measurement: "Measurement",
@@ -389,6 +392,12 @@ const en = {
     selectTraceRecord: "Select a row to view its trace details",
     noNumericReadings: "No numeric readings match these filters.",
     noReadingsInRange: "No readings in this range.",
+    simulatedRunning: "Simulated stream running",
+    simulatedPaused: "Simulated stream paused",
+    noSpecification: "No specification configured",
+    selectedFilters: "Selected filters",
+    simulatedInterval: "Simulated interval: every {seconds}s",
+    streamPaused: "Stream paused",
   },
   instruments: {
     instruments: "Instruments",
@@ -412,6 +421,11 @@ const en = {
     messages: "Messages",
     errors: "Errors",
     firmware: "FW",
+    notConfigured: "Not configured",
+    hideDetails: "Hide details",
+    details: "Details",
+    simulateOffline: "Simulate offline",
+    simulateReconnect: "Simulate reconnect",
   },
   spc: {
     part: "Part",
@@ -447,6 +461,7 @@ const en = {
     ucl: "UCL",
     lcl: "LCL",
     usl: "USL",
+    lsl: "LSL",
   },
   reports: {
     template: "Report template",

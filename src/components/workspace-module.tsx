@@ -977,7 +977,7 @@ export function WorkspaceModule({
                 action={t("dashboard.latestSix")}
                 eyebrow={t("dashboard.workspaceFeed")}
                 eyebrowClassName="text-[var(--secondary)]"
-                title={t("dashboard.recentActivity")}
+                title={t("dashboard.latestActivity")}
               />
               {activity.length ? (
                 <ol className="mt-3">
@@ -1081,7 +1081,7 @@ export function WorkspaceModule({
                 <input aria-label={t("measurements.search")} className={`${inputClass} pl-9`} onChange={(event) => setQuery(event.target.value)} placeholder={t("measurements.searchPlaceholder")} value={query} />
               </label>
               <select aria-label={t("measurements.filterStatus")} className={`${inputClass} ${live ? "w-full min-w-0 sm:w-auto sm:min-w-32" : "w-auto min-w-32"}`} onChange={(event) => setStatusFilter(event.target.value)} value={statusFilter}>
-                <option>{t("measurements.all")}</option><option>PASS</option><option>FAIL</option><option>INVALID</option>
+                <option>{t("measurements.allMeasurements")}</option><option>PASS</option><option>FAIL</option><option>INVALID</option>
               </select>
               <select aria-label={t("measurements.filterInstrument")} className={`${inputClass} ${live ? "w-full min-w-0 sm:w-auto sm:min-w-36" : "w-auto min-w-36"}`} onChange={(event) => setInstrumentFilter(event.target.value)} value={instrumentFilter}>
                 <option value="All">{t("measurements.allInstruments")}</option>{data.instruments.map((instrument) => <option key={instrument.id} value={instrument.id}>{instrument.id}</option>)}
@@ -1124,7 +1124,7 @@ export function WorkspaceModule({
                   <input aria-label={t("instruments.search")} className={`${inputClass} w-52 pl-9`} onChange={(event) => setInstrumentSearch(event.target.value)} placeholder={t("instruments.searchPlaceholder")} value={instrumentSearch} />
                 </label>
                 <select aria-label={t("instruments.filterStatus")} className={`${inputClass} w-auto min-w-28`} onChange={(event) => setInstrumentStatusFilter(event.target.value)} value={instrumentStatusFilter}>
-                  <option>{t("measurements.all")}</option><option>{t("common.online")}</option><option>{t("common.offline")}</option>
+                  <option>{t("measurements.allMeasurements")}</option><option>{t("common.online")}</option><option>{t("common.offline")}</option>
                 </select>
               </div>
               {can("create") && <form className="flex flex-wrap gap-2" onSubmit={addInstrument}>
@@ -1134,7 +1134,7 @@ export function WorkspaceModule({
               </form>}
             </div>
             <div className="overflow-x-auto"><table className="w-full min-w-[760px] text-left text-xs">
-              <thead className="border-b border-slate-200 text-[10px] uppercase tracking-wide text-slate-500 dark:border-slate-800"><tr>{[t("instruments.instruments"), t("instruments.typeModel"), t("instruments.line"), t("instruments.gateway"), t("instruments.calibrationDue"), t("accounts.status"), t("accounts.actions")].map((name) => <th key={name} className="px-3 py-3 font-semibold">{name}</th>)}</tr></thead>
+              <thead className="border-b border-slate-200 text-[10px] uppercase tracking-wide text-slate-500 dark:border-slate-800"><tr>{[t("instruments.instruments"), t("instruments.instrumentModel"), t("instruments.productionLine"), t("instruments.gateway"), t("instruments.calibrationDue"), t("accounts.status"), t("accounts.actions")].map((name) => <th key={name} className="px-3 py-3 font-semibold">{name}</th>)}</tr></thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">{matchingInstruments.map((item) => <tr key={item.id}>
                 <td className="px-3 py-3"><span className="block font-semibold text-slate-800 dark:text-slate-100">{demoText(item.name)}</span><span className="text-slate-500">{item.id}, {demoText(item.manufacturer)}</span></td>
                 <td className="px-3 py-3 text-slate-700 dark:text-slate-300">{demoText(item.type)}<span className="block text-slate-500">{demoText(item.model)}, {t("instruments.firmware")} {item.firmware === "Demo" ? t("dashboard.demoData") : item.firmware}</span></td>
