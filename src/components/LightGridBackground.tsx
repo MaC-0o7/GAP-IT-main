@@ -22,8 +22,8 @@ export default function LightGridBackground({ active }: { active: boolean }) {
   return (
     <div
       aria-hidden="true"
-      className="fixed inset-0 -z-10 h-screen w-screen overflow-hidden bg-white"
-      style={{ height: "100lvh", pointerEvents: "none" }}
+      className="absolute inset-0 overflow-hidden bg-white"
+      style={{ pointerEvents: "none" }}
     >
       <GridScan
         autoScan

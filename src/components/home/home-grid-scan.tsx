@@ -14,7 +14,13 @@ function getActiveTheme(): ActiveTheme {
   return document.documentElement.classList.contains("dark") ? "dark" : "light";
 }
 
-export function HomeGridScan({ active = true }: { active?: boolean }) {
+export function HomeGridScan({
+  active = true,
+  observeHero = true,
+}: {
+  active?: boolean;
+  observeHero?: boolean;
+}) {
   const [theme, setTheme] = useState<ActiveTheme | null>(null);
   const [dpr, setDpr] = useState<number | undefined>(undefined);
   const [ready, setReady] = useState(false);
@@ -54,6 +60,11 @@ export function HomeGridScan({ active = true }: { active?: boolean }) {
   }, []);
 
   useEffect(() => {
+    if (!observeHero) {
+      setHeroVisible(true);
+      return;
+    }
+
     const hero = document.getElementById("home-hero");
     if (!hero) return;
 
@@ -62,7 +73,7 @@ export function HomeGridScan({ active = true }: { active?: boolean }) {
     });
     observer.observe(hero);
     return () => observer.disconnect();
-  }, []);
+  }, [observeHero]);
 
   useEffect(() => {
     let timeout = 0;

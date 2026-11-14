@@ -37,16 +37,17 @@ export function SiteBackgrounds() {
     };
   }, []);
 
-  const lightActive = dark === false;
-  const darkHomeActive = dark === true && pathname === "/";
+  const isPublicPage = pathname === "/" || pathname === "/login";
+  const lightActive = dark === false && isPublicPage;
+  const darkBackgroundActive = dark === true && isPublicPage;
 
   return (
     <div aria-hidden="true" className="site-backgrounds">
       <div className={`site-background-layer site-background-light ${lightActive ? "is-active" : ""}`}>
         <LightGridBackground active={lightActive} />
       </div>
-      <div className={`site-background-layer site-background-dark ${darkHomeActive ? "is-active" : ""}`}>
-        <HomeGridScan active={darkHomeActive} />
+    <div className={`site-background-layer site-background-dark ${darkBackgroundActive ? "is-active" : ""}`}>
+      <HomeGridScan active={darkBackgroundActive} observeHero={pathname === "/"} />
       </div>
     </div>
   );
