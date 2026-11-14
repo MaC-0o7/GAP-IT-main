@@ -75,8 +75,9 @@ const inputClass =
 const cardClass =
   "emerald-card rounded-2xl border p-4 md:p-5";
 
-function formatTimestamp(value: string) {
-  return new Intl.DateTimeFormat("en-IN", {
+function formatTimestamp(value: string, language: string) {
+  const locale = language === "en" ? "en-IN" : `${language}-IN`;
+  return new Intl.DateTimeFormat(locale, {
     dateStyle: "medium",
     timeStyle: "short",
     timeZone: "Asia/Kolkata",
@@ -233,7 +234,7 @@ function translateDemoText(value: string, translate: (key: TranslationKey) => st
 }
 
 function MeasurementRows({ rows, parts }: { rows: Measurement[]; parts: DemoData["parts"] }) {
-  const { t } = useT();
+  const { t, language } = useT();
   if (!rows.length) return <EmptyState message="common.noMeasurements" />;
   return (
     <div className="overflow-x-auto">
@@ -256,7 +257,7 @@ function MeasurementRows({ rows, parts }: { rows: Measurement[]; parts: DemoData
             return (
               <tr key={row.id} className="text-slate-700 dark:text-slate-200">
                 <td className="whitespace-nowrap px-3 py-3 text-slate-500 dark:text-slate-400">
-                  {formatTimestamp(row.timestamp)}
+                  {formatTimestamp(row.timestamp, language)}
                 </td>
                 <td className="whitespace-nowrap px-3 py-3 font-medium">{row.id}</td>
                 <td className="px-3 py-3">
@@ -290,7 +291,7 @@ export function WorkspaceModule({
   role,
   onUnsavedChange,
 }: Props) {
-  const { t } = useT();
+  const { t, language } = useT();
   const can = (action: PermissionAction) =>
     roleCan(role, WORKSPACE_SECTION_PERMISSIONS[activeSection], action);
   const updateRangeStart = (
@@ -539,11 +540,11 @@ export function WorkspaceModule({
   }, [data.settings]);
 
   useEffect(() => {
-    const updateTime = () => setLastUpdated(formatTimestamp(new Date().toISOString()));
+    const updateTime = () => setLastUpdated(formatTimestamp(new Date().toISOString(), language));
     updateTime();
     const timer = window.setInterval(updateTime, 30_000);
     return () => window.clearInterval(timer);
-  }, []);
+  }, [language]);
 
   const exportMeasurements = (filename: string) => {
     const rows = filteredMeasurements.map((item) => {
@@ -837,25 +838,25 @@ export function WorkspaceModule({
       return shell("Overview Dashboard", "Quality operations at a glance. KPIs are calculated from the shared demo measurement and device data.", (
         <div className="space-y-4">
           <div className="grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 lg:grid-cols-3">
-            <Metric label="Measurements today" value={daily.length} detail={`${data.measurements.length} total records`} icon={<IconActivity className="size-5" />} />
-            <Metric label="Accepted readings" value={passCount} detail="Within specification limits" icon={<IconCircleCheck className="size-5" />} />
-            <Metric label="Rejected readings" value={failCount} detail={`${invalidCount} invalid readings excluded`} icon={<IconAlertTriangle className="size-5" />} />
-            <Metric label="Quality pass rate" value={`${passRate}%`} detail={`${passCount} pass / ${failCount} fail`} icon={<IconGauge className="size-5" />} />
-            <Metric label="Active instruments" value={data.instruments.filter((item) => item.online).length} detail={`${data.instruments.length} registered, demo status`} icon={<IconCpu className="size-5" />} />
-            <Metric label="Open quality events" value={openEvents} detail={`${data.events.length} total events`} icon={<IconBell className="size-5" />} />
+            <Metric label={t("dashboard.measurementsToday")} value={daily.length} detail={`${data.measurements.length} ${t("dashboard.totalRecords")}`} icon={<IconActivity className="size-5" />} />
+            <Metric label={t("dashboard.acceptedReadings")} value={passCount} detail={t("dashboard.withinSpecificationLimits")} icon={<IconCircleCheck className="size-5" />} />
+            <Metric label={t("dashboard.rejectedReadings")} value={failCount} detail={`${invalidCount} ${t("dashboard.invalidReadingsExcluded")}`} icon={<IconAlertTriangle className="size-5" />} />
+            <Metric label={t("dashboard.qualityPassRate")} value={`${passRate}%`} detail={t("dashboard.passFailSummary", { pass: passCount, fail: failCount })} icon={<IconGauge className="size-5" />} />
+            <Metric label={t("dashboard.activeInstruments")} value={data.instruments.filter((item) => item.online).length} detail={`${data.instruments.length} ${t("dashboard.registeredDemoStatus")}`} icon={<IconCpu className="size-5" />} />
+            <Metric label={t("dashboard.openQualityEvents")} value={openEvents} detail={`${data.events.length} ${t("dashboard.totalEvents")}`} icon={<IconBell className="size-5" />} />
           </div>
           <div className="grid gap-4 xl:grid-cols-[1.45fr_1fr]">
             <section className={cardClass}>
               <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
-                <div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-blue-700 dark:text-blue-400">Production pulse</p><h2 className="mt-1 font-semibold text-slate-900 dark:text-white">Measurement trend</h2><p className="mt-1 text-xs text-slate-500 dark:text-slate-400">Past {rangeLabel}, {daily.length} readings</p></div>
+                <div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-blue-700 dark:text-blue-400">{t("dashboard.productionPulse")}</p><h2 className="mt-1 font-semibold text-slate-900 dark:text-white">{t("dashboard.measurementTrend")}</h2><p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{t("dashboard.pastRangeReadings", { range: rangeLabel, count: daily.length })}</p></div>
                 <div className="flex items-center gap-2">
-                  <label className="sr-only" htmlFor="dashboard-date-range">Dashboard date range</label>
-                  <select id="dashboard-date-range" aria-label="Dashboard date range" className={`${inputClass} min-h-9 w-auto py-1 text-xs`} onChange={(event) => setDashboardRange(event.target.value)} value={dashboardRange}>
-                    <option value="24h">Last 24 hours</option>
-                    <option value="7d">Last 7 days</option>
-                    <option value="30d">Last 30 days</option>
+                  <label className="sr-only" htmlFor="dashboard-date-range">{t("dashboard.measurementTrend")}</label>
+                  <select id="dashboard-date-range" aria-label={t("dashboard.measurementTrend")} className={`${inputClass} min-h-9 w-auto py-1 text-xs`} onChange={(event) => setDashboardRange(event.target.value)} value={dashboardRange}>
+                    <option value="24h">{t("dashboard.rangeLast24Hours")}</option>
+                    <option value="7d">{t("dashboard.rangeLast7Days")}</option>
+                    <option value="30d">{t("dashboard.rangeLast30Days")}</option>
                   </select>
-                  <span className="hidden rounded-lg bg-slate-50 px-2.5 py-1.5 text-[11px] font-medium text-slate-500 dark:bg-slate-800 dark:text-slate-400 sm:inline">Updated {lastUpdated || "Demo data"}</span>
+                  <span className="hidden rounded-lg bg-slate-50 px-2.5 py-1.5 text-[11px] font-medium text-slate-500 dark:bg-slate-800 dark:text-slate-400 sm:inline">{t("dashboard.updated")} {lastUpdated || t("dashboard.demoData")}</span>
                 </div>
               </div>
               <div className="aspect-[4.25/1]">
@@ -868,43 +869,43 @@ export function WorkspaceModule({
                   </svg>
                 ) : (
                   <div className="grid h-full place-items-center rounded-xl border border-dashed border-slate-200 text-sm text-slate-500 dark:border-slate-700">
-                    No readings in this range.
+                    {t("dashboard.noReadingsInRange")}
                   </div>
                 )}
               </div>
-              <div className="mt-1 flex justify-between text-[10px] font-medium text-slate-400"><span>{rangeLabel} ago</span><span>Now</span></div>
+              <div className="mt-1 flex justify-between text-[10px] font-medium text-slate-400"><span>{t("dashboard.rangeAgo", { range: rangeLabel })}</span><span>{t("dashboard.now")}</span></div>
               <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-[11px] text-slate-500">
-                <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-blue-600" /> Measurements</span>
-                <span>Peak bucket: {maxBucket}</span>
+                <span className="inline-flex items-center gap-1.5"><span className="size-2 rounded-full bg-blue-600" /> {t("dashboard.measurements")}</span>
+                <span>{t("dashboard.peakBucket", { count: maxBucket })}</span>
               </div>
               <div className="mt-5 flex flex-wrap gap-2 border-t border-slate-100 pt-4 dark:border-slate-800">
-                <button className="rounded-lg bg-blue-700 px-3 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-800" onClick={() => onNavigate("live-measurements")} type="button">Open live monitor</button>
-                <button className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800" onClick={() => onNavigate("spc-analytics")} type="button">View SPC analysis</button>
+                <button className="rounded-lg bg-blue-700 px-3 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-800" onClick={() => onNavigate("live-measurements")} type="button">{t("dashboard.openLiveMonitor")}</button>
+                <button className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800" onClick={() => onNavigate("spc-analytics")} type="button">{t("dashboard.viewSpcAnalysis")}</button>
               </div>
             </section>
             <section className={cardClass}>
               <div className="mb-3 flex items-start justify-between gap-3">
-                <div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-rose-600 dark:text-rose-400">Needs attention</p><h2 className="mt-1 font-semibold text-slate-900 dark:text-white">Recent quality events</h2></div>
-                <span className="rounded-full bg-rose-50 px-2.5 py-1 text-[10px] font-bold text-rose-700 dark:bg-rose-950 dark:text-rose-300">{openEvents} open</span>
+                <div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-rose-600 dark:text-rose-400">{t("dashboard.needsAttention")}</p><h2 className="mt-1 font-semibold text-slate-900 dark:text-white">{t("dashboard.recentQualityEvents")}</h2></div>
+                <span className="rounded-full bg-rose-50 px-2.5 py-1 text-[10px] font-bold text-rose-700 dark:bg-rose-950 dark:text-rose-300">{t("dashboard.openCount", { count: openEvents })}</span>
               </div>
-              <p className="mb-3 text-xs text-slate-500 dark:text-slate-400">Prioritize current issues across the workspace</p>
+              <p className="mb-3 text-xs text-slate-500 dark:text-slate-400">{t("dashboard.prioritizeIssues")}</p>
               {latestEvents.length ? latestEvents.map((item) => (
                 <div key={item.id} className="flex items-start gap-3 border-t border-slate-100 py-3 first:border-0 dark:border-slate-800">
                   <span className={`mt-1 grid size-7 shrink-0 place-items-center rounded-lg ${item.severity === "high" || item.severity === "critical" ? "bg-rose-50 text-rose-600 dark:bg-rose-950 dark:text-rose-300" : "bg-amber-50 text-amber-600 dark:bg-amber-950 dark:text-amber-300"}`}><IconAlertTriangle aria-hidden="true" className="size-3.5" /></span>
-                  <div className="min-w-0 flex-1"><p className="text-sm font-medium leading-5 text-slate-800 dark:text-slate-100">{eventDescription(item)}</p><p className="mt-1 text-[11px] text-slate-500">{item.id}, {formatTimestamp(item.timestamp)}</p></div>
+                  <div className="min-w-0 flex-1"><p className="text-sm font-medium leading-5 text-slate-800 dark:text-slate-100">{eventDescription(item)}</p><p className="mt-1 text-[11px] text-slate-500">{item.id}, {formatTimestamp(item.timestamp, language)}</p></div>
                   <StatusPill status={item.status} />
                 </div>
               )) : <EmptyState message="common.noQualityEvents" />}
-              <button className="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-left text-xs font-semibold text-blue-700 transition hover:border-blue-200 hover:bg-blue-50 dark:border-slate-700 dark:text-blue-400 dark:hover:bg-slate-800" onClick={() => onNavigate("alerts-quality-events")} type="button">Go to event centre</button>
+              <button className="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-left text-xs font-semibold text-blue-700 transition hover:border-blue-200 hover:bg-blue-50 dark:border-slate-700 dark:text-blue-400 dark:hover:bg-slate-800" onClick={() => onNavigate("alerts-quality-events")} type="button">{t("dashboard.goToEventCentre")}</button>
             </section>
           </div>
           <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2 md:gap-5">
             <section className={`${cardClass} flex h-full min-w-0 flex-col`}>
               <OverviewCardHeader
                 action={<span className="tabular-nums">{data.measurements.length} total</span>}
-                eyebrow="Quality mix"
+                eyebrow={t("dashboard.qualityMix")}
                 eyebrowClassName="text-[var(--primary-dark)]"
-                title="Inspection results"
+                title={t("dashboard.inspectionResults")}
               />
               <div className="mt-4 flex flex-1 flex-col items-center">
                 <div
@@ -935,7 +936,7 @@ export function WorkspaceModule({
                     </Pie>
                   </PieChart>
                   <div className="pointer-events-none absolute inset-[24%] z-10 grid place-items-center text-center">
-                    <div><p className="text-xl font-bold tabular-nums text-[var(--text)]">{passRate}%</p><p className="text-[10px] font-semibold uppercase text-[var(--muted)]">Pass rate</p></div>
+                    <div><p className="text-xl font-bold tabular-nums text-[var(--text)]">{passRate}%</p><p className="text-[10px] font-semibold uppercase text-[var(--muted)]">{t("dashboard.passRate")}</p></div>
                   </div>
                 </div>
                 <div className="mt-4 w-full space-y-2 text-xs">
@@ -948,35 +949,35 @@ export function WorkspaceModule({
                 </div>
               </div>
               <div className="mt-3 rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">
-                <div className="mb-2 flex min-h-5 items-center justify-between gap-3 text-xs text-slate-600 dark:text-slate-300"><span>Accepted to target</span><span className="font-semibold tabular-nums">{passRate}%</span></div>
-                <div aria-label={`Quality pass rate ${passRate}%`} className="h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800" role="progressbar" aria-valuenow={passRate} aria-valuemin={0} aria-valuemax={100}>
+                <div className="mb-2 flex min-h-5 items-center justify-between gap-3 text-xs text-slate-600 dark:text-slate-300"><span>{t("dashboard.acceptedToTarget")}</span><span className="font-semibold tabular-nums">{passRate}%</span></div>
+                <div aria-label={`${t("dashboard.qualityPassRate")} ${passRate}%`} className="h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800" role="progressbar" aria-valuenow={passRate} aria-valuemin={0} aria-valuemax={100}>
                   <div className="h-full rounded-full bg-emerald-500 transition-[width]" style={{ width: `${passRate}%` }} />
                 </div>
               </div>
             </section>
             <section className={`${cardClass} flex h-full min-w-0 flex-col`}>
               <OverviewCardHeader
-                action={<button className="flex min-h-11 items-center px-2 text-xs font-semibold text-blue-700 hover:underline dark:text-blue-400" onClick={() => onNavigate("instrument-management")} type="button">View all</button>}
-                eyebrow="Device status"
+                action={<button className="flex min-h-11 items-center px-2 text-xs font-semibold text-blue-700 hover:underline dark:text-blue-400" onClick={() => onNavigate("instrument-management")} type="button">{t("dashboard.viewAll")}</button>}
+                eyebrow={t("dashboard.deviceStatus")}
                 eyebrowClassName="text-blue-700 dark:text-blue-400"
-                title="Instruments"
+                title={t("instruments.instruments")}
               />
               <div className="mt-3 flex-1 divide-y divide-slate-100 dark:divide-slate-800">
                 {data.instruments.slice(0, 3).map((instrument) => (
                   <div className="flex min-h-16 items-center justify-between gap-3 py-2" key={instrument.id}>
-                    <div className="min-w-0"><p className="truncate text-xs font-semibold text-slate-800 dark:text-slate-100">{demoText(instrument.name)}</p><p className="mt-1 truncate text-[10px] text-slate-500 dark:text-slate-400">{instrument.id}, {formatTimestamp(instrument.lastSeen)}</p></div>
+                    <div className="min-w-0"><p className="truncate text-xs font-semibold text-slate-800 dark:text-slate-100">{demoText(instrument.name)}</p><p className="mt-1 truncate text-[10px] text-slate-500 dark:text-slate-400">{instrument.id}, {formatTimestamp(instrument.lastSeen, language)}</p></div>
                     <StatusPill className="min-h-6 min-w-[60px] justify-center px-2 text-center" status={instrument.online ? "Online" : "Offline"} />
                   </div>
                 ))}
               </div>
-              <p className="mt-3 text-[10px] leading-4 text-slate-400">Connection status is simulated demo data.</p>
+              <p className="mt-3 text-[10px] leading-4 text-slate-400">{t("dashboard.connectionSimulated")}</p>
             </section>
             <section className={`${cardClass} min-w-0 md:col-span-2`}>
               <OverviewCardHeader
-                action="Latest 6"
-                eyebrow="Workspace feed"
+                action={t("dashboard.latestSix")}
+                eyebrow={t("dashboard.workspaceFeed")}
                 eyebrowClassName="text-[var(--secondary)]"
-                title="Recent activity"
+                title={t("dashboard.recentActivity")}
               />
               {activity.length ? (
                 <ol className="mt-3">
@@ -994,7 +995,7 @@ export function WorkspaceModule({
                           />
                         </div>
                         <p className="mt-1 line-clamp-2 break-words text-[10px] leading-4 text-slate-500 dark:text-slate-400">{item.detail}</p>
-                        <time className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums" dateTime={item.timestamp}>{formatTimestamp(item.timestamp)}</time>
+                        <time className="mt-1 block text-[10px] leading-4 text-slate-400 tabular-nums" dateTime={item.timestamp}>{formatTimestamp(item.timestamp, language)}</time>
                       </div>
                     </li>
                   ))}
@@ -1003,7 +1004,7 @@ export function WorkspaceModule({
             </section>
           </div>
           <section className={cardClass}>
-            <div className="mb-3 flex items-center justify-between"><div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">Latest activity</p><h2 className="mt-1 font-semibold text-slate-900 dark:text-white">Recent measurements</h2></div><span className="rounded-lg bg-slate-50 px-2.5 py-1.5 text-xs font-medium text-slate-500 dark:bg-slate-800 dark:text-slate-400">{data.measurements.length} records</span></div>
+            <div className="mb-3 flex items-center justify-between"><div><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-400">{t("dashboard.latestActivity")}</p><h2 className="mt-1 font-semibold text-slate-900 dark:text-white">{t("dashboard.recentMeasurements")}</h2></div><span className="rounded-lg bg-slate-50 px-2.5 py-1.5 text-xs font-medium text-slate-500 dark:bg-slate-800 dark:text-slate-400">{data.measurements.length} {t("dashboard.records")}</span></div>
             <MeasurementRows rows={recent} parts={data.parts} />
           </section>
         </div>
@@ -1036,37 +1037,37 @@ export function WorkspaceModule({
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <span className={`grid size-10 place-items-center rounded-xl ${streaming ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300" : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"}`}><IconActivity aria-hidden="true" className="size-5" /></span>
-                  <div className="min-w-0"><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">Latest reading, demo stream</p><p className="mt-1 break-words text-xs text-slate-500 dark:text-slate-400">{latestMeasurement ? `${demoText(latestMeasurement.characteristic)}, ${latestMeasurement.instrumentId}, ${formatTimestamp(latestMeasurement.timestamp)}` : "No measurement available"}</p></div>
+                  <div className="min-w-0"><p className="text-[10px] font-bold uppercase tracking-[0.14em] text-slate-500">{t("dashboard.latestReadingDemoStream")}</p><p className="mt-1 break-words text-xs text-slate-500 dark:text-slate-400">{latestMeasurement ? `${demoText(latestMeasurement.characteristic)}, ${latestMeasurement.instrumentId}, ${formatTimestamp(latestMeasurement.timestamp, language)}` : t("dashboard.noMeasurementAvailable")}</p></div>
                 </div>
                 <span className={`inline-flex min-h-10 items-center gap-2 rounded-full px-3 py-1.5 text-[11px] font-bold ${streaming ? "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300" : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"}`}>
                   <span className={`size-2 rounded-full ${streaming ? "animate-pulse bg-emerald-500" : "bg-slate-400"}`} />
-                  {streaming ? "SIMULATED, RUNNING" : "SIMULATED, PAUSED"}
+                  {streaming ? t("measurements.simulatedRunning") : t("measurements.simulatedPaused")}
                 </span>
               </div>
               <div className="mt-4 grid min-w-0 gap-4 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.5fr)]">
                 <div className="min-w-0 rounded-xl bg-slate-50 p-4 dark:bg-slate-800">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-500">Most recent value</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.12em] text-slate-500">{t("dashboard.mostRecentValue")}</p>
                   <div className="mt-1 flex items-baseline gap-2">
                     <p className="font-mono text-3xl font-semibold tabular-nums text-slate-950 dark:text-white sm:text-4xl">{latestMeasurement?.value?.toFixed(3) ?? "—"}</p>
-                    <span className="text-sm font-semibold text-slate-500">{latestMeasurement ? demoText(latestMeasurement.unit) : "unit"}</span>
+                    <span className="text-sm font-semibold text-slate-500">{latestMeasurement ? demoText(latestMeasurement.unit) : t("spc.unit")}</span>
                   </div>
                   <div className="mt-3 flex flex-wrap items-start gap-2">
                     <StatusPill status={latestMeasurement?.status ?? "No data"} />
-                    <span className="min-w-0 flex-1 text-[11px] leading-5 text-slate-500 dark:text-slate-400">{latestPart ? `LSL ${latestPart.lsl}, Nominal ${latestPart.nominal}, USL ${latestPart.usl} ${demoText(latestPart.unit)}` : "No specification available"}</span>
+                    <span className="min-w-0 flex-1 text-[11px] leading-5 text-slate-500 dark:text-slate-400">{latestPart ? `${t("spc.lsl")} ${latestPart.lsl}, ${t("spc.nominal")} ${latestPart.nominal}, ${t("spc.usl")} ${latestPart.usl} ${demoText(latestPart.unit)}` : t("measurements.noSpecification")}</span>
                   </div>
-                  <p className="mt-3 text-[10px] leading-4 text-slate-400">Instrument connection is simulated; no physical hardware is connected.</p>
+                  <p className="mt-3 text-[10px] leading-4 text-slate-400">{t("dashboard.noPhysicalHardware")}</p>
                 </div>
                 <div className="min-w-0">
-                  <div className="mb-2 flex flex-wrap items-center justify-between gap-2"><p className="text-xs font-semibold text-slate-800 dark:text-slate-100">Recent readings</p><p className="text-[10px] text-slate-500 dark:text-slate-400">{latestPart ? demoText(latestPart.characteristic) : "Selected filters"}, limits shown separately</p></div>
+                  <div className="mb-2 flex flex-wrap items-center justify-between gap-2"><p className="text-xs font-semibold text-slate-800 dark:text-slate-100">{t("dashboard.recentReadings")}</p><p className="text-[10px] text-slate-500 dark:text-slate-400">{latestPart ? demoText(latestPart.characteristic) : t("measurements.selectedFilters")}, {t("dashboard.limitsShownSeparately")}</p></div>
                   <div className="min-h-32 rounded-xl bg-white p-2 dark:bg-slate-900 sm:aspect-[14/3] sm:min-h-0">
                     {liveValues.length ? (
-                      <svg aria-label="Recent measurement trend with specification limits" className="h-32 w-full sm:h-full" preserveAspectRatio="xMidYMid meet" role="img" viewBox="0 0 700 150">
+                      <svg aria-label={t("dashboard.recentMeasurementTrend")} className="h-32 w-full sm:h-full" preserveAspectRatio="xMidYMid meet" role="img" viewBox="0 0 700 150">
                         {latestPart && <><line x1="24" x2="676" y1={liveY(latestPart.usl)} y2={liveY(latestPart.usl)} stroke="var(--danger)" strokeDasharray="5 4" /><line x1="24" x2="676" y1={liveY(latestPart.nominal)} y2={liveY(latestPart.nominal)} stroke="var(--primary)" strokeDasharray="4 4" /><line x1="24" x2="676" y1={liveY(latestPart.lsl)} y2={liveY(latestPart.lsl)} stroke="var(--danger)" strokeDasharray="5 4" /></>}
                         {liveValues.map((value, index) => <circle key={livePoints[index].id} cx={liveX(index)} cy={liveY(value)} r="3" fill={latestPart && (value < latestPart.lsl || value > latestPart.usl) ? "var(--danger)" : "var(--primary)"} />)}
                       </svg>
-                    ) : <div className="grid h-full place-items-center rounded-xl border border-dashed border-slate-200 text-xs text-slate-500 dark:border-slate-700">No numeric readings match these filters.</div>}
+                    ) : <div className="grid h-full place-items-center rounded-xl border border-dashed border-slate-200 text-xs text-slate-500 dark:border-slate-700">{t("measurements.noNumericReadings")}</div>}
                   </div>
-                  {latestPart && <div className="mt-2 flex flex-wrap gap-4 text-[10px] text-slate-500"><span><i className="mr-1 inline-block w-4 border-t border-dashed border-rose-500" />LSL / USL</span><span><i className="mr-1 inline-block w-4 border-t border-dashed border-blue-600" />Nominal</span></div>}
+                  {latestPart && <div className="mt-2 flex flex-wrap gap-4 text-[10px] text-slate-500"><span><i className="mr-1 inline-block w-4 border-t border-dashed border-rose-500" />LSL / USL</span><span><i className="mr-1 inline-block w-4 border-t border-dashed border-blue-600" />{t("spc.nominal")}</span></div>}
                 </div>
               </div>
             </section>
@@ -1077,27 +1078,27 @@ export function WorkspaceModule({
             <div className={live ? "grid w-full grid-cols-2 gap-2 sm:flex sm:min-w-0 sm:flex-1 sm:flex-wrap" : "flex flex-1 flex-wrap items-center gap-2"}>
               <label className={`relative min-w-0 flex-1 ${live ? "col-span-2 sm:min-w-[220px]" : "sm:min-w-[220px]"}`}>
                 <IconSearch aria-hidden="true" className="absolute left-3 top-3 size-4 text-slate-400" />
-                <input aria-label="Search measurements" className={`${inputClass} pl-9`} onChange={(event) => setQuery(event.target.value)} placeholder="Search ID, part, batch, instrument…" value={query} />
+                <input aria-label={t("measurements.search")} className={`${inputClass} pl-9`} onChange={(event) => setQuery(event.target.value)} placeholder={t("measurements.searchPlaceholder")} value={query} />
               </label>
-              <select aria-label="Filter by measurement status" className={`${inputClass} ${live ? "w-full min-w-0 sm:w-auto sm:min-w-32" : "w-auto min-w-32"}`} onChange={(event) => setStatusFilter(event.target.value)} value={statusFilter}>
-                <option>All</option><option>PASS</option><option>FAIL</option><option>INVALID</option>
+              <select aria-label={t("measurements.filterStatus")} className={`${inputClass} ${live ? "w-full min-w-0 sm:w-auto sm:min-w-32" : "w-auto min-w-32"}`} onChange={(event) => setStatusFilter(event.target.value)} value={statusFilter}>
+                <option>{t("measurements.all")}</option><option>PASS</option><option>FAIL</option><option>INVALID</option>
               </select>
-              <select aria-label="Filter by instrument" className={`${inputClass} ${live ? "w-full min-w-0 sm:w-auto sm:min-w-36" : "w-auto min-w-36"}`} onChange={(event) => setInstrumentFilter(event.target.value)} value={instrumentFilter}>
-                <option value="All">All instruments</option>{data.instruments.map((instrument) => <option key={instrument.id} value={instrument.id}>{instrument.id}</option>)}
+              <select aria-label={t("measurements.filterInstrument")} className={`${inputClass} ${live ? "w-full min-w-0 sm:w-auto sm:min-w-36" : "w-auto min-w-36"}`} onChange={(event) => setInstrumentFilter(event.target.value)} value={instrumentFilter}>
+                <option value="All">{t("measurements.allInstruments")}</option>{data.instruments.map((instrument) => <option key={instrument.id} value={instrument.id}>{instrument.id}</option>)}
               </select>
-              <select aria-label="Filter by part" className={`${inputClass} ${live ? "w-full min-w-0 sm:w-auto sm:min-w-28" : "w-auto min-w-28"}`} onChange={(event) => setPartFilter(event.target.value)} value={partFilter}>
-                <option value="All">All parts</option>{data.parts.map((part) => <option key={part.number} value={part.number}>{part.number}</option>)}
+              <select aria-label={t("measurements.filterPart")} className={`${inputClass} ${live ? "w-full min-w-0 sm:w-auto sm:min-w-28" : "w-auto min-w-28"}`} onChange={(event) => setPartFilter(event.target.value)} value={partFilter}>
+                <option value="All">{t("measurements.allParts")}</option>{data.parts.map((part) => <option key={part.number} value={part.number}>{part.number}</option>)}
               </select>
             </div>
             <div className="flex flex-wrap gap-2">
-              {live && can("start") && <button aria-pressed={streaming} className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-3 text-sm font-semibold text-white ${streaming ? "bg-rose-600 hover:bg-rose-700" : "bg-emerald-600 hover:bg-emerald-700"}`} onClick={() => setStreaming((value) => !value)} type="button">{streaming ? <><IconActivity className="size-4" /> Pause stream</> : <><IconActivity className="size-4" /> Start stream</>}</button>}
-              {can("export") && <button className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-200 px-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200" onClick={() => exportMeasurements(live ? "gap-it-live-measurements.csv" : "gap-it-measurement-history.csv")} type="button"><IconDownload className="size-4" /> CSV</button>}
+              {live && can("start") && <button aria-pressed={streaming} className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-3 text-sm font-semibold text-white ${streaming ? "bg-rose-600 hover:bg-rose-700" : "bg-emerald-600 hover:bg-emerald-700"}`} onClick={() => setStreaming((value) => !value)} type="button">{streaming ? <><IconActivity className="size-4" /> {t("measurements.pauseStream")}</> : <><IconActivity className="size-4" /> {t("measurements.startStream")}</>}</button>}
+              {can("export") && <button className="inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-slate-200 px-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200" onClick={() => exportMeasurements(live ? "gap-it-live-measurements.csv" : "gap-it-measurement-history.csv")} type="button"><IconDownload className="size-4" /> {t("measurements.csv")}</button>}
             </div>
             </div>
             <div className="mt-4 flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-slate-500 dark:text-slate-400">
-              <span>{filteredMeasurements.length} matching records</span>
-              <span>{passCount} pass</span><span>{failCount} fail</span><span>{invalidCount} invalid</span>
-              {live && <span className="inline-flex items-center gap-1.5"><span className={`size-2 rounded-full ${streaming ? "animate-pulse bg-emerald-500" : "bg-slate-300"}`} />{streaming ? `Simulated stream, ${data.settings.demoIntervalSeconds}s interval` : "Stream paused"}</span>}
+              <span>{t("measurements.matchingRecords", { count: filteredMeasurements.length })}</span>
+              <span>{passCount} {t("common.pass").toLowerCase()}</span><span>{failCount} {t("common.fail").toLowerCase()}</span><span>{invalidCount} {t("common.invalid").toLowerCase()}</span>
+              {live && <span className="inline-flex items-center gap-1.5"><span className={`size-2 rounded-full ${streaming ? "animate-pulse bg-emerald-500" : "bg-slate-300"}`} />{streaming ? t("measurements.simulatedInterval", { seconds: data.settings.demoIntervalSeconds }) : t("measurements.streamPaused")}</span>}
             </div>
             {!live && <div className="mt-3 grid gap-2 sm:grid-cols-2"><label className="text-xs font-medium text-slate-500">From date<DatePicker onChange={(next) => updateRangeStart(next, setStartDate, endDate)} rangeEnd={endDate} rangeStart={startDate} value={startDate} /></label><label className="text-xs font-medium text-slate-500">To date<DatePicker onChange={(next) => updateRangeEnd(next, startDate, setEndDate)} rangeEnd={endDate} rangeStart={startDate} value={endDate} /></label></div>}
             </div>
@@ -1116,47 +1117,47 @@ export function WorkspaceModule({
           </div>
           <section className={cardClass}>
             <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
-              <h2 className="font-semibold text-slate-900 dark:text-white">Instruments</h2>
+              <h2 className="font-semibold text-slate-900 dark:text-white">{t("instruments.instruments")}</h2>
               <div className="flex flex-wrap gap-2">
                 <label className="relative">
                   <IconSearch aria-hidden="true" className="absolute left-3 top-3 size-4 text-slate-400" />
-                  <input aria-label="Search instruments" className={`${inputClass} w-52 pl-9`} onChange={(event) => setInstrumentSearch(event.target.value)} placeholder="Search devices…" value={instrumentSearch} />
+                  <input aria-label={t("instruments.search")} className={`${inputClass} w-52 pl-9`} onChange={(event) => setInstrumentSearch(event.target.value)} placeholder={t("instruments.searchPlaceholder")} value={instrumentSearch} />
                 </label>
-                <select aria-label="Filter instruments by status" className={`${inputClass} w-auto min-w-28`} onChange={(event) => setInstrumentStatusFilter(event.target.value)} value={instrumentStatusFilter}>
-                  <option>All</option><option>Online</option><option>Offline</option>
+                <select aria-label={t("instruments.filterStatus")} className={`${inputClass} w-auto min-w-28`} onChange={(event) => setInstrumentStatusFilter(event.target.value)} value={instrumentStatusFilter}>
+                  <option>{t("measurements.all")}</option><option>{t("common.online")}</option><option>{t("common.offline")}</option>
                 </select>
               </div>
               {can("create") && <form className="flex flex-wrap gap-2" onSubmit={addInstrument}>
-                <input aria-label="New instrument name" className={`${inputClass} w-44`} onChange={(event) => setInstrumentDraft({ ...instrumentDraft, name: event.target.value })} placeholder="Instrument name" value={instrumentDraft.name} />
-                <input aria-label="New instrument model" className={`${inputClass} w-36`} onChange={(event) => setInstrumentDraft({ ...instrumentDraft, model: event.target.value })} placeholder="Model" value={instrumentDraft.model} />
-                <button className="inline-flex min-h-10 items-center gap-1 rounded-lg bg-blue-700 px-3 text-xs font-semibold text-white hover:bg-blue-800" type="submit"><IconPlus className="size-4" /> Register</button>
+                <input aria-label={t("instruments.newInstrumentName")} className={`${inputClass} w-44`} onChange={(event) => setInstrumentDraft({ ...instrumentDraft, name: event.target.value })} placeholder={t("instruments.instrumentName")} value={instrumentDraft.name} />
+                <input aria-label={t("instruments.newInstrumentModel")} className={`${inputClass} w-36`} onChange={(event) => setInstrumentDraft({ ...instrumentDraft, model: event.target.value })} placeholder={t("instruments.instrumentModel")} value={instrumentDraft.model} />
+                <button className="inline-flex min-h-10 items-center gap-1 rounded-lg bg-blue-700 px-3 text-xs font-semibold text-white hover:bg-blue-800" type="submit"><IconPlus className="size-4" /> {t("instruments.register")}</button>
               </form>}
             </div>
             <div className="overflow-x-auto"><table className="w-full min-w-[760px] text-left text-xs">
-              <thead className="border-b border-slate-200 text-[10px] uppercase tracking-wide text-slate-500 dark:border-slate-800"><tr>{["Instrument", "Type / model", "Line", "Gateway", "Calibration due", "Status", "Action"].map((name) => <th key={name} className="px-3 py-3 font-semibold">{name}</th>)}</tr></thead>
+              <thead className="border-b border-slate-200 text-[10px] uppercase tracking-wide text-slate-500 dark:border-slate-800"><tr>{[t("instruments.instruments"), t("instruments.typeModel"), t("instruments.line"), t("instruments.gateway"), t("instruments.calibrationDue"), t("accounts.status"), t("accounts.actions")].map((name) => <th key={name} className="px-3 py-3 font-semibold">{name}</th>)}</tr></thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800">{matchingInstruments.map((item) => <tr key={item.id}>
                 <td className="px-3 py-3"><span className="block font-semibold text-slate-800 dark:text-slate-100">{demoText(item.name)}</span><span className="text-slate-500">{item.id}, {demoText(item.manufacturer)}</span></td>
-                <td className="px-3 py-3 text-slate-700 dark:text-slate-300">{demoText(item.type)}<span className="block text-slate-500">{demoText(item.model)}, FW {item.firmware}</span></td>
+                <td className="px-3 py-3 text-slate-700 dark:text-slate-300">{demoText(item.type)}<span className="block text-slate-500">{demoText(item.model)}, {t("instruments.firmware")} {item.firmware === "Demo" ? t("dashboard.demoData") : item.firmware}</span></td>
                 <td className="px-3 py-3 text-slate-700 dark:text-slate-300">{demoText(item.line)}</td><td className="px-3 py-3 text-slate-700 dark:text-slate-300">{item.gatewayId}</td>
-                <td className="px-3 py-3 text-slate-700 dark:text-slate-300">{item.calibrationDue}{item.calibrationDue !== "Not configured" && item.calibrationDue < new Date().toISOString().slice(0, 10) && <span className="mt-1 block text-[10px] font-semibold text-rose-600">Calibration overdue</span>}</td><td className="px-3 py-3"><StatusPill status={item.online ? "Online" : "Offline"} /></td>
-                <td className="px-3 py-3"><div className="flex items-center gap-2"><button aria-expanded={expandedInstrument === item.id} className="rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold text-blue-700 hover:bg-blue-50 dark:border-slate-700 dark:text-blue-300 dark:hover:bg-slate-800" onClick={() => setExpandedInstrument(expandedInstrument === item.id ? "" : item.id)} type="button">{expandedInstrument === item.id ? "Hide details" : "Details"}</button>{can("edit") && <button className="rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200" onClick={() => toggleInstrument(item.id)} type="button">{item.online ? "Simulate offline" : "Simulate reconnect"}</button>}</div></td>
+                <td className="px-3 py-3 text-slate-700 dark:text-slate-300">{item.calibrationDue === "Not configured" ? t("instruments.notConfigured") : item.calibrationDue}{item.calibrationDue !== "Not configured" && item.calibrationDue < new Date().toISOString().slice(0, 10) && <span className="mt-1 block text-[10px] font-semibold text-rose-600">{t("instruments.calibrationOverdue")}</span>}</td><td className="px-3 py-3"><StatusPill status={item.online ? "Online" : "Offline"} /></td>
+                <td className="px-3 py-3"><div className="flex items-center gap-2"><button aria-expanded={expandedInstrument === item.id} className="rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold text-blue-700 hover:bg-blue-50 dark:border-slate-700 dark:text-blue-300 dark:hover:bg-slate-800" onClick={() => setExpandedInstrument(expandedInstrument === item.id ? "" : item.id)} type="button">{expandedInstrument === item.id ? t("instruments.hideDetails") : t("instruments.details")}</button>{can("edit") && <button className="rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-200" onClick={() => toggleInstrument(item.id)} type="button">{item.online ? t("instruments.simulateOffline") : t("instruments.simulateReconnect")}</button>}</div></td>
               </tr>)}</tbody>
             </table></div>
             {!matchingInstruments.length && <EmptyState message="common.noInstruments" />}
             {expandedInstrument && data.instruments.filter((item) => item.id === expandedInstrument).map((item) => (
               <aside aria-label={`${demoText(item.name)} device details`} className="mt-4 rounded-xl border border-blue-100 bg-blue-50/60 p-4 dark:border-blue-900 dark:bg-blue-950/30" key={item.id}>
                 <div className="flex items-start justify-between gap-3"><div><h3 className="font-semibold text-slate-900 dark:text-white">{demoText(item.name)}, {item.id}</h3><p className="mt-1 text-xs text-slate-500">{demoText(item.manufacturer)} {demoText(item.model)}, {demoText(item.type)}</p></div><StatusPill status={item.online ? "Online" : "Offline"} /></div>
-                <div className="mt-3 grid gap-3 text-xs text-slate-600 dark:text-slate-300 sm:grid-cols-2 lg:grid-cols-4"><span>Production line <b className="mt-1 block text-slate-900 dark:text-white">{demoText(item.line)}</b></span><span>Gateway <b className="mt-1 block text-slate-900 dark:text-white">{item.gatewayId}</b></span><span>Last communication <b className="mt-1 block text-slate-900 dark:text-white">{formatTimestamp(item.lastSeen)}</b></span><span>Calibration due <b className="mt-1 block text-slate-900 dark:text-white">{item.calibrationDue}</b></span></div>
+                <div className="mt-3 grid gap-3 text-xs text-slate-600 dark:text-slate-300 sm:grid-cols-2 lg:grid-cols-4"><span>{t("instruments.productionLine")} <b className="mt-1 block text-slate-900 dark:text-white">{demoText(item.line)}</b></span><span>{t("instruments.gateway")} <b className="mt-1 block text-slate-900 dark:text-white">{item.gatewayId}</b></span><span>{t("instruments.lastCommunication")} <b className="mt-1 block text-slate-900 dark:text-white">{formatTimestamp(item.lastSeen, language)}</b></span><span>{t("instruments.calibrationDue")} <b className="mt-1 block text-slate-900 dark:text-white">{item.calibrationDue}</b></span></div>
               </aside>
             ))}
           </section>
           <section className={cardClass}>
-            <h2 className="mb-3 font-semibold text-slate-900 dark:text-white">Calibration and device records</h2>
-            <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">Demo instruments and gateway values are sample records only. No physical hardware, network connection, calibration source, or diagnostic command has been verified. The reconnect action only changes this browser’s simulated status.</p>
+            <h2 className="mb-3 font-semibold text-slate-900 dark:text-white">{t("instruments.calibrationRecords")}</h2>
+            <p className="text-sm leading-6 text-slate-600 dark:text-slate-300">{t("instruments.demoRecordsOnly")}</p>
           </section>
           <section className={cardClass}>
-            <h2 className="mb-3 font-semibold text-slate-900 dark:text-white">Gateways</h2>
-            <div className="grid gap-3 md:grid-cols-2">{data.gateways.map((gateway) => <div key={gateway.id} className="rounded-xl border border-slate-200 p-4 dark:border-slate-800"><div className="flex items-center justify-between"><div><p className="font-semibold text-slate-900 dark:text-white">{demoText(gateway.name)}</p><p className="text-xs text-slate-500">{gateway.id}, {demoText(gateway.protocol)}</p></div><StatusPill status={gateway.online ? "Online" : "Offline"} /></div><div className="mt-3 grid grid-cols-3 gap-2 text-xs text-slate-500"><span>Address<br /><b className="text-slate-700 dark:text-slate-200">{gateway.address}</b></span><span>Messages<br /><b className="text-slate-700 dark:text-slate-200">{gateway.messageCount.toLocaleString()}</b></span><span>Errors<br /><b className="text-slate-700 dark:text-slate-200">{gateway.errors}</b></span></div></div>)}</div>
+            <h2 className="mb-3 font-semibold text-slate-900 dark:text-white">{t("instruments.gateways")}</h2>
+            <div className="grid gap-3 md:grid-cols-2">{data.gateways.map((gateway) => <div key={gateway.id} className="rounded-xl border border-slate-200 p-4 dark:border-slate-800"><div className="flex items-center justify-between"><div><p className="font-semibold text-slate-900 dark:text-white">{demoText(gateway.name)}</p><p className="text-xs text-slate-500">{gateway.id}, {demoText(gateway.protocol)}</p></div><StatusPill status={gateway.online ? "Online" : "Offline"} /></div><div className="mt-3 grid grid-cols-3 gap-2 text-xs text-slate-500"><span>{t("instruments.address")}<br /><b className="text-slate-700 dark:text-slate-200">{gateway.address}</b></span><span>{t("instruments.messages")}<br /><b className="text-slate-700 dark:text-slate-200">{gateway.messageCount.toLocaleString()}</b></span><span>{t("instruments.errors")}<br /><b className="text-slate-700 dark:text-slate-200">{gateway.errors}</b></span></div></div>)}</div>
           </section>
         </div>
       ));
@@ -1317,7 +1318,7 @@ export function WorkspaceModule({
                         <StatusPill status={item.status} />
                       </div>
                       <p className="mt-2 text-sm text-slate-700 dark:text-slate-300">{eventDescription(item)}</p>
-                      <p className="mt-1 text-xs text-slate-500">{demoText(item.type)}, {demoText(item.source)}, {formatTimestamp(item.timestamp)} {item.measurementId && `, ${item.measurementId}`}</p>
+                      <p className="mt-1 text-xs text-slate-500">{demoText(item.type)}, {demoText(item.source)}, {formatTimestamp(item.timestamp, language)} {item.measurementId && `, ${item.measurementId}`}</p>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {(["acknowledged", "investigating", "resolved"] as const).filter((status) => can(status === "acknowledged" ? "acknowledge" : status === "investigating" ? "investigate" : "resolve")).map((status) => (
@@ -1337,7 +1338,7 @@ export function WorkspaceModule({
                       {(item.statusHistory ?? [{ status: item.status, timestamp: item.timestamp }]).map((step, index) => (
                         <li className="flex items-center gap-2 text-[11px] text-slate-600 dark:text-slate-300" key={`${step.status}-${step.timestamp}-${index}`}>
                           <span className={`size-2 rounded-full ${step.status === "resolved" ? "bg-emerald-500" : step.status === "open" ? "bg-blue-500" : "bg-[var(--secondary)]"}`} />
-                          <span className="font-semibold">{t(`common.${step.status}` as TranslationKey)}</span><time className="text-slate-400" dateTime={step.timestamp}>{formatTimestamp(step.timestamp)}</time>
+                          <span className="font-semibold">{t(`common.${step.status}` as TranslationKey)}</span><time className="text-slate-400" dateTime={step.timestamp}>{formatTimestamp(step.timestamp, language)}</time>
                         </li>
                       ))}
                     </ol>
@@ -1467,7 +1468,7 @@ export function WorkspaceModule({
                 const expanded = expandedTraceId === item.id;
                 return <article key={item.id} className="rounded-xl border border-slate-200 dark:border-slate-800">
                   <button aria-expanded={expanded} className="flex min-h-14 w-full flex-wrap items-center justify-between gap-2 p-4 text-left" onClick={() => setExpandedTraceId(expanded ? "" : item.id)} type="button">
-                    <span><b className="text-sm text-slate-900 dark:text-white">{item.id}, {item.partNumber}, {item.serialNumber}</b><span className="ml-3 text-xs text-slate-500">{formatTimestamp(item.timestamp)}</span></span><span className="flex items-center gap-3"><span className="font-mono text-xs text-slate-700 dark:text-slate-300">{item.value ?? t("common.invalid")} {demoText(item.unit)}</span><StatusPill status={item.status} /></span>
+                    <span><b className="text-sm text-slate-900 dark:text-white">{item.id}, {item.partNumber}, {item.serialNumber}</b><span className="ml-3 text-xs text-slate-500">{formatTimestamp(item.timestamp, language)}</span></span><span className="flex items-center gap-3"><span className="font-mono text-xs text-slate-700 dark:text-slate-300">{item.value ?? t("common.invalid")} {demoText(item.unit)}</span><StatusPill status={item.status} /></span>
                   </button>
                   {expanded && <div className="border-t border-slate-100 px-4 py-3 dark:border-slate-800"><div className="grid gap-2 text-xs text-slate-600 dark:text-slate-300 sm:grid-cols-2 lg:grid-cols-4"><span>Batch: <b>{item.batchId}</b></span><span>Characteristic: <b>{demoText(item.characteristic)}</b></span><span>Specification: <b>{part ? `${part.lsl}–${part.usl} ${demoText(part.unit)}` : "—"}</b></span><span>Part revision: <b>{part?.revision ?? "—"}</b></span><span>Instrument: <b>{demoText(instrument?.name ?? item.instrumentId)}</b></span><span>Gateway: <b>{instrument?.gatewayId ?? "—"}</b></span><span>Operator: <b>{demoText(item.operator)}</b></span><span>Quality event: <b>{event?.id ?? "None"}</b></span></div></div>}
                 </article>;

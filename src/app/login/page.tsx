@@ -141,7 +141,7 @@ export default function LoginPage() {
           surfaceIsLight={!isDark}
         >
           <div style={{ padding: "2em" }}>
-          <Link aria-label="Back to home" className="login-back-home" href="/">
+          <Link aria-label={t("auth.backHome")} className="login-back-home" href="/">
             <ArrowLeft aria-hidden="true" className="login-back-home-icon" size={18} />
             <span>Back to home</span>
           </Link>
