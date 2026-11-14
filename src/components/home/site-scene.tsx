@@ -2,14 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import dynamic from "next/dynamic";
-import { useLowPower } from "@/hooks/use-low-power";
-
-const ShapeWaves = dynamic(() => import("@/components/reactbits/ShapeWaves/ShapeWaves"), { ssr: false });
+import ShapeWaves from "@/components/reactbits/ShapeWaves/ShapeWaves";
 
 export function SiteScene() {
   const pathname = usePathname();
-  const lowPower = useLowPower();
   const [reducedMotion, setReducedMotion] = useState(false);
   const [sceneColors, setSceneColors] = useState<{
     color: string;
@@ -56,12 +52,12 @@ export function SiteScene() {
         fontWeight={500}
         textSize={0.33}
         shapes="mixed"
-        cellSize={lowPower ? 16 : 10}
+        cellSize={10}
         dotSize={0.76}
         color={sceneColors.color}
         hoverColor={sceneColors.hoverColor}
         backgroundColor={sceneColors.backgroundColor}
-        speed={lowPower ? 0.4 : 1}
+        speed={1}
         scale={1}
         contrast={1}
         brightness={0.5}
@@ -71,10 +67,10 @@ export function SiteScene() {
         interactive
         splashRadius={40}
         splashStrength={0.4}
-        glow={lowPower ? 0.4 : 1.1}
+        glow={1.1}
         intro
         introDuration={1.6}
-        paused={reducedMotion || lowPower}
+        paused={reducedMotion}
       />
     </div>
   );

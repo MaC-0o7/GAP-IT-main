@@ -223,19 +223,19 @@ const LatticeLoader: React.FC<LatticeLoaderProps> = ({
       </span>
       <span className="relative inline-block font-medium" aria-hidden="true">
         <span
-          className="ll-text absolute top-0 left-0 whitespace-nowrap translate-y-1 opacity-0 [transition:opacity_var(--dur-base)_var(--ease-out),transform_var(--dur-base)_var(--ease-out)] data-[active]:static data-[active]:translate-y-0 data-[active]:opacity-100"
+          className="ll-text absolute top-0 left-0 whitespace-nowrap opacity-0 [filter:blur(2px)] [transition:opacity_200ms_ease,filter_200ms_ease] data-[active]:static data-[active]:opacity-100 data-[active]:[filter:blur(0)]"
           data-active={status === 'loading' ? '' : undefined}
         >
           {label}
         </span>
         <span
-          className="ll-text absolute top-0 left-0 whitespace-nowrap translate-y-1 opacity-0 [transition:opacity_var(--dur-base)_var(--ease-out),transform_var(--dur-base)_var(--ease-out)] data-[active]:static data-[active]:translate-y-0 data-[active]:opacity-100"
+          className="ll-text absolute top-0 left-0 whitespace-nowrap opacity-0 [filter:blur(2px)] [transition:opacity_200ms_ease,filter_200ms_ease] data-[active]:static data-[active]:opacity-100 data-[active]:[filter:blur(0)]"
           data-active={status === 'done' ? '' : undefined}
         >
           {doneLabel}
         </span>
         <span
-          className="ll-text absolute top-0 left-0 whitespace-nowrap translate-y-1 opacity-0 [transition:opacity_var(--dur-base)_var(--ease-out),transform_var(--dur-base)_var(--ease-out)] data-[active]:static data-[active]:translate-y-0 data-[active]:opacity-100"
+          className="ll-text absolute top-0 left-0 whitespace-nowrap opacity-0 [filter:blur(2px)] [transition:opacity_200ms_ease,filter_200ms_ease] data-[active]:static data-[active]:opacity-100 data-[active]:[filter:blur(0)]"
           data-active={status === 'error' ? '' : undefined}
         >
           {errorLabel}

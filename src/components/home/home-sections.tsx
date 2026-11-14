@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { HomeText, HomeTextRevealContext } from "@/components/home/home-text";
 import { HomeGridScan } from "@/components/home/home-grid-scan";
@@ -9,12 +8,14 @@ import { useT } from "@/lib/i18n/provider";
 import type { TranslationKey } from "@/lib/i18n/types";
 
 export function HomeSection({
+  background,
   children,
   className = "",
   id,
   labelledBy,
   tint = false,
 }: {
+  background?: ReactNode;
   children: ReactNode;
   className?: string;
   id: string;
@@ -58,6 +59,7 @@ export function HomeSection({
         id={id}
         ref={sectionRef}
       >
+        {background}
         <div className={`home-section-content ${revealed ? "is-revealed" : ""}`}>
           {children}
         </div>
@@ -94,37 +96,48 @@ const featureCards: { title: HomeCopyKey; description: HomeCopyKey }[] = [
   { title: "home.featureAccessTitle", description: "home.featureAccessDescription" },
 ];
 
-export function HomeHero({
-  workspaceHref,
-  children,
-}: {
-  workspaceHref: string;
-  children: ReactNode;
-}) {
+export function HomeHero({ workspaceHref }: { workspaceHref: string }) {
   const { t } = useT();
-  const router = useRouter();
-  const prefetchWorkspace = () => router.prefetch(workspaceHref);
   return (
-    <section aria-labelledby="home-hero-title" className="home-hero-section" id="home-hero">
-      <div className="home-hero-background">
-        <HomeGridScan />
-      </div>
-      {children}
-      <div className="home-hero-content">
-        <h1 className="home-hero-title" id="home-hero-title">GAP-IT</h1>
-        <p className="home-hero-tagline">{t("auth.tagline")}</p>
-        <h2 className="home-hero-heading">{t("home.heroTitle")}</h2>
-        <p className="home-hero-description">{t("home.heroDescription")}</p>
-        <div className="home-hero-actions">
-          <Link className="home-primary-action" href={workspaceHref} onFocus={prefetchWorkspace} onMouseEnter={prefetchWorkspace} onTouchStart={prefetchWorkspace}>
-            <HomeText as="span">{t("home.heroPrimary")}</HomeText>
-          </Link>
-          <a className="home-secondary-action" href="#features">
-            <HomeText as="span">{t("home.heroSecondary")}</HomeText>
-          </a>
+    <HomeSection
+      background={
+        <div aria-hidden="true" className="home-hero-background">
+          <HomeGridScan />
+        </div>
+      }
+      className="home-hero-section"
+      id="home-hero"
+      labelledBy="home-hero-title"
+    >
+      <div className="home-hero-grid">
+        <div className="home-hero-copy">
+          <p className="home-section-eyebrow"><HomeText as="span">{t("home.heroEyebrow")}</HomeText></p>
+          <HomeText as="h1" className="home-hero-title" id="home-hero-title">{t("home.heroTitle")}</HomeText>
+          <HomeText as="p" className="home-hero-description" hover={false}>{t("home.heroDescription")}</HomeText>
+          <div className="home-hero-actions">
+            <Link className="home-primary-action" href={workspaceHref}>
+              <HomeText as="span">{t("home.heroPrimary")}</HomeText>
+            </Link>
+            <a className="home-secondary-action" href="#features">
+              <HomeText as="span">{t("home.heroSecondary")}</HomeText>
+            </a>
+          </div>
+        </div>
+        <div aria-hidden="true" className="home-hero-visual">
+          <div className="home-hero-visual-grid">
+            <span className="home-hero-visual-line home-hero-visual-line-one" />
+            <span className="home-hero-visual-line home-hero-visual-line-two" />
+            <span className="home-hero-visual-line home-hero-visual-line-three" />
+          </div>
+          <div className="home-hero-visual-panel">
+            <span className="home-hero-visual-bar home-hero-visual-bar-one" />
+            <span className="home-hero-visual-bar home-hero-visual-bar-two" />
+            <span className="home-hero-visual-bar home-hero-visual-bar-three" />
+            <span className="home-hero-visual-bar home-hero-visual-bar-four" />
+          </div>
         </div>
       </div>
-    </section>
+    </HomeSection>
   );
 }
 
@@ -265,7 +278,7 @@ const aboutFeatures = [
 export function HomeAbout() {
   const { t } = useT();
   return (
-    <HomeSection className="home-about-section" id="about-overview" labelledBy="home-about-title" tint>
+    <HomeSection className="home-about-section" id="about" labelledBy="home-about-title" tint>
       <div className="home-about-grid">
         <div className="home-about-copy">
           <SectionHeading eyebrow="home.aboutEyebrow" title="aboutExperience.heading" id="home-about-title" />

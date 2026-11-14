@@ -3,13 +3,10 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { IconMail, IconMapPin, IconPhone } from "@tabler/icons-react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler";
 import { BrandLogo } from "@/components/ui/sidebar";
 import { LanguageSelector } from "@/components/ui/language-selector";
 import { HomeText, HomeTextRevealContext } from "@/components/home/home-text";
-import AboutCta from "@/components/home/about-cta";
-import AboutSection from "@/components/home/about-section";
 import {
   HomeAbout,
   HomeCallToAction,
@@ -23,12 +20,11 @@ import {
 } from "@/components/home/home-sections";
 import { useT } from "@/lib/i18n/provider";
 import { readDemoSession, clearDemoSession, type DemoSession } from "@/lib/auth/session";
-import { getSavedTheme, resolveTheme, setSavedTheme } from "@/lib/auth/theme";
+import { getSavedTheme, setSavedTheme } from "@/lib/auth/theme";
 import { siteInfo } from "@/lib/site-info";
 
 export default function HomePage() {
   const { t } = useT();
-  const router = useRouter();
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [session, setSession] = useState<DemoSession | null>(null);
   const [formError, setFormError] = useState("");
@@ -37,45 +33,18 @@ export default function HomePage() {
 
   useEffect(() => {
     const savedTheme = getSavedTheme();
-    setTheme(resolveTheme(savedTheme));
+    setTheme(savedTheme);
     setSavedTheme(savedTheme);
     setSession(readDemoSession());
     setYear(new Date().getFullYear());
     const refreshSession = () => setSession(readDemoSession());
-    const refreshTheme = () => setTheme(resolveTheme(getSavedTheme()));
     window.addEventListener("gap-it-session-change", refreshSession);
     window.addEventListener("storage", refreshSession);
-    window.addEventListener("gap-it-theme-change", refreshTheme);
     return () => {
       window.removeEventListener("gap-it-session-change", refreshSession);
       window.removeEventListener("storage", refreshSession);
-      window.removeEventListener("gap-it-theme-change", refreshTheme);
     };
   }, []);
-
-  useEffect(() => {
-    let timeout = 0;
-    let idleId: number | undefined;
-    const prefetch = () => {
-      window.clearTimeout(timeout);
-      router.prefetch("/login");
-      router.prefetch("/workspace");
-    };
-    const idleWindow: {
-      requestIdleCallback?: (callback: IdleRequestCallback) => number;
-      cancelIdleCallback?: (handle: number) => void;
-    } = window;
-    if (idleWindow.requestIdleCallback) {
-      idleId = idleWindow.requestIdleCallback(prefetch);
-      timeout = window.setTimeout(prefetch, 1200);
-    } else {
-      timeout = window.setTimeout(prefetch, 0);
-    }
-    return () => {
-      window.clearTimeout(timeout);
-      if (idleId !== undefined) idleWindow.cancelIdleCallback?.(idleId);
-    };
-  }, [router]);
 
   const toggleTheme = () => {
     const next = theme === "dark" ? "light" : "dark";
@@ -111,24 +80,23 @@ export default function HomePage() {
     <>
     <div className="relative z-10">
       <main className="home-page overflow-x-clip bg-transparent text-[var(--text)]">
-      <HomeHero workspaceHref={session ? "/workspace" : "/login"}>
-          <header className="home-site-nav absolute inset-x-0 top-0 z-[var(--z-sticky)] mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-2 px-4 py-2 sm:px-6" style={{ paddingTop: "max(.5rem, env(safe-area-inset-top))" }}>
+          <header className="home-site-nav relative z-[var(--z-sticky)] mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-2 px-4 py-2 sm:px-6" style={{ paddingTop: "max(.5rem, env(safe-area-inset-top))" }}>
             <Link aria-label={t("home.homeLink")} className="shrink-0" href="/"><BrandLogo className="h-auto w-[clamp(100px,16vw,150px)]" priority /></Link>
             <div className="flex shrink-0 items-center gap-2">
               <LanguageSelector />
               <AnimatedThemeToggler isDark={theme === "dark"} label={t("shell.switchTheme", { theme: t(theme === "dark" ? "shell.light" : "shell.dark") })} onToggle={toggleTheme} />
               {session ? (
-                <Link className="home-get-started" href="/workspace" onFocus={() => router.prefetch("/workspace")} onMouseEnter={() => router.prefetch("/workspace")} onTouchStart={() => router.prefetch("/workspace")}><HomeText as="span">{t("home.heroPrimary")}</HomeText></Link>
+                <Link className="home-get-started" href="/workspace"><HomeText as="span">{t("home.heroPrimary")}</HomeText></Link>
               ) : (
                 <>
-                  <Link className="home-get-started home-mobile-get-started" href="/login" onFocus={() => router.prefetch("/login")} onMouseEnter={() => router.prefetch("/login")} onTouchStart={() => router.prefetch("/login")}><HomeText as="span">{t("home.heroPrimary")}</HomeText></Link>
-                  <Link className="home-desktop-login inline-flex min-h-11 items-center rounded-xl bg-[var(--primary)] px-4 text-sm font-bold text-[var(--on-primary)]" href="/login" onFocus={() => router.prefetch("/login")} onMouseEnter={() => router.prefetch("/login")} onTouchStart={() => router.prefetch("/login")}><HomeText as="span">{t("auth.login")}</HomeText></Link>
+                  <Link className="home-get-started home-mobile-get-started" href="/login"><HomeText as="span">{t("home.heroPrimary")}</HomeText></Link>
+                  <Link className="home-desktop-login inline-flex min-h-11 items-center rounded-xl bg-[var(--primary)] px-4 text-sm font-bold text-[var(--on-primary)]" href="/login"><HomeText as="span">{t("auth.login")}</HomeText></Link>
                 </>
               )}
             </div>
           </header>
 
-      </HomeHero>
+      <HomeHero workspaceHref={session ? "/workspace" : "/login"} />
       <HomeProblemSolution />
       <HomeFeatures />
       <HomeProcess />
@@ -136,7 +104,6 @@ export default function HomePage() {
       <HomeRoles />
       <HomeCallToAction href={session ? "/workspace" : "/login"} />
       <HomeAbout />
-      <AboutSection />
 
       <HomeSection className="home-transparent-section home-contact-section grid max-w-7xl gap-[var(--section-gap)] px-5 py-[var(--section-gap)] sm:px-8 lg:grid-cols-[.9fr_1.1fr]" id="contact" labelledBy="home-contact-title" tint>
         <div>
@@ -161,7 +128,6 @@ export default function HomePage() {
           </form>
         </div>
       </HomeSection>
-      <AboutCta />
       </main>
 
       <HomeTextRevealContext.Provider value>

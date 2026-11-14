@@ -6,14 +6,12 @@ import {
   Space_Grotesk,
 } from "next/font/google";
 import Script from "next/script";
-import { AnimatedBackgroundLoader } from "@/components/AnimatedBackgroundLoader";
 import { SiteScene } from "@/components/home/site-scene";
 import { LanguageProvider } from "@/lib/i18n/provider";
 import "./globals.css";
 
 const notoTamil = Noto_Sans_Tamil({
   display: "swap",
-  preload: false,
   subsets: ["latin", "tamil"],
   variable: "--font-noto-tamil",
   weight: ["400", "500", "600", "700"],
@@ -21,7 +19,6 @@ const notoTamil = Noto_Sans_Tamil({
 
 const notoDevanagari = Noto_Sans_Devanagari({
   display: "swap",
-  preload: false,
   subsets: ["devanagari", "latin"],
   variable: "--font-noto-devanagari",
   weight: ["400", "500", "600", "700"],
@@ -55,18 +52,9 @@ export const metadata: Metadata = {
 
 const themeInitScript = `
   try {
-    const savedTheme = localStorage.getItem("gap-it-theme");
-    const applyTheme = () => {
-      const theme = savedTheme === "system"
-        ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
-        : savedTheme === "dark" ? "dark" : "light";
-      document.documentElement.classList.toggle("dark", theme === "dark");
-      document.documentElement.style.colorScheme = theme;
-    };
-    applyTheme();
-    if (savedTheme === "system") {
-      matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
-    }
+    const theme = localStorage.getItem("gap-it-theme") === "dark" ? "dark" : "light";
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.style.colorScheme = theme;
   } catch (error) {
     console.warn("Unable to read the saved theme from browser storage.", error);
     document.documentElement.classList.remove("dark");
@@ -86,7 +74,6 @@ export default function RootLayout({
     </head>
     <body>
       <LanguageProvider>
-        <AnimatedBackgroundLoader />
         <SiteScene />
         {children}
       </LanguageProvider>

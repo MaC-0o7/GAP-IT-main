@@ -1,16 +1,11 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
 import { motion, useReducedMotion } from "motion/react";
 import { IconX } from "@tabler/icons-react";
+import ScrambledText from "@/components/reactbits/ScrambledText/ScrambledText";
+import AboutArt from "@/components/home/about-art";
 import { useT } from "@/lib/i18n/provider";
-
-const ScrambledText = dynamic(() => import("@/components/reactbits/ScrambledText/ScrambledText"), { ssr: false });
-const AboutArt = dynamic(() => import("@/components/home/about-art"), {
-  ssr: false,
-  loading: () => <div aria-hidden="true" className="about-art-placeholder" />,
-});
 
 const OPEN_EVENT = "gapit:open-about";
 const CLOSE_EVENT = "gapit:close-about";
@@ -52,8 +47,11 @@ export default function AboutSection() {
     if (!open) return;
     const reduce = reduceMotion || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.history.replaceState(window.history.state, "", `${window.location.pathname}${window.location.search}#about`);
-    sectionRef.current?.scrollIntoView({ behavior: reduce ? "instant" : "smooth", block: "start" });
-    headingRef.current?.focus({ preventScroll: true });
+    const focusTimer = window.setTimeout(() => {
+      sectionRef.current?.scrollIntoView({ behavior: reduce ? "instant" : "smooth", block: "start" });
+      headingRef.current?.focus({ preventScroll: true });
+    }, 250);
+    return () => window.clearTimeout(focusTimer);
   }, [open, reduceMotion]);
 
   const close = () => {
@@ -64,7 +62,7 @@ export default function AboutSection() {
     const reduce = reduceMotion || window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     document.getElementById("home-hero")?.scrollIntoView({ behavior: reduce ? "instant" : "smooth", block: "start" });
     window.dispatchEvent(new Event(CLOSE_EVENT));
-    requestAnimationFrame(() => window.dispatchEvent(new Event(FOCUS_EVENT)));
+    window.setTimeout(() => window.dispatchEvent(new Event(FOCUS_EVENT)), reduce ? 0 : 350);
   };
 
   return (
@@ -74,13 +72,12 @@ export default function AboutSection() {
       id="about"
       inert={!open}
       ref={sectionRef}
-      animate={{ opacity: open ? 1 : 0, gridTemplateRows: open ? "1fr" : "0fr" }}
+      animate={{ height: open ? "auto" : 0, opacity: open ? 1 : 0 }}
       initial={false}
-      transition={{ duration: reduceMotion ? 0 : 0.22, ease: "easeOut" }}
+      transition={{ duration: reduceMotion ? 0 : 0.55, ease: "easeInOut" }}
     >
-      <div className="about-experience-clip">
-        {open && (
-          <div className="about-experience-inner">
+      {open && (
+        <div className="about-experience-inner">
           <button
             aria-label={t("aboutExperience.close")}
             className="about-close-button"
@@ -120,9 +117,8 @@ export default function AboutSection() {
             </motion.div>
             <AboutArt />
           </div>
-          </div>
-        )}
-      </div>
+        </div>
+      )}
     </motion.section>
   );
 }

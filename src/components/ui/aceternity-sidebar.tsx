@@ -108,7 +108,7 @@ export const DesktopSidebar = ({
       <ExpandedContext.Provider value={open}>
         <motion.aside
           className={cn(
-            "glass-header absolute inset-y-0 left-0 z-[var(--z-drawer)] flex flex-col overflow-hidden border-r border-[var(--border)] bg-[var(--surface)] px-3 py-4 text-[var(--text)] shadow-[var(--shadow-soft)]",
+            "glass-header absolute inset-y-0 left-0 z-[var(--z-drawer)] flex flex-col overflow-hidden border-r border-[var(--border)] bg-[var(--surface)]/90 px-3 py-4 text-[var(--text)] shadow-[var(--shadow-soft)] backdrop-blur-2xl [-webkit-backdrop-filter:blur(20px)]",
             SURFACE,
             open && "shadow-xl",
             className,
@@ -180,7 +180,7 @@ export const MobileSidebar = ({
             exit={{ x: "-100%", opacity: 0 }}
             transition={{ duration: reduce ? 0 : 0.3, ease: "easeInOut" }}
             className={cn(
-              "fixed inset-0 z-[var(--z-drawer)] flex flex-col justify-between overflow-y-auto border-r border-[var(--border)] bg-[var(--surface)] p-6 pt-[max(1.5rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))] text-[var(--text)] shadow-2xl",
+              "fixed inset-0 z-[var(--z-drawer)] flex flex-col justify-between overflow-y-auto border-r border-[var(--border)] p-6 pt-[max(1.5rem,env(safe-area-inset-top))] pb-[max(1.5rem,env(safe-area-inset-bottom))] text-[var(--text)] shadow-2xl backdrop-blur-2xl [-webkit-backdrop-filter:blur(20px)]",
               DRAWER_SURFACE,
               className,
             )}

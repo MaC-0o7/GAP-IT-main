@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createPortal } from "react-dom";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { IconChevronDown } from "@tabler/icons-react";
 import { useT } from "@/lib/i18n/provider";
@@ -17,11 +16,8 @@ export function openAboutExperience() {
 export default function AboutCta() {
   const { t } = useT();
   const reduceMotion = useReducedMotion();
-  const [portalReady, setPortalReady] = useState(false);
   const [revealed, setRevealed] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
-
-  useEffect(() => setPortalReady(true), []);
 
   useEffect(() => {
     const onOpen = () => {
@@ -45,7 +41,7 @@ export default function AboutCta() {
     };
   }, []);
 
-  const controls = (
+  return (
     <div
       aria-controls="about-cta-actions"
       aria-expanded={revealed}
@@ -93,6 +89,4 @@ export default function AboutCta() {
       </div>
     </div>
   );
-
-  return portalReady ? createPortal(controls, document.body) : null;
 }

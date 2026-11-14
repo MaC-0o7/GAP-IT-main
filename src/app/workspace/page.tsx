@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useDeferredValue, useEffect, useMemo, useRef, useState, type ComponentType, type Dispatch, type SetStateAction } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type ComponentType, type Dispatch, type SetStateAction } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, MotionConfig, motion } from "motion/react";
 import {
@@ -36,7 +36,7 @@ import {
   WORKSPACE_SECTION_PERMISSIONS,
   type PermissionModule,
 } from "@/lib/auth/permissions";
-import { getSavedTheme, resolveTheme, setSavedTheme } from "@/lib/auth/theme";
+import { getSavedTheme } from "@/lib/auth/theme";
 import { MrSpotIt } from "@/components/mascots/mascots";
 import { LoadingScreen } from "@/components/auth/loading-screen";
 import {
@@ -270,14 +270,10 @@ export default function Home() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [moduleSearch, setModuleSearch] = useState("");
-  const deferredModuleSearch = useDeferredValue(moduleSearch);
   const [searchOpen, setSearchOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchCloseTimerRef = useRef<number | null>(null);
   const [data, setData] = useState<DemoData>(() => createDemoData(0));
-  const dataRef = useRef(data);
-  dataRef.current = data;
-  const persistenceTimerRef = useRef<number | null>(null);
   const [isHydrated, setIsHydrated] = useState(false);
   const [canPersistData, setCanPersistData] = useState(false);
   const [storageWarning, setStorageWarning] = useState(false);
@@ -290,14 +286,6 @@ export default function Home() {
   const userButtonRef = useRef<HTMLButtonElement>(null);
   const activeUserTriggerRef = useRef<HTMLButtonElement>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
-  const persistData = useCallback(() => {
-    try {
-      window.localStorage.setItem("gap-it-demo-data", JSON.stringify(dataRef.current));
-    } catch {
-      setCanPersistData(false);
-      setStorageWarning(true);
-    }
-  }, []);
   const currentSection =
     sections.find((section) => section.id === activeSection) ?? sections[0];
 
@@ -319,23 +307,23 @@ export default function Home() {
         const parsed: unknown = JSON.parse(saved);
         const migrated = migrateDemoData(parsed);
         if (migrated) {
-          const savedTheme = resolveTheme(getSavedTheme());
+          const savedTheme = getSavedTheme();
           setData({ ...migrated, settings: { ...migrated.settings, theme: savedTheme } });
           setCanPersistData(true);
         } else {
           const seeded = createDemoData();
-          setData({ ...seeded, settings: { ...seeded.settings, theme: resolveTheme(getSavedTheme()) } });
+          setData({ ...seeded, settings: { ...seeded.settings, theme: getSavedTheme() } });
           setCanPersistData(true);
           setStorageWarning(true);
         }
       } else {
         const seeded = createDemoData();
-        setData({ ...seeded, settings: { ...seeded.settings, theme: resolveTheme(getSavedTheme()) } });
+        setData({ ...seeded, settings: { ...seeded.settings, theme: getSavedTheme() } });
         setCanPersistData(true);
       }
     } catch {
       const seeded = createDemoData();
-      setData({ ...seeded, settings: { ...seeded.settings, theme: resolveTheme(getSavedTheme()) } });
+      setData({ ...seeded, settings: { ...seeded.settings, theme: getSavedTheme() } });
       setCanPersistData(true);
       setStorageWarning(true);
     } finally {
@@ -345,33 +333,18 @@ export default function Home() {
 
   useEffect(() => {
     if (!isHydrated || !canPersistData) return;
-    persistenceTimerRef.current = window.setTimeout(persistData, 500);
-    const flush = () => {
-      if (persistenceTimerRef.current !== null) {
-        window.clearTimeout(persistenceTimerRef.current);
-        persistenceTimerRef.current = null;
-      }
-      persistData();
-    };
-    const flushWhenHidden = () => {
-      if (document.visibilityState === "hidden") flush();
-    };
-    window.addEventListener("pagehide", flush);
-    document.addEventListener("visibilitychange", flushWhenHidden);
-    return () => {
-      if (persistenceTimerRef.current !== null) {
-        window.clearTimeout(persistenceTimerRef.current);
-        persistenceTimerRef.current = null;
-      }
-      window.removeEventListener("pagehide", flush);
-      document.removeEventListener("visibilitychange", flushWhenHidden);
-    };
-  }, [canPersistData, data, isHydrated, persistData]);
+    try {
+      window.localStorage.setItem("gap-it-demo-data", JSON.stringify(data));
+    } catch {
+      setCanPersistData(false);
+      setStorageWarning(true);
+    }
+  }, [canPersistData, data, isHydrated]);
 
-  const updateData = useCallback<Dispatch<SetStateAction<DemoData>>>((update) => {
+  const updateData: Dispatch<SetStateAction<DemoData>> = (update) => {
     setCanPersistData(true);
     setData(update);
-  }, []);
+  };
 
   useEffect(() => {
     if (!isHydrated) return;
@@ -508,7 +481,7 @@ export default function Home() {
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
 
-  const navigateToSection = useCallback((sectionId: SectionId) => {
+  const navigateToSection = (sectionId: SectionId) => {
     if (!session || !roleCan(session.role, sectionPermissions[sectionId], "view") || sectionId === activeSection) return;
 
     window.history.pushState(
@@ -517,11 +490,22 @@ export default function Home() {
       `/workspace?section=${encodeURIComponent(sectionId)}`,
     );
     setActiveSection(sectionId);
-  }, [activeSection, session]);
+  };
 
   const toggleTheme = () => {
     const theme = data.settings.theme === "light" ? "dark" : "light";
-    setSavedTheme(theme);
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    document.documentElement.style.colorScheme = theme;
+    window.dispatchEvent(new Event("gap-it-theme-change"));
+    try {
+      window.localStorage.setItem("gap-it-theme", theme);
+      window.localStorage.setItem("gap-it-demo-data", JSON.stringify({
+        ...data,
+        settings: { ...data.settings, theme },
+      }));
+    } catch {
+      setStorageWarning(true);
+    }
     setData((current) => ({
       ...current,
       settings: { ...current.settings, theme },
@@ -560,7 +544,7 @@ export default function Home() {
     roleCan(session?.role ?? null, sectionPermissions[section.id], "view") &&
     `${t(section.labelKey)} ${t(section.descriptionKey)}`
       .toLowerCase()
-      .includes(deferredModuleSearch.trim().toLowerCase()),
+      .includes(moduleSearch.trim().toLowerCase()),
   );
 
   if (!authReady || !session || !isHydrated) return <LoadingScreen />;
@@ -598,7 +582,7 @@ export default function Home() {
       </Sidebar>
 
       <div className="flex h-full min-h-0 min-w-0 flex-1 flex-col">
-        <header className="glass-header sticky top-0 z-[var(--z-sticky)] hidden h-[68px] shrink-0 items-center justify-between gap-6 border-b border-[var(--border)] bg-[var(--surface)] px-5 md:flex md:px-8">
+        <header className="glass-header sticky top-0 z-[var(--z-sticky)] hidden h-[68px] shrink-0 items-center justify-between gap-6 border-b border-[var(--border)] bg-[var(--surface)]/90 px-5 backdrop-blur-2xl md:flex md:px-8">
           <div className="flex min-w-0 items-center gap-2 text-xs text-slate-500 dark:text-blue-100/60">
             <IconDatabase aria-hidden="true" className="size-4 shrink-0 text-blue-600 dark:text-sky-400" />
             <span className="whitespace-nowrap">{t("shell.qualityOperations")}</span>
@@ -635,7 +619,7 @@ export default function Home() {
                 aria-label={t("shell.searchModules")}
                 aria-expanded={searchOpen}
                 aria-controls="workspace-search"
-                className="grid size-10 place-items-center rounded-xl text-slate-500 transition-[color,background-color,border-color,opacity,transform] duration-[var(--dur-fast)] hover:bg-blue-50 hover:text-blue-700 dark:text-blue-100/70 dark:hover:bg-blue-100/[0.08] dark:hover:text-sky-300"
+                className="grid size-10 place-items-center rounded-xl text-slate-500 transition hover:bg-blue-50 hover:text-blue-700 dark:text-blue-100/70 dark:hover:bg-blue-100/[0.08] dark:hover:text-sky-300"
                 onClick={() => setSearchOpen((open) => !open)}
                 title={t("shell.searchShortcut")}
                 type="button"
@@ -674,7 +658,7 @@ export default function Home() {
                     >
                       {searchResults.length ? searchResults.map((section) => (
                         <button
-                          className="flex min-h-11 w-full items-center gap-3 rounded-lg px-3 text-left text-sm text-slate-700 transition-[color,background-color,border-color,opacity,transform] duration-[var(--dur-fast)] hover:bg-blue-50 hover:text-blue-800 dark:text-blue-50/80 dark:hover:bg-blue-300/10 dark:hover:text-sky-200"
+                          className="flex min-h-11 w-full items-center gap-3 rounded-lg px-3 text-left text-sm text-slate-700 transition hover:bg-blue-50 hover:text-blue-800 dark:text-blue-50/80 dark:hover:bg-blue-300/10 dark:hover:text-sky-200"
                           key={section.id}
                           onMouseDown={(event) => event.preventDefault()}
                           onClick={() => {
@@ -703,7 +687,7 @@ export default function Home() {
             </span>
             {roleCan(session.role, "qualityEvents", "view") && <button
               aria-label={t("shell.openEvents", { n: data.events.filter((event) => event.status !== "resolved").length })}
-              className="relative grid size-10 shrink-0 place-items-center rounded-xl text-slate-500 transition-[color,background-color,border-color,opacity,transform] duration-[var(--dur-fast)] hover:bg-blue-50 hover:text-blue-800 dark:text-blue-100/70 dark:hover:bg-blue-100/[0.08] dark:hover:text-blue-200"
+              className="relative grid size-10 shrink-0 place-items-center rounded-xl text-slate-500 transition hover:bg-blue-50 hover:text-blue-800 dark:text-blue-100/70 dark:hover:bg-blue-100/[0.08] dark:hover:text-blue-200"
               onClick={() => navigateToSection("alerts-quality-events")}
               type="button"
             >
@@ -763,7 +747,7 @@ export default function Home() {
         </main>
 
         <section className="workspace-mobile-frame app-main flex h-dvh min-h-0 flex-1 flex-col overflow-x-hidden md:hidden">
-          <header className="workspace-mobile-header glass-header flex h-14 shrink-0 items-center gap-2 border-b border-[var(--border)] bg-[var(--surface)] ps-[max(0.75rem,env(safe-area-inset-left))] pe-[max(0.75rem,env(safe-area-inset-right))] pt-[env(safe-area-inset-top)]">
+          <header className="workspace-mobile-header glass-header flex h-14 shrink-0 items-center gap-2 border-b border-[var(--border)] bg-[var(--surface)]/90 ps-[max(0.75rem,env(safe-area-inset-left))] pe-[max(0.75rem,env(safe-area-inset-right))] pt-[env(safe-area-inset-top)] backdrop-blur-2xl">
             <button
               aria-expanded={mobileOpen}
               aria-label={t("shell.openMenu")}
@@ -776,7 +760,7 @@ export default function Home() {
             {activeSection !== "overview" ? (
               <button
                 aria-label={t("shell.backToOverview")}
-                className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl text-slate-700 transition-[color,background-color,border-color,opacity,transform] duration-[var(--dur-fast)] active:bg-slate-100"
+                className="inline-flex size-10 shrink-0 items-center justify-center rounded-xl text-slate-700 transition active:bg-slate-100"
                 onClick={() => window.history.back()}
                 type="button"
               >
