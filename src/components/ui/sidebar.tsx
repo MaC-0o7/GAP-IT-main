@@ -184,7 +184,7 @@ function DesktopSidebar({
     <motion.aside
       aria-label={t("shell.mainNavigation")}
       className={cn(
-        "glass-header hidden h-dvh shrink-0 flex-col overflow-hidden border-r border-[var(--border)] bg-[var(--surface)]/90 px-3 py-5 shadow-[var(--shadow-soft)] backdrop-blur-2xl md:flex",
+        "glass-header hidden h-dvh shrink-0 flex-col overflow-hidden border-r border-[var(--border)] bg-[var(--surface)] px-3 py-5 shadow-[var(--shadow-soft)] backdrop-blur-[12px] md:flex",
         className,
       )}
       animate={{ width: animate ? (open ? 272 : 76) : 272 }}
@@ -194,7 +194,7 @@ function DesktopSidebar({
       onMouseLeave={() => {
         if (hoverToExpand) setOpen(false);
       }}
-      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
       {...props}
     >
       {children}
@@ -227,14 +227,14 @@ function MobileSidebar({
   }, [panelOpen, setMobileOpen]);
 
   return (
-    <div className="glass-header flex h-14 items-center justify-between border-b border-[var(--border)] bg-[var(--surface)]/90 px-4 backdrop-blur-xl md:hidden">
+    <div className="glass-header flex h-14 items-center justify-between border-b border-[var(--border)] bg-[var(--surface)] px-4 md:hidden">
       <a aria-label="GAP-IT Overview" className="flex items-center" href="/workspace">
         <BrandLogo className="h-auto w-[120px]" />
       </a>
       <button
         aria-expanded={panelOpen}
         aria-label={panelOpen ? actualCloseLabel : actualMenuLabel}
-        className="inline-flex size-10 items-center justify-center rounded-lg text-slate-600 transition hover:bg-blue-50 hover:text-blue-800"
+        className="inline-flex size-10 items-center justify-center rounded-lg text-slate-600 transition-[color,background-color,border-color,opacity,transform] duration-[var(--dur-fast)] hover:bg-blue-50 hover:text-blue-800"
         onClick={() => setMobileOpen((current) => !current)}
         type="button"
       >
@@ -244,10 +244,10 @@ function MobileSidebar({
         {panelOpen && (
           <motion.div
             animate={{ opacity: 1, x: 0 }}
-            className="glass-header fixed inset-0 z-[var(--z-drawer)] flex h-dvh w-full flex-col bg-[var(--surface)] p-5 backdrop-blur-2xl"
+            className="glass-header fixed inset-0 z-[var(--z-drawer)] flex h-dvh w-full flex-col bg-[var(--surface)] p-5"
             exit={{ opacity: 0, x: "-100%" }}
             initial={{ opacity: 0, x: "-100%" }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
           >
             <div className="mb-7 flex items-center justify-between">
               <a aria-label="GAP-IT Overview" className="flex items-center" href="/workspace">
@@ -255,7 +255,7 @@ function MobileSidebar({
               </a>
               <button
                 aria-label={actualCloseLabel}
-                className="inline-flex size-10 items-center justify-center rounded-lg text-slate-600 transition hover:bg-blue-50 hover:text-blue-800"
+                className="inline-flex size-10 items-center justify-center rounded-lg text-slate-600 transition-[color,background-color,border-color,opacity,transform] duration-[var(--dur-fast)] hover:bg-blue-50 hover:text-blue-800"
                 onClick={() => setMobileOpen(false)}
                 type="button"
               >

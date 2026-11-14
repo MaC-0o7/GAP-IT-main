@@ -1,13 +1,16 @@
 "use client";
 
-import { useEffect, useMemo, useState, type Dispatch, type FormEvent, type SetStateAction } from "react";
+import { memo, useCallback, useDeferredValue, useEffect, useMemo, useState, type Dispatch, type FormEvent, type SetStateAction } from "react";
 import { motion } from "motion/react";
+import dynamic from "next/dynamic";
 import {
   IconActivity,
   IconAlertTriangle,
   IconBell,
   IconChartBar,
   IconCheck,
+  IconChevronLeft,
+  IconChevronRight,
   IconCircleCheck,
   IconCpu,
   IconDatabase,
@@ -19,7 +22,6 @@ import {
   IconWifi,
   IconX,
 } from "@tabler/icons-react";
-import { Cell, Pie, PieChart } from "recharts";
 import {
   calculateStatistics,
   createDemoData,
@@ -46,6 +48,11 @@ import type { TranslationKey } from "@/lib/i18n/types";
 
 type ModuleId = WorkspaceSectionId;
 
+const WorkspacePieChart = dynamic(
+  () => import("@/components/workspace/workspace-pie-chart").then((module) => module.WorkspacePieChart),
+  { ssr: false, loading: () => null },
+);
+
 const pageCopyKeys: Record<ModuleId, [TranslationKey, TranslationKey]> = {
   overview: ["page.overviewTitle", "page.overviewDescription"],
   "live-measurements": ["page.liveTitle", "page.liveDescription"],
@@ -71,7 +78,7 @@ type Props = {
 };
 
 const inputClass =
-  "emerald-input min-h-10 w-full rounded-lg border px-3 text-sm outline-none transition placeholder:text-slate-400 focus:border-[var(--primary)] focus:ring-2 focus:ring-teal-100";
+  "emerald-input min-h-10 w-full rounded-lg border px-3 text-sm outline-none transition-[color,background-color,border-color,opacity,transform] duration-[var(--dur-fast)] placeholder:text-slate-400 focus:border-[var(--primary)] focus:ring-2 focus:ring-teal-100";
 const cardClass =
   "emerald-card rounded-2xl border p-4 md:p-5";
 
@@ -105,7 +112,7 @@ const statusLabelKeys: Record<string, TranslationKey> = {
   "No data": "common.noData",
 };
 
-function StatusPill({ status, className = "" }: { status: string; className?: string }) {
+const StatusPill = memo(function StatusPill({ status, className = "" }: { status: string; className?: string }) {
   const { t } = useT();
   const color =
     status === "PASS" || status === "Online" || status === "resolved" || status === "active"
@@ -120,7 +127,7 @@ function StatusPill({ status, className = "" }: { status: string; className?: st
       {statusLabelKeys[status] ? t(statusLabelKeys[status]) : status}
     </span>
   );
-}
+});
 
 function OverviewCardHeader({
   eyebrow,
@@ -168,7 +175,7 @@ function PageIntro({ title, description }: { title: string; description: string 
   );
 }
 
-function Metric({
+const Metric = memo(function Metric({
   label,
   value,
   detail,
@@ -200,7 +207,7 @@ function Metric({
       </div>
     </motion.div>
   );
-}
+});
 
 function EmptyState({ message }: { message: TranslationKey }) {
   const { t } = useT();
@@ -232,12 +239,19 @@ function translateDemoText(value: string, translate: (key: TranslationKey) => st
   return key ? translate(key) : value;
 }
 
-function MeasurementRows({ rows, parts }: { rows: Measurement[]; parts: DemoData["parts"] }) {
+const MeasurementRows = memo(function MeasurementRows({ rows, parts }: { rows: Measurement[]; parts: DemoData["parts"] }) {
   const { t } = useT();
+  const [page, setPage] = useState(0);
+  const pageCount = Math.max(1, Math.ceil(rows.length / 50));
+  useEffect(() => {
+    setPage((current) => Math.min(current, pageCount - 1));
+  }, [pageCount]);
   if (!rows.length) return <EmptyState message="common.noMeasurements" />;
+  const pageRows = rows.slice(page * 50, (page + 1) * 50);
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full min-w-[840px] text-left text-xs">
+    <div>
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[840px] text-left text-xs">
         <thead className="border-b border-slate-200 text-[10px] uppercase tracking-wide text-slate-500 dark:border-slate-800 dark:text-slate-400">
           <tr>
             <th className="px-3 py-3 font-semibold">Timestamp</th>
@@ -251,7 +265,7 @@ function MeasurementRows({ rows, parts }: { rows: Measurement[]; parts: DemoData
           </tr>
         </thead>
         <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
-          {rows.map((row) => {
+          {pageRows.map((row) => {
             const part = parts.find((candidate) => candidate.number === row.partNumber);
             return (
               <tr key={row.id} className="text-slate-700 dark:text-slate-200">
@@ -276,10 +290,33 @@ function MeasurementRows({ rows, parts }: { rows: Measurement[]; parts: DemoData
             );
           })}
         </tbody>
-      </table>
+        </table>
+      </div>
+      {pageCount > 1 && (
+        <nav aria-label="Measurement pages" className="mt-3 flex justify-end gap-2">
+          <button
+            aria-label="Previous measurements page"
+            className="grid size-9 place-items-center rounded-lg border border-[var(--border)] disabled:opacity-40"
+            disabled={page === 0}
+            onClick={() => setPage((current) => Math.max(0, current - 1))}
+            type="button"
+          >
+            <IconChevronLeft aria-hidden="true" className="size-4" />
+          </button>
+          <button
+            aria-label="Next measurements page"
+            className="grid size-9 place-items-center rounded-lg border border-[var(--border)] disabled:opacity-40"
+            disabled={page >= pageCount - 1}
+            onClick={() => setPage((current) => Math.min(pageCount - 1, current + 1))}
+            type="button"
+          >
+            <IconChevronRight aria-hidden="true" className="size-4" />
+          </button>
+        </nav>
+      )}
     </div>
   );
-}
+});
 
 export function WorkspaceModule({
   activeSection,
@@ -315,7 +352,7 @@ export function WorkspaceModule({
     }
     setEnd(next);
   };
-  const demoText = (value: string) => translateDemoText(value, t);
+  const demoText = useCallback((value: string) => translateDemoText(value, t), [t]);
   const eventDescription = (event: QualityEvent) => {
     if (event.description === "measurementOutsideSpecification") {
       const measurement = data.measurements.find((item) => item.id === event.descriptionMeasurementId);
@@ -385,6 +422,7 @@ export function WorkspaceModule({
   const [reportPart, setReportPart] = useState("All");
   const [instrumentDraft, setInstrumentDraft] = useState({ name: "", model: "" });
   const [userQuery, setUserQuery] = useState("");
+  const deferredUserQuery = useDeferredValue(userQuery);
   const [userDraft, setUserDraft] = useState<{
     id: string | null;
     name: string;
@@ -393,6 +431,9 @@ export function WorkspaceModule({
     active: boolean;
   }>({ id: null, name: "", email: "", role: "administrator", active: true });
   const [userFormError, setUserFormError] = useState("");
+  const deferredQuery = useDeferredValue(query);
+  const deferredTraceQuery = useDeferredValue(traceQuery);
+  const deferredInstrumentSearch = useDeferredValue(instrumentSearch);
 
   useEffect(() => {
     const hasDraft =
@@ -411,7 +452,7 @@ export function WorkspaceModule({
     [data.parts],
   );
   const filteredMeasurements = useMemo(() => {
-    const normalized = query.trim().toLowerCase();
+    const normalized = deferredQuery.trim().toLowerCase();
     return data.measurements
       .filter((item) => {
         const searchText = [
@@ -435,7 +476,7 @@ export function WorkspaceModule({
         );
       })
       .sort((left, right) => right.timestamp.localeCompare(left.timestamp));
-  }, [data.measurements, endDate, instrumentFilter, partFilter, query, startDate, statusFilter]);
+  }, [data.measurements, deferredQuery, endDate, instrumentFilter, partFilter, startDate, statusFilter]);
   const reportMeasurements = useMemo(
     () =>
       data.measurements.filter(
@@ -446,26 +487,33 @@ export function WorkspaceModule({
       ),
     [data.measurements, reportEnd, reportPart, reportStart],
   );
-  const reportPass = reportMeasurements.filter((item) => item.status === "PASS").length;
-  const reportFail = reportMeasurements.filter((item) => item.status === "FAIL").length;
+  const { reportPass, reportFail } = useMemo(() => ({
+    reportPass: reportMeasurements.filter((item) => item.status === "PASS").length,
+    reportFail: reportMeasurements.filter((item) => item.status === "FAIL").length,
+  }), [reportMeasurements]);
   const reportRate = reportPass + reportFail
     ? Math.round((reportPass / (reportPass + reportFail)) * 100)
     : 0;
 
-  const passCount = data.measurements.filter((item) => item.status === "PASS").length;
-  const failCount = data.measurements.filter((item) => item.status === "FAIL").length;
-  const invalidCount = data.measurements.filter((item) => item.status === "INVALID").length;
+  const { passCount, failCount, invalidCount } = useMemo(() => ({
+    passCount: data.measurements.filter((item) => item.status === "PASS").length,
+    failCount: data.measurements.filter((item) => item.status === "FAIL").length,
+    invalidCount: data.measurements.filter((item) => item.status === "INVALID").length,
+  }), [data.measurements]);
   const validCount = passCount + failCount;
   const passRate = validCount ? Math.round((passCount / validCount) * 100) : 0;
-  const openEvents = data.events.filter((event) => event.status !== "resolved").length;
-  const matchingInstruments = data.instruments.filter((instrument) => {
+  const openEvents = useMemo(
+    () => data.events.filter((event) => event.status !== "resolved").length,
+    [data.events],
+  );
+  const matchingInstruments = useMemo(() => data.instruments.filter((instrument) => {
     const searchText = `${demoText(instrument.name)} ${instrument.id} ${demoText(instrument.model)} ${demoText(instrument.line)} ${instrument.gatewayId}`.toLowerCase();
     return (
-      (!instrumentSearch.trim() || searchText.includes(instrumentSearch.trim().toLowerCase())) &&
+      (!deferredInstrumentSearch.trim() || searchText.includes(deferredInstrumentSearch.trim().toLowerCase())) &&
       (instrumentStatusFilter === "All" ||
         (instrumentStatusFilter === "Online" ? instrument.online : !instrument.online))
     );
-  });
+  }), [data.instruments, deferredInstrumentSearch, demoText, instrumentStatusFilter]);
 
   useEffect(() => {
     setHasMounted(true);
@@ -473,7 +521,7 @@ export function WorkspaceModule({
 
   useEffect(() => {
     if (!activeForStreaming || !streaming || activeSection !== "live-measurements") return;
-    const timer = window.setInterval(() => {
+    const tick = () => {
       setData((current) => {
         const availableParts = current.parts.filter((part) => part.active);
         const part = availableParts[current.measurements.length % Math.max(availableParts.length, 1)];
@@ -530,8 +578,23 @@ export function WorkspaceModule({
           events: [...newEvent, ...current.events],
         };
       });
-    }, data.settings.demoIntervalSeconds * 1000);
-    return () => window.clearInterval(timer);
+    };
+    let timer = 0;
+    const start = () => {
+      if (timer || document.hidden) return;
+      timer = window.setInterval(tick, data.settings.demoIntervalSeconds * 1000);
+    };
+    const stop = () => {
+      window.clearInterval(timer);
+      timer = 0;
+    };
+    const onVisibilityChange = () => (document.hidden ? stop() : start());
+    start();
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => {
+      stop();
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+    };
   }, [activeForStreaming, activeSection, data.settings.demoIntervalSeconds, setData, streaming]);
 
   useEffect(() => {
@@ -719,18 +782,18 @@ export function WorkspaceModule({
     setNotice("Part created in the local demo workspace.");
   };
 
-  const matchingTrace = data.measurements
+  const matchingTrace = useMemo(() => data.measurements
     .filter((item) =>
-      (!traceQuery.trim() ||
+      (!deferredTraceQuery.trim() ||
         [item.id, item.partNumber, item.serialNumber, item.batchId]
           .join(" ")
           .toLowerCase()
-          .includes(traceQuery.trim().toLowerCase())) &&
+          .includes(deferredTraceQuery.trim().toLowerCase())) &&
       (tracePart === "All" || item.partNumber === tracePart) &&
       (!traceStart || item.timestamp.slice(0, 10) >= traceStart) &&
       (!traceEnd || item.timestamp.slice(0, 10) <= traceEnd),
     )
-    .sort((left, right) => right.timestamp.localeCompare(left.timestamp));
+    .sort((left, right) => right.timestamp.localeCompare(left.timestamp)), [data.measurements, deferredTraceQuery, traceEnd, tracePart, traceStart]);
   const traceRecords = traceSearched ? matchingTrace : [];
 
   const shell = (title: string, description: string, content: React.ReactNode) => (
@@ -879,7 +942,7 @@ export function WorkspaceModule({
               </div>
               <div className="mt-5 flex flex-wrap gap-2 border-t border-slate-100 pt-4 dark:border-slate-800">
                 <button className="rounded-lg bg-blue-700 px-3 py-2 text-xs font-semibold text-white shadow-sm hover:bg-blue-800" onClick={() => onNavigate("live-measurements")} type="button">Open live monitor</button>
-                <button className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-blue-200 hover:bg-blue-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800" onClick={() => onNavigate("spc-analytics")} type="button">View SPC analysis</button>
+                <button className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-xs font-semibold text-slate-700 transition-[color,background-color,border-color,opacity,transform] duration-[var(--dur-fast)] hover:border-blue-200 hover:bg-blue-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800" onClick={() => onNavigate("spc-analytics")} type="button">View SPC analysis</button>
               </div>
             </section>
             <section className={cardClass}>
@@ -895,7 +958,7 @@ export function WorkspaceModule({
                   <StatusPill status={item.status} />
                 </div>
               )) : <EmptyState message="common.noQualityEvents" />}
-              <button className="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-left text-xs font-semibold text-blue-700 transition hover:border-blue-200 hover:bg-blue-50 dark:border-slate-700 dark:text-blue-400 dark:hover:bg-slate-800" onClick={() => onNavigate("alerts-quality-events")} type="button">Go to event centre</button>
+              <button className="mt-2 w-full rounded-lg border border-slate-200 px-3 py-2.5 text-left text-xs font-semibold text-blue-700 transition-[color,background-color,border-color,opacity,transform] duration-[var(--dur-fast)] hover:border-blue-200 hover:bg-blue-50 dark:border-slate-700 dark:text-blue-400 dark:hover:bg-slate-800" onClick={() => onNavigate("alerts-quality-events")} type="button">Go to event centre</button>
             </section>
           </div>
           <div className="grid grid-cols-1 items-stretch gap-4 md:grid-cols-2 md:gap-5">
@@ -912,28 +975,7 @@ export function WorkspaceModule({
                   className="relative size-40 shrink-0"
                   role="img"
                 >
-                  <PieChart responsive style={{ width: "100%", height: "100%", aspectRatio: 1 }}>
-                    <Pie
-                      data={inspectionResults}
-                      dataKey="value"
-                      innerRadius="80%"
-                      outerRadius="100%"
-                      cornerRadius={3}
-                      minAngle={1}
-                      paddingAngle={2}
-                      isAnimationActive
-                    >
-                      {inspectionResults.map((result) => (
-                        <Cell
-                          fill={result.fill}
-                          key={result.name}
-                          stroke="var(--card)"
-                          strokeLinecap="round"
-                          strokeWidth={1}
-                        />
-                      ))}
-                    </Pie>
-                  </PieChart>
+                  <WorkspacePieChart data={inspectionResults} />
                   <div className="pointer-events-none absolute inset-[24%] z-10 grid place-items-center text-center">
                     <div><p className="text-xl font-bold tabular-nums text-[var(--text)]">{passRate}%</p><p className="text-[10px] font-semibold uppercase text-[var(--muted)]">Pass rate</p></div>
                   </div>
@@ -950,7 +992,7 @@ export function WorkspaceModule({
               <div className="mt-3 rounded-lg bg-slate-50 px-3 py-2 dark:bg-slate-800">
                 <div className="mb-2 flex min-h-5 items-center justify-between gap-3 text-xs text-slate-600 dark:text-slate-300"><span>Accepted to target</span><span className="font-semibold tabular-nums">{passRate}%</span></div>
                 <div aria-label={`Quality pass rate ${passRate}%`} className="h-1.5 overflow-hidden rounded-full bg-slate-100 dark:bg-slate-800" role="progressbar" aria-valuenow={passRate} aria-valuemin={0} aria-valuemax={100}>
-                  <div className="h-full rounded-full bg-emerald-500 transition-[width]" style={{ width: `${passRate}%` }} />
+                  <div className="h-full w-full origin-left rounded-full bg-emerald-500 transition-transform duration-[var(--dur-base)]" style={{ transform: `scaleX(${passRate / 100})` }} />
                 </div>
               </div>
             </section>
@@ -1102,7 +1144,7 @@ export function WorkspaceModule({
             {!live && <div className="mt-3 grid gap-2 sm:grid-cols-2"><label className="text-xs font-medium text-slate-500">From date<DatePicker onChange={(next) => updateRangeStart(next, setStartDate, endDate)} rangeEnd={endDate} rangeStart={startDate} value={startDate} /></label><label className="text-xs font-medium text-slate-500">To date<DatePicker onChange={(next) => updateRangeEnd(next, startDate, setEndDate)} rangeEnd={endDate} rangeStart={startDate} value={endDate} /></label></div>}
             </div>
           </section>
-          <section className={`${cardClass} p-2 md:p-4`}><MeasurementRows rows={filteredMeasurements.slice(0, 100)} parts={data.parts} /></section>
+          <section className={`${cardClass} p-2 md:p-4`}><MeasurementRows rows={filteredMeasurements} parts={data.parts} /></section>
         </div>
       ));
     }
@@ -1460,7 +1502,7 @@ export function WorkspaceModule({
           {traceSearched && <section className={cardClass}>
             {traceRecords.length ? <>
               <div className="mb-3 flex flex-wrap items-center justify-between gap-3"><h2 className="font-semibold text-slate-900 dark:text-white">{traceRecords.length} matching measurement records</h2><span className="text-xs text-slate-500">Select a row to view its trace details</span></div>
-              <div className="space-y-2">{traceRecords.slice(0, 100).map((item) => {
+              <div className="space-y-2">{traceRecords.slice(0, 50).map((item) => {
                 const part = partByNumber.get(item.partNumber);
                 const instrument = data.instruments.find((device) => device.id === item.instrumentId);
                 const event = data.events.find((qualityEvent) => qualityEvent.measurementId === item.id);
@@ -1483,7 +1525,7 @@ export function WorkspaceModule({
           .filter((user) =>
             `${user.name} ${user.email} ${t(`common.${user.role}` as TranslationKey)}`
               .toLowerCase()
-              .includes(userQuery.trim().toLowerCase()),
+              .includes(deferredUserQuery.trim().toLowerCase()),
           );
         const accountAccessLabel = (accountRole: UserRole) => {
           if (accountRole === "administrator") return t("accounts.accessAll");

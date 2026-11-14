@@ -35,7 +35,7 @@ export function Button({
     <button
       {...props}
       className={cn(
-        "inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] disabled:cursor-not-allowed disabled:opacity-50",
+        "inline-flex min-h-10 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition-[color,background-color,border-color,opacity,transform] duration-[var(--dur-base)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)] disabled:cursor-not-allowed disabled:opacity-50",
         variant === "primary" &&
           "emerald-button shadow-sm active:translate-y-px",
         variant === "secondary" &&
@@ -79,7 +79,7 @@ export function Dropdown({ children, className, ...props }: DropdownProps) {
     <select
       {...props}
       className={cn(
-        "emerald-input min-h-10 rounded-xl border px-3 text-sm outline-none transition focus:border-[var(--primary)] focus:ring-2 focus:ring-[color-mix(in_srgb,var(--primary)_25%,transparent)]",
+        "emerald-input min-h-10 rounded-xl border px-3 text-sm outline-none transition-[color,background-color,border-color,opacity,transform] duration-[var(--dur-fast)] focus:border-[var(--primary)] focus:ring-2 focus:ring-[color-mix(in_srgb,var(--primary)_25%,transparent)]",
         className,
       )}
     >

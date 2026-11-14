@@ -1,6 +1,8 @@
 "use client";
 
-import FuzzyText from "@/components/reactbits/FuzzyText/FuzzyText";
+import dynamic from "next/dynamic";
+
+const FuzzyText = dynamic(() => import("@/components/reactbits/FuzzyText/FuzzyText"), { ssr: false });
 import { useT } from "@/lib/i18n/provider";
 
 export default function ErrorPage({ reset }: { error: Error & { digest?: string }; reset: () => void }) {

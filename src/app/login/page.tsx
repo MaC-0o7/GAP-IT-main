@@ -2,17 +2,21 @@
 
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import { ArrowLeft } from "lucide-react";
 import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler";
-import BorderGlow from "@/components/reactbits/BorderGlow/BorderGlow";
 import { LoadingScreen } from "@/components/auth/loading-screen";
 import { LanguageSelector } from "@/components/ui/language-selector";
 import { BrandLogo } from "@/components/ui/sidebar";
 import { useT } from "@/lib/i18n/provider";
 import { authenticateDemoAccount, demoAccounts } from "@/lib/auth/demo-accounts";
 import { clearDemoSession, readDemoSession, saveDemoSession } from "@/lib/auth/session";
-import { getSavedTheme, setSavedTheme } from "@/lib/auth/theme";
+import { getSavedTheme, resolveTheme, setSavedTheme } from "@/lib/auth/theme";
+import { useLowPower } from "@/hooks/use-low-power";
 import type { LatticeStatus } from "@/components/reactbits/LatticeLoader/LatticeLoader";
+
+const BorderGlow = dynamic(() => import("@/components/reactbits/BorderGlow/BorderGlow"), { ssr: false });
 
 function returnPath(): string {
   const candidate = new URLSearchParams(window.location.search).get("returnTo");
@@ -22,6 +26,8 @@ function returnPath(): string {
 
 export default function LoginPage() {
   const { t, language } = useT();
+  const router = useRouter();
+  const lowPower = useLowPower();
   const [username, setUsername] = useState(demoAccounts[0]?.username ?? "");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -42,13 +48,17 @@ export default function LoginPage() {
       return;
     }
     const savedTheme = getSavedTheme();
-    setIsDark(savedTheme === "dark");
+    setIsDark(resolveTheme(savedTheme) === "dark");
     setSavedTheme(savedTheme);
     if (new URLSearchParams(window.location.search).has("signedOut")) {
       clearDemoSession();
       setNotice(t("auth.signedOut"));
     }
   }, [t]);
+
+  useEffect(() => {
+    router.prefetch("/workspace");
+  }, [router]);
 
   useEffect(() => {
     if (!lockedUntil) return;
@@ -71,7 +81,7 @@ export default function LoginPage() {
     setSavedTheme(next);
   };
 
-  const submit = async (event: FormEvent<HTMLFormElement>) => {
+  const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (loadingStatus === "loading" || remaining > 0) return;
     setError("");
@@ -97,11 +107,7 @@ export default function LoginPage() {
     window.dispatchEvent(new Event("gap-it-session-change"));
     setAttempts(0);
     setMascotState("happy");
-    setLoadingStatus("loading");
-    await new Promise((resolve) => window.setTimeout(resolve, 800));
-    setLoadingStatus("done");
-    await new Promise((resolve) => window.setTimeout(resolve, 500));
-    window.location.assign(returnPath());
+    router.replace(returnPath());
   };
 
   if (loadingStatus) {
@@ -128,7 +134,7 @@ export default function LoginPage() {
       </header>
       <section className="relative z-10 mx-auto flex w-full max-w-lg flex-1 flex-col justify-center py-8">
         <BorderGlow
-          animated
+          animated={!lowPower}
           backgroundColor="var(--glass-bg)"
           borderRadius={14}
           className="login-glass-card"
@@ -136,7 +142,7 @@ export default function LoginPage() {
           coneSpread={28}
           edgeSensitivity={59}
           glowColor="var(--login-glow-hsl)"
-          glowIntensity={1.9}
+          glowIntensity={lowPower ? 0.6 : 1.9}
           glowRadius={57}
           surfaceIsLight={!isDark}
         >

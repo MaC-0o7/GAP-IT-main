@@ -1,7 +1,12 @@
 "use client";
 
 import { createContext, useContext } from "react";
-import ScrambledText from "@/components/reactbits/ScrambledText/ScrambledText";
+import dynamic from "next/dynamic";
+
+const ScrambledText = dynamic(
+  () => import("@/components/reactbits/ScrambledText/ScrambledText"),
+  { ssr: false },
+);
 
 export const HomeTextRevealContext = createContext(true);
 
