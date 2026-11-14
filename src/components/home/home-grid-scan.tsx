@@ -20,7 +20,6 @@ export function HomeGridScan({ active = true }: { active?: boolean }) {
   const [ready, setReady] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
   const [heroVisible, setHeroVisible] = useState(false);
-  const [tabVisible, setTabVisible] = useState(true);
 
   useEffect(() => {
     const updateTheme = () => setTheme(getActiveTheme());
@@ -66,13 +65,6 @@ export function HomeGridScan({ active = true }: { active?: boolean }) {
   }, []);
 
   useEffect(() => {
-    const updateVisibility = () => setTabVisible(!document.hidden);
-    updateVisibility();
-    document.addEventListener("visibilitychange", updateVisibility);
-    return () => document.removeEventListener("visibilitychange", updateVisibility);
-  }, []);
-
-  useEffect(() => {
     let timeout = 0;
     let idleId: number | undefined;
     const mount = () => {
@@ -115,7 +107,7 @@ export function HomeGridScan({ active = true }: { active?: boolean }) {
           interactive={false}
           lightMode={!dark}
           linesColor={dark ? "#7c3aed" : "#ffffff"}
-          paused={!active || !heroVisible || !tabVisible}
+          paused={!active || !heroVisible}
           scanColor={dark ? "#ffffff" : "#0fd795"}
           scanDelay={1.6}
           scanDuration={2.4}
