@@ -36,6 +36,7 @@ export interface GridScanProps extends Omit<HTMLAttributes<HTMLDivElement>, 'sty
   intro?: boolean;
   lightMode?: boolean;
   dpr?: number;
+  paused?: boolean;
   style?: CSSProperties;
 }
 
@@ -536,6 +537,7 @@ export const GridScan = ({
   intro = true,
   lightMode = false,
   dpr,
+  paused = false,
   className = '',
   style,
   ...rest
@@ -545,6 +547,8 @@ export const GridScan = ({
   const videoRef = useRef<HTMLVideoElement>(null);
   const wakeRef = useRef<(() => void) | null>(null);
   const headRef = useRef<Head | null>(null);
+  const pausedRef = useRef(paused);
+  pausedRef.current = paused;
   const [status, setStatus] = useState<Status>('loading');
   const settings: Settings = {
     linesColor: linesColor ?? (lightMode ? '#d4d4d8' : '#4d4757'),
@@ -842,7 +846,7 @@ export const GridScan = ({
 
     const frame = (now: number) => {
       raf = 0;
-      if (!visible || document.hidden) return;
+      if (!visible || document.hidden || pausedRef.current) return;
       if (last && lowPower && now - last < 1000 / 30) {
         raf = requestAnimationFrame(frame);
         return;
@@ -903,7 +907,7 @@ export const GridScan = ({
     };
 
     function wake() {
-      if (!raf && visible && !document.hidden) raf = requestAnimationFrame(frame);
+      if (!raf && visible && !document.hidden && !pausedRef.current) raf = requestAnimationFrame(frame);
     }
 
     const locate = (event: PointerEvent) => {
@@ -1036,7 +1040,7 @@ export const GridScan = ({
 
   useEffect(() => {
     wakeRef.current?.();
-  });
+  }, [paused]);
 
   useEffect(() => {
     if (!enableWebcam) return undefined;

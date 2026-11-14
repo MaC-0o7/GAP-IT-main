@@ -19,6 +19,8 @@ export function HomeGridScan() {
   const [dpr, setDpr] = useState<number | undefined>(undefined);
   const [ready, setReady] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [heroVisible, setHeroVisible] = useState(false);
+  const [tabVisible, setTabVisible] = useState(true);
 
   useEffect(() => {
     const updateTheme = () => setTheme(getActiveTheme());
@@ -53,6 +55,24 @@ export function HomeGridScan() {
   }, []);
 
   useEffect(() => {
+    const hero = document.getElementById("home-hero");
+    if (!hero) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      setHeroVisible(entry.isIntersecting);
+    });
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const updateVisibility = () => setTabVisible(!document.hidden);
+    updateVisibility();
+    document.addEventListener("visibilitychange", updateVisibility);
+    return () => document.removeEventListener("visibilitychange", updateVisibility);
+  }, []);
+
+  useEffect(() => {
     let timeout = 0;
     let idleId: number | undefined;
     const mount = () => {
@@ -81,7 +101,11 @@ export function HomeGridScan() {
     : "radial-gradient(ellipse at 50% 40%, #0F766E 0%, #134E4A 100%)";
 
   return (
-    <div aria-hidden="true" className="home-grid-scan" style={theme ? { background: surface } : undefined}>
+    <div
+      aria-hidden="true"
+      className="home-grid-scan"
+      style={theme ? { background: surface } : undefined}
+    >
       {ready && !reducedMotion && (
         <GridScan
           cells={8}
@@ -91,6 +115,7 @@ export function HomeGridScan() {
           interactive={false}
           lightMode={!dark}
           linesColor={dark ? "#7c3aed" : "#ffffff"}
+          paused={!heroVisible || !tabVisible}
           scanColor={dark ? "#ffffff" : "#0fd795"}
           scanDelay={1.6}
           scanDuration={2.4}

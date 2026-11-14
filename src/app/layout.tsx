@@ -52,9 +52,12 @@ export const metadata: Metadata = {
 
 const themeInitScript = `
   try {
-    const theme = localStorage.getItem("gap-it-theme") === "dark" ? "dark" : "light";
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    document.documentElement.style.colorScheme = theme;
+    const preference = localStorage.getItem("gap-it-theme");
+    const dark = preference === "dark" || (
+      preference === "system" && window.matchMedia("(prefers-color-scheme: dark)").matches
+    );
+    document.documentElement.classList.toggle("dark", dark);
+    document.documentElement.style.colorScheme = dark ? "dark" : "light";
   } catch (error) {
     console.warn("Unable to read the saved theme from browser storage.", error);
     document.documentElement.classList.remove("dark");

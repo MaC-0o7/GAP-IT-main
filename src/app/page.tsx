@@ -6,6 +6,7 @@ import Link from "next/link";
 import { AnimatedThemeToggler } from "@/registry/magicui/animated-theme-toggler";
 import { BrandLogo } from "@/components/ui/sidebar";
 import { LanguageSelector } from "@/components/ui/language-selector";
+import { HomeGridScan } from "@/components/home/home-grid-scan";
 import { HomeText, HomeTextRevealContext } from "@/components/home/home-text";
 import {
   HomeAbout,
@@ -33,16 +34,83 @@ export default function HomePage() {
 
   useEffect(() => {
     const savedTheme = getSavedTheme();
-    setTheme(savedTheme);
-    setSavedTheme(savedTheme);
+    let activeTheme = savedTheme;
+    let systemPreference = false;
+    try {
+      systemPreference = window.localStorage.getItem("gap-it-theme") === "system";
+    } catch (error) {
+      console.warn("Unable to read the saved theme preference.", error);
+    }
+    if (systemPreference) {
+      activeTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.classList.toggle("dark", activeTheme === "dark");
+      document.documentElement.style.colorScheme = activeTheme;
+      window.dispatchEvent(new Event("gap-it-theme-change"));
+    } else {
+      setSavedTheme(savedTheme);
+    }
+    setTheme(activeTheme);
     setSession(readDemoSession());
     setYear(new Date().getFullYear());
     const refreshSession = () => setSession(readDemoSession());
     window.addEventListener("gap-it-session-change", refreshSession);
     window.addEventListener("storage", refreshSession);
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const refreshSystemTheme = () => {
+      try {
+        if (window.localStorage.getItem("gap-it-theme") !== "system") return;
+      } catch (error) {
+        console.warn("Unable to read the saved theme preference.", error);
+        return;
+      }
+      const next = systemTheme.matches ? "dark" : "light";
+      document.documentElement.classList.toggle("dark", next === "dark");
+      document.documentElement.style.colorScheme = next;
+      setTheme(next);
+      window.dispatchEvent(new Event("gap-it-theme-change"));
+    };
+    systemTheme.addEventListener("change", refreshSystemTheme);
     return () => {
       window.removeEventListener("gap-it-session-change", refreshSession);
       window.removeEventListener("storage", refreshSession);
+      systemTheme.removeEventListener("change", refreshSystemTheme);
+    };
+  }, []);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    const originalThemeColor = document
+      .querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+      ?.getAttribute("content") ?? null;
+    const systemTheme = window.matchMedia("(prefers-color-scheme: dark)");
+    const updateHomeTheme = () => {
+      let useSystemTheme = false;
+      try {
+        useSystemTheme = window.localStorage.getItem("gap-it-theme") === "system";
+      } catch (error) {
+        console.warn("Unable to read the saved theme preference.", error);
+      }
+      const dark = useSystemTheme ? systemTheme.matches : root.classList.contains("dark");
+      root.classList.toggle("home-fullscreen-theme", true);
+      const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+      if (themeColor) themeColor.content = dark ? "#05020C" : "#134E4A";
+    };
+    root.classList.add("home-fullscreen-theme");
+    const observer = new MutationObserver(updateHomeTheme);
+    observer.observe(root, { attributes: true, attributeFilter: ["class"] });
+    observer.observe(document.head, { childList: true, subtree: true });
+    window.addEventListener("gap-it-theme-change", updateHomeTheme);
+    window.addEventListener("storage", updateHomeTheme);
+    systemTheme.addEventListener("change", updateHomeTheme);
+    updateHomeTheme();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("gap-it-theme-change", updateHomeTheme);
+      window.removeEventListener("storage", updateHomeTheme);
+      systemTheme.removeEventListener("change", updateHomeTheme);
+      root.classList.remove("home-fullscreen-theme");
+      const themeColor = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]');
+      if (themeColor && originalThemeColor !== null) themeColor.content = originalThemeColor;
     };
   }, []);
 
@@ -79,6 +147,7 @@ export default function HomePage() {
   return (
     <>
     <div className="relative z-10">
+      <HomeGridScan />
       <main className="home-page overflow-x-clip bg-transparent text-[var(--text)]">
           <header className="home-site-nav relative z-[var(--z-sticky)] mx-auto flex min-h-16 w-full max-w-7xl items-center justify-between gap-2 px-4 py-2 sm:px-6" style={{ paddingTop: "max(.5rem, env(safe-area-inset-top))" }}>
             <Link aria-label={t("home.homeLink")} className="shrink-0" href="/"><BrandLogo className="h-auto w-[clamp(100px,16vw,150px)]" priority /></Link>

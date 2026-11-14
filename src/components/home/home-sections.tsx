@@ -3,19 +3,16 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { HomeText, HomeTextRevealContext } from "@/components/home/home-text";
-import { HomeGridScan } from "@/components/home/home-grid-scan";
 import { useT } from "@/lib/i18n/provider";
 import type { TranslationKey } from "@/lib/i18n/types";
 
 export function HomeSection({
-  background,
   children,
   className = "",
   id,
   labelledBy,
   tint = false,
 }: {
-  background?: ReactNode;
   children: ReactNode;
   className?: string;
   id: string;
@@ -59,7 +56,6 @@ export function HomeSection({
         id={id}
         ref={sectionRef}
       >
-        {background}
         <div className={`home-section-content ${revealed ? "is-revealed" : ""}`}>
           {children}
         </div>
@@ -99,16 +95,7 @@ const featureCards: { title: HomeCopyKey; description: HomeCopyKey }[] = [
 export function HomeHero({ workspaceHref }: { workspaceHref: string }) {
   const { t } = useT();
   return (
-    <HomeSection
-      background={
-        <div aria-hidden="true" className="home-hero-background">
-          <HomeGridScan />
-        </div>
-      }
-      className="home-hero-section"
-      id="home-hero"
-      labelledBy="home-hero-title"
-    >
+    <HomeSection className="home-hero-section" id="home-hero" labelledBy="home-hero-title">
       <div className="home-hero-grid">
         <div className="home-hero-copy">
           <p className="home-section-eyebrow"><HomeText as="span">{t("home.heroEyebrow")}</HomeText></p>

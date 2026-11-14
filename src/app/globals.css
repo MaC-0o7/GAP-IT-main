@@ -213,6 +213,9 @@ html:lang(ta) {
 
 html {
   scroll-behavior: smooth;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   background: var(--bg);
@@ -326,8 +329,8 @@ body {
   flex-direction: column;
   isolation: isolate;
   margin: 0;
-  min-height: 100vh;
-  min-height: 100dvh;
+  padding: 0;
+  min-height: 100%;
   overflow-x: hidden;
   color: var(--app-foreground);
   background: var(--bg);
@@ -458,13 +461,20 @@ html .workspace-mobile-drawer {
 .home-section {
   position: relative;
   isolation: isolate;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   padding-block: clamp(4rem, 8vw, 7.5rem);
   padding-inline: max(clamp(1rem, 5vw, 4rem), env(safe-area-inset-left)) max(clamp(1rem, 5vw, 4rem), env(safe-area-inset-right));
   scroll-margin-top: max(1rem, env(safe-area-inset-top));
 }
 
-.home-section-tint {
-  background: color-mix(in srgb, var(--surface) 86%, transparent);
+.home-page .home-section:not(.home-hero-section) {
+  background-color: transparent;
+}
+
+.home-page .home-section.home-section-tint {
+  background: transparent;
 }
 
 .home-section-content {
@@ -515,11 +525,11 @@ html .workspace-mobile-drawer {
 }
 
 .home-hero-section {
-  overflow: hidden;
+  position: relative;
   display: flex;
-  min-height: calc(100dvh - 4rem);
+  min-height: 100svh;
   align-items: center;
-  padding-block: max(clamp(3rem, 7vw, 6rem), env(safe-area-inset-top)) max(clamp(3rem, 7vw, 6rem), env(safe-area-inset-bottom));
+  padding-block: max(6rem, env(safe-area-inset-top)) max(6rem, env(safe-area-inset-bottom));
 }
 
 .home-hero-section > .home-section-content {
@@ -527,16 +537,29 @@ html .workspace-mobile-drawer {
   z-index: 1;
 }
 
-.home-hero-background {
+.home-site-nav {
   position: absolute;
-  z-index: 0;
-  inset: 0;
-  pointer-events: none;
+  z-index: var(--z-sticky);
+  inset: 0 0 auto;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+
+.home-page {
+  position: relative;
+  z-index: 1;
+  width: 100%;
 }
 
 .home-grid-scan {
-  position: absolute;
-  inset: 0;
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100lvh;
+  pointer-events: none;
   background: radial-gradient(ellipse at 50% 40%, #0F766E 0%, #134E4A 100%);
 }
 
@@ -547,6 +570,13 @@ html .workspace-mobile-drawer {
 .home-grid-scan > div {
   position: absolute;
   inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.home-grid-scan :is(canvas, svg, img) {
+  display: block;
   width: 100%;
   height: 100%;
 }
@@ -935,7 +965,7 @@ html .workspace-mobile-drawer {
   }
 
   .home-hero-section {
-    min-height: calc(100dvh - 4rem);
+    min-height: 100svh;
   }
 
   .home-hero-visual {
@@ -1026,8 +1056,16 @@ html .workspace-mobile-drawer {
 }
 
 .home-site-footer {
+  position: relative;
+  z-index: 1;
+  background-color: transparent;
   padding-inline: max(var(--page-pad), env(safe-area-inset-left)) max(var(--page-pad), env(safe-area-inset-right));
   padding-bottom: max(var(--space-5), env(safe-area-inset-bottom));
+}
+
+.home-page :is(.home-hero-visual, .home-hero-visual-panel, .home-feature-card, .home-role-card, .home-cta-band, .home-about-visual),
+.home-page :is(.home-feature-card, .home-role-card):hover {
+  background: transparent;
 }
 
 .home-site-footer a {
@@ -1577,6 +1615,22 @@ textarea {
 .dark :is(input, select, textarea, button, a):focus-visible {
   outline: 2px solid var(--primary-dark);
   outline-offset: 2px;
+}
+
+html.home-fullscreen-theme {
+  background-color: #134E4A;
+}
+
+html.home-fullscreen-theme body {
+  background-color: #134E4A;
+}
+
+html.home-fullscreen-theme.dark {
+  background-color: #05020C;
+}
+
+html.home-fullscreen-theme.dark body {
+  background-color: #05020C;
 }
 
 :root:not(.dark) :is(input, select, textarea, button, a):focus-visible {
